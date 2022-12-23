@@ -2,7 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "../styles/Home.module.css";
-import { Container, Heading, Stack, Text } from "@chakra-ui/react";
+import { Container, Heading, Text } from "@chakra-ui/react";
 import { useTestHook } from "@shared/hooks";
 import { ProjectEntity } from "@/models";
 import { getProjectBySlug } from "@/api";
@@ -31,48 +31,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Container maxW="720">
-        <Stack spacing={6}>
-          <Heading as="h1" size="4xl" noOfLines={1}>
-            (4xl) In love with React & Next
-          </Heading>
-          <Heading as="h2" size="3xl" noOfLines={1}>
-            (3xl) In love with React & Next
-          </Heading>
-          <Heading as="h2" size="2xl">
-            (2xl) In love with React & Next
-          </Heading>
-          <Heading as="h2" size="xl">
-            (xl) In love with React & Next
-          </Heading>
-          <Heading as="h3" size="lg">
-            (lg) In love with React & Next
-          </Heading>
-          <Heading as="h4" size="md">
-            (md) In love with React & Next
-          </Heading>
-          <Heading as="h5" size="sm">
-            (sm) In love with React & Next
-          </Heading>
-          <Heading as="h6" size="xs">
-            (xs) In love with React & Next
-          </Heading>
-        </Stack>
-
-        <Text>
-          font-display lets you to control how your font is displayed while
-          loading. @next/font uses font-display: optional by default. When the
-          primary font used by @next/font does not load within 100ms, the auto
-          generated fallback font will be displayed in the browser. While it is
-          automatically generated to be as visually similar to the primary font
-          as possible to reduce layout shift, it does come with the tradeoff
-          that your intended font might not be shown on slower networks unless
-          cached. If you want guarantees around your intended font always
-          showing, and accept the tradeoff of minimal layout shift from swapping
-          your fallback font for the primary font, you can use font-display:
-          swap.
-        </Text>
-      </Container>
+      <Text>Hello</Text>
     </>
   );
 }
