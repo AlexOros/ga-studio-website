@@ -1,5 +1,16 @@
 {
   "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "@components": ["components/index"],
+      "@shared/hooks": ["shared/hooks/index.ts"],
+      "@/models": ["models/types.ts"],
+      "@/api": ["api/index.ts"]
+      // "@/templates": ["templates/index"],
+      // "@/theme": ["theme/index"],
+      // "@/context": ["context/index"],
+      // "@/constant": ["constant/index"]
+    },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
