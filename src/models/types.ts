@@ -209,7 +209,7 @@ export type JsonFilterInput = {
 };
 
 export type ComponentCommonImages = {
-  __typename?: 'ComponentCommonImages';
+  __component?: 'common.images' ;
   id: Scalars['ID'];
   images?: Maybe<UploadFileRelationResponseCollection>;
 };
@@ -222,7 +222,7 @@ export type ComponentCommonImagesImagesArgs = {
 };
 
 export type ComponentCommonRichText = {
-  __typename?: 'ComponentCommonRichText';
+  __component?: 'common.rich-text';
   id: Scalars['ID'];
   text?: Maybe<Scalars['String']>;
 };

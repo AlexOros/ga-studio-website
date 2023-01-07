@@ -1,20 +1,13 @@
-import { ProjectEntity } from "@/models";
+import { ProjectEntity } from "@models";
 import { api } from "api/axios";
-
-type Params = {
-  locale?: string;
-  populate?: string | string[] | Record<string, any>;
-  sort?: string | string[];
-  filters?: any;
-  fields?: string | string[];
-};
+import { QueryParams } from "api/shared/types";
 
 export const getProjectBySlug = async ({
   slug,
   params = {},
 }: {
   slug: string;
-  params?: Params;
+  params?: QueryParams;
 }) => {
   const {
     data: { data },
