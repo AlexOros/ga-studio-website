@@ -1,11 +1,10 @@
 import React from "react";
-import { AspectRatio, Box, Container, useMediaQuery } from "@chakra-ui/react";
-import Image from "next/image";
+import { AspectRatio, Box, Container } from "@chakra-ui/react";
 import { UploadFileEntity } from "@models";
-import { getImageFormat } from "@utils";
+import { getImageFormat, getImageFormatDimensions } from "@utils";
 import { MotionBox } from "components/motion-box";
 import { PageModal } from "components/pageModal";
-import { motion } from "framer-motion";
+import { BlurImage } from "components/blurImage";
 
 export type ContentImage = {
   image: UploadFileEntity;
@@ -20,19 +19,26 @@ export const ContentImage = ({
   onOpen,
   onClose,
 }: ContentImage) => {
-  const { hero, large, original, thumbnail, medium } = getImageFormat(image);
-  const [mediaQueryActive] = useMediaQuery("(max-width: 800px)");
+  const imageFormat = getImageFormat(image);
+  const { hero, large, original, placeholder } = imageFormat;
 
-  const src = large?.url || medium?.url || original?.url || "";
+  if (!original) return null;
+
+  const src = large?.url || hero?.url || original.url;
+  const { width, height } = getImageFormatDimensions(imageFormat, [
+    "large",
+    "hero",
+    "original",
+  ]);
 
   return (
-    <Container
-      onClick={onOpen}
-      maxW="4xl"
-      p={0}
-      {...(mediaQueryActive && { m: "1em calc(50% - 50vw)", w: "100vw" })}
-    >
-      <Box overflow={["visible", "hidden"]}>
+    <Container onClick={onOpen} maxW="4xl" p={0}>
+      <Box
+        position="relative"
+        left="-10vw"
+        marginRight="-20vw"
+        overflow={["visible", "hidden"]}
+      >
         <MotionBox
           cursor="pointer"
           whileHover={{ scale: 1.05 }}
@@ -42,19 +48,13 @@ export const ContentImage = ({
             ease: "easeInOut",
           }}
         >
-          <AspectRatio
-            maxH="400px"
-            ratio={(original?.width ?? 0) / (original?.height ?? 0)}
-          >
-            <Image
+          <AspectRatio maxH="600px" ratio={width / height}>
+            <BlurImage
+              width={width}
+              height={height}
               alt={original?.alternativeText || ""}
-              // placeholder="blur"
-              // blurDataURL={thumbnail?.url}
+              blurDataURL={placeholder}
               src={src}
-              fill={true}
-              style={{
-                objectFit: "cover",
-              }}
               quality={80}
             />
           </AspectRatio>
@@ -69,17 +69,13 @@ export const ContentImage = ({
           flexDir="column"
           justifyContent="center"
         >
-          <AspectRatio
-            overflow="hidden"
-            maxH="100vh"
-            ratio={(original?.width ?? 0) / (original?.height ?? 0)}
-          >
-            <Image
+          <AspectRatio overflow="hidden" maxH="100vh" ratio={width / height}>
+            <BlurImage
               alt={original?.alternativeText || ""}
-              // placeholder="blur"
-              // blurDataURL={thumbnail?.url}
+              blurDataURL={placeholder}
               src={hero?.url ?? src}
-              fill={true}
+              width={original.width ?? 0}
+              height={original.height ?? 0}
               style={{
                 objectFit: "contain",
               }}

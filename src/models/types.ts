@@ -209,7 +209,7 @@ export type JsonFilterInput = {
 };
 
 export type ComponentCommonImages = {
-  __component?: 'common.images' ;
+  __typename?: 'ComponentCommonImages';
   id: Scalars['ID'];
   images?: Maybe<UploadFileRelationResponseCollection>;
 };
@@ -222,7 +222,7 @@ export type ComponentCommonImagesImagesArgs = {
 };
 
 export type ComponentCommonRichText = {
-  __component?: 'common.rich-text';
+  __typename?: 'ComponentCommonRichText';
   id: Scalars['ID'];
   text?: Maybe<Scalars['String']>;
 };
@@ -377,6 +377,7 @@ export type UploadFileFiltersInput = {
   folderPath?: InputMaybe<StringFilterInput>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
+  placeholder?: InputMaybe<StringFilterInput>;
   and?: InputMaybe<Array<InputMaybe<UploadFileFiltersInput>>>;
   or?: InputMaybe<Array<InputMaybe<UploadFileFiltersInput>>>;
   not?: InputMaybe<UploadFileFiltersInput>;
@@ -399,6 +400,7 @@ export type UploadFileInput = {
   provider_metadata?: InputMaybe<Scalars['JSON']>;
   folder?: InputMaybe<Scalars['ID']>;
   folderPath?: InputMaybe<Scalars['String']>;
+  placeholder?: InputMaybe<Scalars['String']>;
 };
 
 export type UploadFile = {
@@ -420,6 +422,7 @@ export type UploadFile = {
   related?: Maybe<Array<Maybe<GenericMorph>>>;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
+  placeholder?: Maybe<Scalars['String']>;
 };
 
 export type UploadFileEntity = {

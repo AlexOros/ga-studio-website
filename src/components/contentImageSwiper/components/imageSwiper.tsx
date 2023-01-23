@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, A11y, Keyboard } from "swiper";
-import Image from "next/image";
 import { Container, AspectRatio, Box } from "@chakra-ui/react";
-import { MotionBox } from "@components";
-import { getImageFormat } from "@utils";
+import { BlurImage, MotionBox } from "@components";
+import { getImageFormat, getImageFormatDimensions } from "@utils";
 import { UploadFileEntity } from "@models";
 import { PageModal } from "components/pageModal";
 
@@ -43,10 +42,11 @@ export const ImageSwiper = ({
         maxWidth={"2950"}
         p={0}
         maxHeight={"70%"}
-        m="1em calc(50% - 50vw)"
-        w="99.4vw"
+        m="0 calc(50% - 50vw)"
+        w={["99vw", "99.2vw", "99.3vw", "99.4vw"]}
       >
         <Swiper
+          lazy
           modules={[Navigation, Pagination, A11y]}
           navigation
           pagination={{
@@ -55,25 +55,27 @@ export const ImageSwiper = ({
             dynamicBullets: true,
           }}
           slidesPerView={1}
-          spaceBetween={20}
+          spaceBetween={16}
           breakpoints={{
             895: {
-              slidesPerView: 2,
-              spaceBetween: 40,
+              slidesPerView: images.length > 1 ? 2 : 1,
             },
             1432: {
               slidesPerView: images.length > 2 ? 3 : 2,
             },
-            2060: {
-              slidesPerView: 4,
-            },
           }}
         >
           {images.map((image, index) => {
-            const { large, original, thumbnail, medium } =
-              getImageFormat(image);
+            const imageFormat = getImageFormat(image);
+            const { large, original, placeholder, medium } = imageFormat;
 
             const src = large?.url || medium?.url || original?.url || "";
+
+            const { width, height } = getImageFormatDimensions(imageFormat, [
+              "large",
+              "hero",
+              "original",
+            ]);
 
             return (
               <SwiperSlide
@@ -91,15 +93,12 @@ export const ImageSwiper = ({
                     }}
                   >
                     <AspectRatio maxH="400px" ratio={16 / 9}>
-                      <Image
+                      <BlurImage
+                        width={width}
+                        height={height}
                         alt={original?.alternativeText || ""}
-                        // placeholder="blur"
-                        // blurDataURL={thumbnail?.url}
+                        blurDataURL={placeholder}
                         src={src}
-                        fill={true}
-                        style={{
-                          objectFit: "cover",
-                        }}
                         quality={80}
                       />
                     </AspectRatio>
@@ -113,7 +112,9 @@ export const ImageSwiper = ({
 
       <PageModal id="slider modal" isOpen={open} onClose={handleCloseModal}>
         <Swiper
-          lazy
+          lazy={{
+            loadPrevNext: false,
+          }}
           modules={[Navigation, Pagination, Keyboard, A11y]}
           keyboard={{
             enabled: true,
@@ -129,26 +130,32 @@ export const ImageSwiper = ({
           onInit={(swiper) => swiper.slideTo(startingModalSlideIndex)}
         >
           {images.map((image) => {
-            const { hero, large, original, medium, thumbnail } =
-              getImageFormat(image);
+            const imageFormat = getImageFormat(image);
+            const { large, original, placeholder, medium } = imageFormat;
 
-            const src =
-              hero?.url || large?.url || medium?.url || original?.url || "";
+            const src = large?.url || medium?.url || original?.url || "";
+
+            const { width, height } = getImageFormatDimensions(imageFormat, [
+              "large",
+              "hero",
+              "original",
+            ]);
 
             return (
               <SwiperSlide
                 key={original?.id}
-                style={{ height: "calc(100vh - 64px)" }}
+                style={{
+                  height: "calc(100vh - 10px)",
+                  display: "grid",
+                  placeContent: "center",
+                }}
               >
-                <Image
-                  placeholder="blur"
-                  blurDataURL={thumbnail?.url}
+                <BlurImage
+                  width={width}
+                  height={height}
+                  blurDataURL={placeholder}
                   alt={original?.alternativeText || ""}
                   src={src}
-                  fill
-                  style={{
-                    objectFit: "contain",
-                  }}
                   quality={100}
                 />
               </SwiperSlide>

@@ -14,7 +14,6 @@ export const ContentImageSwiper = ({
   const handleCloseModal = () => setIsModalOpen(false);
 
   if (images.length === 1) {
-    console.log(images);
     return (
       <ContentImage
         image={images[0]}

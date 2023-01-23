@@ -3,13 +3,10 @@ import { Styles } from "@chakra-ui/theme-tools";
 const styles: Styles = {
   global: ({ theme }) => {
     return {
-      // "*::placeholder": {
-      //   color: "gray.400",
-      // },
-      // "*, *::before, &::after": {
-      //   borderColor: "gray.200",
-      //   wordWrap: "break-word",
-      // },
+      "ul, ol": {
+        width: "100%",
+        paddingLeft: theme.space[6],
+      },
 
       ".swiper-pagination-bullet": {
         background: theme.colors.blackAlpha[700],
@@ -17,7 +14,7 @@ const styles: Styles = {
 
       ".swiper": {
         transition: `${theme.transition.property.background} ${theme.transition.duration.normal} ease-in-out`,
-        paddingBottom: theme.space[6],
+        paddingBottom: 0,
       },
 
       ".swiper-pagination": {

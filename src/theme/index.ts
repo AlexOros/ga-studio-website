@@ -4,6 +4,7 @@ import {
   ThemeConfig,
   withDefaultColorScheme,
 } from "@chakra-ui/react";
+import foundations from "./foundations";
 // import components from "./components"
 // import foundations from "./foundations"
 
@@ -19,7 +20,7 @@ let customTheme = {
   config,
   styles,
   // components,
-  // ...foundations
+  ...foundations,
 };
 
 const theme = extendTheme(
