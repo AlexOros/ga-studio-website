@@ -1,1 +1,1 @@
-export * from "./ContentImageSwiper";
+export * from "./ContentImageContainer";

@@ -14,7 +14,7 @@ import typography from "./typography";
 
 const foundations = {
   // ...typography,
-  // colors,
+  colors,
   textStyles,
 
   //   breakpoints,

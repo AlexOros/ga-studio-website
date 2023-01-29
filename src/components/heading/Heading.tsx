@@ -3,13 +3,23 @@ import React from "react";
 
 interface HeadingProps extends BoxProps {
   accent?: "bottom" | "through";
-  size: OtherProps["textStyle"];
+  size?: "title" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 }
+
+const bottomHeightMapBySize = {
+  title: 10,
+  h1: 8,
+  h2: 8,
+  h3: 7,
+  h4: 5,
+  h5: 4,
+  h6: 2,
+};
 
 const Heading: React.FC<HeadingProps> = ({
   children,
   as = "h2",
-  size,
+  size = "h2",
   accent,
   ...restProps
 }) => {
@@ -47,7 +57,7 @@ const Heading: React.FC<HeadingProps> = ({
             display="inline-block"
             position="absolute"
             width="100%"
-            height="2px"
+            height={`${bottomHeightMapBySize[size]}px`}
             bg="orange.400"
             left={0}
             bottom={0}

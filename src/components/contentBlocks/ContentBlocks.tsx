@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Box,
   Divider,
@@ -9,39 +10,41 @@ import {
   Th,
   Thead,
   Tr,
+  Text,
   UnorderedList,
+  Heading as ChackraHeading,
 } from "@chakra-ui/react";
-import React from "react";
 import { Block } from "./ContentBlocks.model";
-import BlockImage from "./components/BlockImage";
 import BlockParagraph from "./components/BlockParagraph";
 import { Heading } from "components/heading";
+import { ContentImage } from "components/contentImage";
 
 type ContentBlocksProps = {
+  onImageClick: (id: number) => void;
   data?: {
     time: number;
     blocks: Block[];
   };
 };
 
-export const ContentBlocks = ({ data }: ContentBlocksProps) => {
+export const ContentBlocks = ({ data, onImageClick }: ContentBlocksProps) => {
   return (
     <>
       {data?.blocks.map((block) => {
         if (block.type === "header") {
-          const headingLevel = `h${
-            block.data.level + 1 > 6 ? 6 : block.data.level + 1
-          }`;
+          const headingLevel = block.data.level;
+
           return (
-            <Heading
-              mb={3}
-              accent="bottom"
-              key={block.id}
-              as={headingLevel as any}
-              size={headingLevel}
-            >
-              {block.data.text}
-            </Heading>
+            <Box key={block.id} alignSelf="center">
+              <Heading
+                mb={2}
+                accent="bottom"
+                as={`h${headingLevel + 1 > 6 ? 6 : headingLevel + 1}` as any}
+                size={`h${headingLevel}`}
+              >
+                {block.data.text}
+              </Heading>
+            </Box>
           );
         }
 
@@ -90,7 +93,9 @@ export const ContentBlocks = ({ data }: ContentBlocksProps) => {
                     <Tr>
                       {headings.map((heading, index) => (
                         <Th key={heading + index}>
-                          <Heading size="xs">{heading}</Heading>
+                          <Heading fontSize="sm" size="h3">
+                            {heading}
+                          </Heading>
                         </Th>
                       ))}
                     </Tr>
@@ -100,7 +105,9 @@ export const ContentBlocks = ({ data }: ContentBlocksProps) => {
                   {data.map((row, index) => (
                     <Tr key={block.id + index}>
                       {row.map((cell, cellIndex) => (
-                        <Th key={cell + cellIndex}>{cell}</Th>
+                        <Th key={cell + cellIndex}>
+                          <Text fontSize="sm">{cell}</Text>
+                        </Th>
                       ))}
                     </Tr>
                   ))}
@@ -115,6 +122,7 @@ export const ContentBlocks = ({ data }: ContentBlocksProps) => {
             <Box
               as="blockquote"
               key={block.id}
+              alignSelf="center"
               textAlign="center"
               fontStyle="italic"
               fontSize="medium"
@@ -128,9 +136,17 @@ export const ContentBlocks = ({ data }: ContentBlocksProps) => {
         }
 
         if (block.type === "image") {
-          return <BlockImage key={block.id} file={block.data.file} />;
+          return (
+            <ContentImage
+              key={block.id}
+              onClick={onImageClick}
+              image={{
+                id: (block.data.file as any)?.id,
+                attributes: block.data.file,
+              }}
+            />
+          );
         }
-
         return null;
       })}
     </>

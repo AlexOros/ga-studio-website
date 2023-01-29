@@ -18,7 +18,12 @@ const styles: Styles = {
       },
 
       ".swiper-pagination": {
-        transform: "translate(-50%, 50%) !important",
+        background: theme.colors.blackAlpha[700],
+        width: "fit-content",
+        left: "50%",
+        borderRadius: "2px",
+        transform: "translate(-50%, 0)",
+        padding: `${theme.space[0.5]} ${theme.space[3]}`,
       },
 
       ".swiper-button-next, .swiper-button-prev ": {

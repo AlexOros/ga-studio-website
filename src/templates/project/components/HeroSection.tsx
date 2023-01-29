@@ -2,7 +2,7 @@ import React from "react";
 import { UploadFileEntity } from "@models";
 import { getImageFormat, getImageFormatDimensions } from "@utils";
 import { Box } from "@chakra-ui/react";
-import { BlurImage } from "@components";
+import { BlurImage, Heading } from "@components";
 
 export type HeroSectionProps = {
   imageData: UploadFileEntity;
@@ -10,28 +10,31 @@ export type HeroSectionProps = {
 };
 
 export function HeroSection({ imageData, title }: HeroSectionProps) {
-  const imageFormat = getImageFormat(imageData);
-  const { hero, original, placeholder } = imageFormat;
-  const { width, height } = getImageFormatDimensions(imageFormat, [
-    "hero",
-    "original",
-  ]);
+  const { hero, original, placeholder } = getImageFormat(imageData);
 
   return (
-    <Box position="relative" height="80vh" width="100%" overflow="hidden">
+    <Box
+      position="relative"
+      overflow="hidden"
+      height={["40vh", "60vh", null, "80vh"]}
+    >
       {original && (
         <BlurImage
           loading="eager"
-          width={width}
-          height={height}
+          fill={true}
           blurDataURL={placeholder ?? ""}
           src={hero?.url ?? original.url}
-          priority={false}
-          alt="hero image"
-          quality={80}
+          alt="project image"
+          quality={100}
         />
       )}
-      <h1> {title}</h1>
+      <Box maxW={["80%"]} bottom={0} position="absolute">
+        <Box px={[3, null, 6]} background="gray.800">
+          <Heading fontWeight="medium" as="h1" accent="through" size={"title"}>
+            {title}
+          </Heading>
+        </Box>
+      </Box>
     </Box>
   );
 }

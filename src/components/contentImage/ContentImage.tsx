@@ -3,22 +3,14 @@ import { AspectRatio, Box, Container } from "@chakra-ui/react";
 import { UploadFileEntity } from "@models";
 import { getImageFormat, getImageFormatDimensions } from "@utils";
 import { MotionBox } from "components/motion-box";
-import { PageModal } from "components/pageModal";
 import { BlurImage } from "components/blurImage";
 
 export type ContentImage = {
   image: UploadFileEntity;
-  open: boolean;
-  onOpen: () => void;
-  onClose: () => void;
+  onClick: (id: number) => void;
 };
 
-export const ContentImage = ({
-  image,
-  open,
-  onOpen,
-  onClose,
-}: ContentImage) => {
+export const ContentImage = ({ image, onClick }: ContentImage) => {
   const imageFormat = getImageFormat(image);
   const { hero, large, original, placeholder } = imageFormat;
 
@@ -32,7 +24,7 @@ export const ContentImage = ({
   ]);
 
   return (
-    <Container onClick={onOpen} maxW="4xl" p={0}>
+    <Container onClick={() => onClick(image.id as any)} maxW="4xl" p={0}>
       <Box
         position="relative"
         left="-10vw"
@@ -48,7 +40,7 @@ export const ContentImage = ({
             ease: "easeInOut",
           }}
         >
-          <AspectRatio maxH="600px" ratio={width / height}>
+          <AspectRatio maxH="400px" ratio={width / height}>
             <BlurImage
               width={width}
               height={height}
@@ -60,30 +52,6 @@ export const ContentImage = ({
           </AspectRatio>
         </MotionBox>
       </Box>
-
-      <PageModal isOpen={open} onClose={onClose}>
-        <Box
-          width="100%"
-          height="100%"
-          display="flex"
-          flexDir="column"
-          justifyContent="center"
-        >
-          <AspectRatio overflow="hidden" maxH="100vh" ratio={width / height}>
-            <BlurImage
-              alt={original?.alternativeText || ""}
-              blurDataURL={placeholder}
-              src={hero?.url ?? src}
-              width={original.width ?? 0}
-              height={original.height ?? 0}
-              style={{
-                objectFit: "contain",
-              }}
-              quality={100}
-            />
-          </AspectRatio>
-        </Box>
-      </PageModal>
     </Container>
   );
 };
