@@ -14,7 +14,17 @@ export const getProjectBySlug = async ({
   } = await api.get<{
     data: Omit<ProjectEntity, "__typename">;
   }>(`/slugify/slugs/project/${slug}`, {
-    params,
+    params: {
+      ...params,
+      populate: {
+        ...(typeof params.populate === "object" ? params.populate : {}),
+        localizations: {
+          attributes: {
+            fields: ["slug"],
+          },
+        },
+      },
+    },
   });
 
   return data;

@@ -1,15 +1,13 @@
-const getRouteBySlug = (slug: string, route: string): string =>
-  `/${route}/${slug}`;
+const getRouteBySlug = (slug: string | null, route: string) => {
+  if (!slug) return null;
+  return `/${route}/${slug}`;
+};
 
 export const ROUTES = {
   home: "/",
   notFound: "/not-found",
-  about: {
-    en: "/about",
-    ro: "/despre",
-  },
   project: {
-    en: (slug: string) => getRouteBySlug(slug, "architecture"),
-    ro: (slug: string) => getRouteBySlug(slug, "arhitectura"),
+    en: (slug: string | null) => getRouteBySlug(slug, "architecture"),
+    ro: (slug: string | null) => getRouteBySlug(slug, "arhitectura"),
   },
 } as const;
