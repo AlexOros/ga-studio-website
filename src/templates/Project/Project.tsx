@@ -1,0 +1,181 @@
+import React, { useState } from "react";
+import {
+  Container,
+  Divider,
+  VStack,
+  Stack,
+  Tag,
+  Text,
+  StackProps,
+  Show,
+} from "@chakra-ui/react";
+import { ROUTES } from "@api";
+import {
+  ContentImageContainer,
+  ContentBlocks,
+  PageModal,
+  FullPageSwiper,
+} from "@components";
+import { useRouter, useSyncNextLocale } from "@shared/hooks";
+import { HeroSection } from "./components";
+import {
+  Maybe,
+  ProjectContentDynamicZone,
+  ProjectEntity,
+  UploadFileEntity,
+} from "@models";
+import { uniqBy, prop, pipe, reduce, __ } from "ramda";
+import { format } from "date-fns";
+
+export const Project = ({ data }: { data: ProjectEntity }) => {
+  const [imageId, setImageId] = useState<number | null>(null);
+
+  const handleOpenModal = (id: number) => setImageId(id);
+  const handleCloseModal = () => setImageId(null);
+
+  const { locale } = useRouter();
+  const localeSlug =
+    data?.attributes?.localizations?.data?.[0]?.attributes?.slug ?? null;
+
+  const nextRoute =
+    locale === "en"
+      ? ROUTES.project.ro(localeSlug!)
+      : ROUTES.project.en(localeSlug!);
+
+  useSyncNextLocale(nextRoute);
+
+  const {
+    title,
+    image,
+    content,
+    // info: infoList,
+    // description = [],
+  } = data?.attributes || {};
+
+  const projectImages = pipe(
+    reduce(getImagesFromContentBlocks, []),
+    uniqBy(prop("id"))
+  )(content as any);
+
+  return (
+    <>
+      <VStack as="article" overflow="hidden" spacing={[8, 12]}>
+        {image?.data && (
+          <HeroSection imageData={image?.data} title={title ?? ""} />
+        )}
+
+        <Stack direction={["column", null, "row"]} spacing="8">
+          <Stack spacing="8" direction="row">
+            <Stat label="Category" value={data.attributes!.category} />
+
+            <Divider height="50px" orientation="vertical" />
+
+            <Stat label="Status" value={data.attributes!.status} />
+          </Stack>
+
+          <Show above="md">
+            <Divider height="50px" orientation="vertical" />
+          </Show>
+
+          <Stack spacing="8" direction="row">
+            <Stat label="Location" value={data.attributes!.location} />
+
+            <Divider height="50px" orientation="vertical" />
+
+            <Stat
+              label="Last Modified"
+              value={format(
+                new Date(data.attributes!.updatedAt),
+                "dd / MM / yyyy"
+              )}
+            />
+          </Stack>
+        </Stack>
+
+        <Divider />
+
+        <Container mx="auto" maxWidth="4xl">
+          <VStack spacing={4} alignItems="flex-start">
+            {content?.map((block) =>
+              renderContentBlock(block, handleOpenModal)
+            )}
+          </VStack>
+        </Container>
+      </VStack>
+
+      <PageModal
+        id="projectModal"
+        isOpen={typeof imageId === "number"}
+        onClose={handleCloseModal}
+      >
+        <FullPageSwiper initialImageId={imageId!} images={projectImages} />
+      </PageModal>
+    </>
+  );
+};
+
+function renderContentBlock(
+  block: Maybe<ProjectContentDynamicZone>,
+  onClick: (id: number) => void
+) {
+  if (!block) return;
+
+  if ("text" in block) {
+    return (
+      <ContentBlocks
+        onImageClick={onClick}
+        key={block.id}
+        data={block.text && JSON.parse(block.text)}
+      />
+    );
+  } else if ("images" in block) {
+    return (
+      <ContentImageContainer
+        onClick={onClick}
+        key={block.id}
+        images={block.images?.data ?? []}
+      />
+    );
+  }
+}
+
+function getImagesFromContentBlocks(
+  acc: UploadFileEntity[],
+  block: ProjectContentDynamicZone
+) {
+  if ("images" in block) {
+    return [...acc, ...(block?.images?.data ?? [])];
+  } else if ("text" in block && block.text) {
+    const blocks = JSON.parse(block.text).blocks;
+    return [
+      ...acc,
+      ...blocks
+        .filter((b: any) => b.type === "image")
+        .map((image: any) => ({
+          id: image.data.file.id,
+          attributes: image.data.file,
+        })),
+    ];
+  }
+  return acc;
+}
+
+function Stat({
+  label,
+  value,
+  ...props
+}: { label: string; value?: string } & StackProps) {
+  if (!value) return null;
+
+  return (
+    <VStack spacing={1} {...props}>
+      <Text fontWeight="bold" fontSize={["sm", "md"]}>
+        {label}
+      </Text>
+
+      <Tag size={["sm", "md"]} colorScheme="gray">
+        {value}
+      </Tag>
+    </VStack>
+  );
+}

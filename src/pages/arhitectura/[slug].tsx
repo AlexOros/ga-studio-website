@@ -32,6 +32,9 @@ export async function getStaticProps({
     params: {
       populate: {
         image: "*",
+        category: {
+          populate: "attribute",
+        },
         content: {
           populate: "*",
         },

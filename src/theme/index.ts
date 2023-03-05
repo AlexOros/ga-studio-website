@@ -2,32 +2,22 @@ import {
   extendTheme,
   theme as chackraTheme,
   ThemeConfig,
-  withDefaultColorScheme,
 } from "@chakra-ui/react";
 import foundations from "./foundations";
-// import components from "./components"
-// import foundations from "./foundations"
-
 import styles from "./styles";
+import components from "./components";
 
-const config: ThemeConfig = {
+const config = {
   initialColorMode: "light",
   useSystemColorMode: false,
-};
+} satisfies ThemeConfig;
 
-let customTheme = {
+const theme = extendTheme({
   ...chackraTheme,
   config,
   styles,
-  // components,
   ...foundations,
-};
-
-const theme = extendTheme(
-  customTheme,
-  withDefaultColorScheme({
-    colorScheme: "primary",
-  })
-);
+  components,
+});
 
 export { theme };

@@ -1,5 +1,5 @@
 const getStyle = () => ({
-  fontWeight: "medium",
+  fontWeight: "bold",
   lineHeight: "110%",
 });
 

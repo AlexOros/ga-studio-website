@@ -10,6 +10,7 @@ const styles: Styles = {
 
       ".swiper-pagination-bullet": {
         background: theme.colors.blackAlpha[700],
+        color: theme.colors.whiteAlpha[900],
       },
 
       ".swiper": {
@@ -18,16 +19,17 @@ const styles: Styles = {
       },
 
       ".swiper-pagination": {
-        background: theme.colors.blackAlpha[700],
+        background: theme.colors.blackAlpha[800],
+        color: "white",
         width: "fit-content",
         left: "50%",
         borderRadius: "2px",
         transform: "translate(-50%, 0)",
-        padding: `${theme.space[0.5]} ${theme.space[3]}`,
+        padding: `${theme.space[1]} ${theme.space[4]}`,
       },
 
       ".swiper-button-next, .swiper-button-prev ": {
-        background: theme.colors.blackAlpha[500],
+        background: theme.colors.gray[900],
         padding: theme.space[6],
         transform: "scale(0.8)",
         borderRadius: "2px",
@@ -36,8 +38,10 @@ const styles: Styles = {
         color: theme.colors.whiteAlpha[900],
         pointerEvents: "all !important",
         "&:hover": {
-          transform: "scale(0.9)",
-          background: theme.colors.blackAlpha[700],
+          background: theme.colors.gray[800],
+        },
+        "&:active": {
+          background: theme.colors.gray[700],
         },
       },
 
