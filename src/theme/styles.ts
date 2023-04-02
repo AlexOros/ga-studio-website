@@ -18,6 +18,10 @@ const styles: Styles = {
         paddingBottom: 0,
       },
 
+      ".swiper-autoheight .swiper-wrapper": {
+        alignItems: "center",
+      },
+
       ".swiper-pagination": {
         background: theme.colors.blackAlpha[800],
         color: "white",

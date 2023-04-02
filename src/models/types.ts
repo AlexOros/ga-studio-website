@@ -14,6 +14,8 @@ export type Scalars = {
   JSON: any;
   /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
   DateTime: any;
+  /** A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
+  Date: any;
   /** The `Upload` scalar type represents a file upload. */
   Upload: any;
   ProjectContentDynamicZoneInput: any;
@@ -39,6 +41,11 @@ export type ResponseCollectionMeta = {
   __typename?: 'ResponseCollectionMeta';
   pagination: Pagination;
 };
+
+export enum PublicationState {
+  Live = 'LIVE',
+  Preview = 'PREVIEW'
+}
 
 export type IdFilterInput = {
   and?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
@@ -160,6 +167,30 @@ export type FloatFilterInput = {
   between?: InputMaybe<Array<InputMaybe<Scalars['Float']>>>;
 };
 
+export type DateFilterInput = {
+  and?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>;
+  or?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>;
+  not?: InputMaybe<DateFilterInput>;
+  eq?: InputMaybe<Scalars['Date']>;
+  eqi?: InputMaybe<Scalars['Date']>;
+  ne?: InputMaybe<Scalars['Date']>;
+  startsWith?: InputMaybe<Scalars['Date']>;
+  endsWith?: InputMaybe<Scalars['Date']>;
+  contains?: InputMaybe<Scalars['Date']>;
+  notContains?: InputMaybe<Scalars['Date']>;
+  containsi?: InputMaybe<Scalars['Date']>;
+  notContainsi?: InputMaybe<Scalars['Date']>;
+  gt?: InputMaybe<Scalars['Date']>;
+  gte?: InputMaybe<Scalars['Date']>;
+  lt?: InputMaybe<Scalars['Date']>;
+  lte?: InputMaybe<Scalars['Date']>;
+  null?: InputMaybe<Scalars['Boolean']>;
+  notNull?: InputMaybe<Scalars['Boolean']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>;
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>;
+  between?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>;
+};
+
 export type DateTimeFilterInput = {
   and?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
   or?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
@@ -208,6 +239,20 @@ export type JsonFilterInput = {
   between?: InputMaybe<Array<InputMaybe<Scalars['JSON']>>>;
 };
 
+export type ComponentCommonCompositeText = {
+  __typename?: 'ComponentCommonCompositeText';
+  id: Scalars['ID'];
+  title?: Maybe<Scalars['String']>;
+  entries?: Maybe<Array<Maybe<ComponentCommonSimpleText>>>;
+};
+
+
+export type ComponentCommonCompositeTextEntriesArgs = {
+  filters?: InputMaybe<ComponentCommonSimpleTextFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
 export type ComponentCommonImages = {
   __typename?: 'ComponentCommonImages';
   id: Scalars['ID'];
@@ -227,13 +272,136 @@ export type ComponentCommonRichText = {
   text?: Maybe<Scalars['String']>;
 };
 
+export type ComponentCommonSimpleTextFiltersInput = {
+  text?: InputMaybe<StringFilterInput>;
+  and?: InputMaybe<Array<InputMaybe<ComponentCommonSimpleTextFiltersInput>>>;
+  or?: InputMaybe<Array<InputMaybe<ComponentCommonSimpleTextFiltersInput>>>;
+  not?: InputMaybe<ComponentCommonSimpleTextFiltersInput>;
+};
+
+export type ComponentCommonSimpleTextInput = {
+  id?: InputMaybe<Scalars['ID']>;
+  text?: InputMaybe<Scalars['String']>;
+};
+
+export type ComponentCommonSimpleText = {
+  __typename?: 'ComponentCommonSimpleText';
+  id: Scalars['ID'];
+  text: Scalars['String'];
+};
+
+export type ComponentHomeHeroInput = {
+  id?: InputMaybe<Scalars['ID']>;
+  title?: InputMaybe<Scalars['String']>;
+  subTitle?: InputMaybe<Scalars['String']>;
+  image?: InputMaybe<Scalars['ID']>;
+};
+
+export type ComponentHomeHero = {
+  __typename?: 'ComponentHomeHero';
+  id: Scalars['ID'];
+  title: Scalars['String'];
+  subTitle?: Maybe<Scalars['String']>;
+  image: UploadFileEntityResponse;
+};
+
+export type ComponentHomeProcessInput = {
+  id?: InputMaybe<Scalars['ID']>;
+  title?: InputMaybe<Scalars['String']>;
+  image?: InputMaybe<Scalars['ID']>;
+  content?: InputMaybe<Scalars['String']>;
+};
+
+export type ComponentHomeProcess = {
+  __typename?: 'ComponentHomeProcess';
+  id: Scalars['ID'];
+  title: Scalars['String'];
+  image: UploadFileEntityResponse;
+  content?: Maybe<Scalars['String']>;
+};
+
+export type ComponentHomeProjectsInput = {
+  id?: InputMaybe<Scalars['ID']>;
+  title?: InputMaybe<Scalars['String']>;
+  categories?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+};
+
+export type ComponentHomeProjects = {
+  __typename?: 'ComponentHomeProjects';
+  id: Scalars['ID'];
+  title: Scalars['String'];
+  categories?: Maybe<CategoryRelationResponseCollection>;
+};
+
+
+export type ComponentHomeProjectsCategoriesArgs = {
+  filters?: InputMaybe<CategoryFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type ComponentHomeServiceInput = {
+  id?: InputMaybe<Scalars['ID']>;
+  title?: InputMaybe<Scalars['String']>;
+  services?: InputMaybe<Array<InputMaybe<ComponentCommonSimpleTextInput>>>;
+  image?: InputMaybe<Scalars['ID']>;
+};
+
+export type ComponentHomeService = {
+  __typename?: 'ComponentHomeService';
+  id: Scalars['ID'];
+  title: Scalars['String'];
+  services: Array<Maybe<ComponentCommonSimpleText>>;
+  image: UploadFileEntityResponse;
+};
+
+
+export type ComponentHomeServiceServicesArgs = {
+  filters?: InputMaybe<ComponentCommonSimpleTextFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type ComponentHomeTestimonyInput = {
+  id?: InputMaybe<Scalars['ID']>;
+  title?: InputMaybe<Scalars['String']>;
+  testimonials?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+};
+
+export type ComponentHomeTestimony = {
+  __typename?: 'ComponentHomeTestimony';
+  id: Scalars['ID'];
+  title: Scalars['String'];
+  testimonials?: Maybe<TestimonialRelationResponseCollection>;
+};
+
+
+export type ComponentHomeTestimonyTestimonialsArgs = {
+  filters?: InputMaybe<TestimonialFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type ComponentHomeVisionInput = {
+  id?: InputMaybe<Scalars['ID']>;
+  title?: InputMaybe<Scalars['String']>;
+  content?: InputMaybe<Scalars['String']>;
+  image?: InputMaybe<Scalars['ID']>;
+};
+
+export type ComponentHomeVision = {
+  __typename?: 'ComponentHomeVision';
+  id: Scalars['ID'];
+  title: Scalars['String'];
+  content?: Maybe<Scalars['String']>;
+  image: UploadFileEntityResponse;
+};
+
 export type CategoryFiltersInput = {
   id?: InputMaybe<IdFilterInput>;
   name?: InputMaybe<StringFilterInput>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
-  localizations?: InputMaybe<CategoryFiltersInput>;
-  locale?: InputMaybe<StringFilterInput>;
   and?: InputMaybe<Array<InputMaybe<CategoryFiltersInput>>>;
   or?: InputMaybe<Array<InputMaybe<CategoryFiltersInput>>>;
   not?: InputMaybe<CategoryFiltersInput>;
@@ -241,22 +409,15 @@ export type CategoryFiltersInput = {
 
 export type CategoryInput = {
   name?: InputMaybe<Scalars['String']>;
+  image?: InputMaybe<Scalars['ID']>;
 };
 
 export type Category = {
   __typename?: 'Category';
   name: Scalars['String'];
+  image: UploadFileEntityResponse;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  localizations?: Maybe<CategoryRelationResponseCollection>;
-  locale?: Maybe<Scalars['String']>;
-};
-
-
-export type CategoryLocalizationsArgs = {
-  filters?: InputMaybe<CategoryFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 export type CategoryEntity = {
@@ -279,6 +440,52 @@ export type CategoryEntityResponseCollection = {
 export type CategoryRelationResponseCollection = {
   __typename?: 'CategoryRelationResponseCollection';
   data: Array<CategoryEntity>;
+};
+
+export type HomePageInput = {
+  process?: InputMaybe<ComponentHomeProcessInput>;
+  vision?: InputMaybe<ComponentHomeVisionInput>;
+  service?: InputMaybe<ComponentHomeServiceInput>;
+  projects?: InputMaybe<ComponentHomeProjectsInput>;
+  hero?: InputMaybe<ComponentHomeHeroInput>;
+  testimonials?: InputMaybe<ComponentHomeTestimonyInput>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type HomePage = {
+  __typename?: 'HomePage';
+  process: ComponentHomeProcess;
+  vision: ComponentHomeVision;
+  service: ComponentHomeService;
+  projects: ComponentHomeProjects;
+  hero: ComponentHomeHero;
+  testimonials: ComponentHomeTestimony;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  localizations?: Maybe<HomePageRelationResponseCollection>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+export type HomePageLocalizationsArgs = {
+  publicationState?: InputMaybe<PublicationState>;
+};
+
+export type HomePageEntity = {
+  __typename?: 'HomePageEntity';
+  id?: Maybe<Scalars['ID']>;
+  attributes?: Maybe<HomePage>;
+};
+
+export type HomePageEntityResponse = {
+  __typename?: 'HomePageEntityResponse';
+  data?: Maybe<HomePageEntity>;
+};
+
+export type HomePageRelationResponseCollection = {
+  __typename?: 'HomePageRelationResponseCollection';
+  data: Array<HomePageEntity>;
 };
 
 export enum Enum_Project_Category {
@@ -364,6 +571,74 @@ export type ProjectEntityResponseCollection = {
 export type ProjectRelationResponseCollection = {
   __typename?: 'ProjectRelationResponseCollection';
   data: Array<ProjectEntity>;
+};
+
+export type TestimonialFiltersInput = {
+  id?: InputMaybe<IdFilterInput>;
+  name?: InputMaybe<StringFilterInput>;
+  description?: InputMaybe<StringFilterInput>;
+  companyAndRole?: InputMaybe<StringFilterInput>;
+  rating?: InputMaybe<IntFilterInput>;
+  addedAt?: InputMaybe<DateFilterInput>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+  localizations?: InputMaybe<TestimonialFiltersInput>;
+  locale?: InputMaybe<StringFilterInput>;
+  and?: InputMaybe<Array<InputMaybe<TestimonialFiltersInput>>>;
+  or?: InputMaybe<Array<InputMaybe<TestimonialFiltersInput>>>;
+  not?: InputMaybe<TestimonialFiltersInput>;
+};
+
+export type TestimonialInput = {
+  name?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+  companyAndRole?: InputMaybe<Scalars['String']>;
+  avatar?: InputMaybe<Scalars['ID']>;
+  rating?: InputMaybe<Scalars['Int']>;
+  addedAt?: InputMaybe<Scalars['Date']>;
+};
+
+export type Testimonial = {
+  __typename?: 'Testimonial';
+  name: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
+  companyAndRole?: Maybe<Scalars['String']>;
+  avatar?: Maybe<UploadFileEntityResponse>;
+  rating: Scalars['Int'];
+  addedAt: Scalars['Date'];
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  localizations?: Maybe<TestimonialRelationResponseCollection>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+export type TestimonialLocalizationsArgs = {
+  filters?: InputMaybe<TestimonialFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type TestimonialEntity = {
+  __typename?: 'TestimonialEntity';
+  id?: Maybe<Scalars['ID']>;
+  attributes?: Maybe<Testimonial>;
+};
+
+export type TestimonialEntityResponse = {
+  __typename?: 'TestimonialEntityResponse';
+  data?: Maybe<TestimonialEntity>;
+};
+
+export type TestimonialEntityResponseCollection = {
+  __typename?: 'TestimonialEntityResponseCollection';
+  data: Array<TestimonialEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type TestimonialRelationResponseCollection = {
+  __typename?: 'TestimonialRelationResponseCollection';
+  data: Array<TestimonialEntity>;
 };
 
 export type UploadFileFiltersInput = {
@@ -763,7 +1038,7 @@ export type UsersPermissionsUserRelationResponseCollection = {
   data: Array<UsersPermissionsUserEntity>;
 };
 
-export type GenericMorph = ComponentCommonImages | ComponentCommonRichText | Category | Project | UploadFile | UploadFolder | SlugifySlug | I18NLocale | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = ComponentCommonCompositeText | ComponentCommonImages | ComponentCommonRichText | ComponentCommonSimpleText | ComponentHomeHero | ComponentHomeProcess | ComponentHomeProjects | ComponentHomeService | ComponentHomeTestimony | ComponentHomeVision | Category | HomePage | Project | Testimonial | UploadFile | UploadFolder | SlugifySlug | I18NLocale | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
 
 export type FileInfoInput = {
   name?: InputMaybe<Scalars['String']>;
@@ -841,8 +1116,11 @@ export type Query = {
   __typename?: 'Query';
   category?: Maybe<CategoryEntityResponse>;
   categories?: Maybe<CategoryEntityResponseCollection>;
+  homePage?: Maybe<HomePageEntityResponse>;
   project?: Maybe<ProjectEntityResponse>;
   projects?: Maybe<ProjectEntityResponseCollection>;
+  testimonial?: Maybe<TestimonialEntityResponse>;
+  testimonials?: Maybe<TestimonialEntityResponseCollection>;
   uploadFile?: Maybe<UploadFileEntityResponse>;
   uploadFiles?: Maybe<UploadFileEntityResponseCollection>;
   uploadFolder?: Maybe<UploadFolderEntityResponse>;
@@ -862,7 +1140,6 @@ export type Query = {
 
 export type QueryCategoryArgs = {
   id?: InputMaybe<Scalars['ID']>;
-  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 
 
@@ -870,6 +1147,11 @@ export type QueryCategoriesArgs = {
   filters?: InputMaybe<CategoryFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryHomePageArgs = {
+  publicationState?: InputMaybe<PublicationState>;
   locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 
@@ -882,6 +1164,20 @@ export type QueryProjectArgs = {
 
 export type QueryProjectsArgs = {
   filters?: InputMaybe<ProjectFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
+};
+
+
+export type QueryTestimonialArgs = {
+  id?: InputMaybe<Scalars['ID']>;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
+};
+
+
+export type QueryTestimonialsArgs = {
+  filters?: InputMaybe<TestimonialFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   locale?: InputMaybe<Scalars['I18NLocaleCode']>;
@@ -971,9 +1267,14 @@ export type Mutation = {
   createCategory?: Maybe<CategoryEntityResponse>;
   updateCategory?: Maybe<CategoryEntityResponse>;
   deleteCategory?: Maybe<CategoryEntityResponse>;
+  updateHomePage?: Maybe<HomePageEntityResponse>;
+  deleteHomePage?: Maybe<HomePageEntityResponse>;
   createProject?: Maybe<ProjectEntityResponse>;
   updateProject?: Maybe<ProjectEntityResponse>;
   deleteProject?: Maybe<ProjectEntityResponse>;
+  createTestimonial?: Maybe<TestimonialEntityResponse>;
+  updateTestimonial?: Maybe<TestimonialEntityResponse>;
+  deleteTestimonial?: Maybe<TestimonialEntityResponse>;
   createUploadFile?: Maybe<UploadFileEntityResponse>;
   updateUploadFile?: Maybe<UploadFileEntityResponse>;
   deleteUploadFile?: Maybe<UploadFileEntityResponse>;
@@ -987,8 +1288,9 @@ export type Mutation = {
   multipleUpload: Array<Maybe<UploadFileEntityResponse>>;
   updateFileInfo: UploadFileEntityResponse;
   removeFile?: Maybe<UploadFileEntityResponse>;
-  createCategoryLocalization?: Maybe<CategoryEntityResponse>;
+  createHomePageLocalization?: Maybe<HomePageEntityResponse>;
   createProjectLocalization?: Maybe<ProjectEntityResponse>;
+  createTestimonialLocalization?: Maybe<TestimonialEntityResponse>;
   /** Create a new role */
   createUsersPermissionsRole?: Maybe<UsersPermissionsCreateRolePayload>;
   /** Update an existing role */
@@ -1017,19 +1319,27 @@ export type Mutation = {
 
 export type MutationCreateCategoryArgs = {
   data: CategoryInput;
-  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 
 
 export type MutationUpdateCategoryArgs = {
   id: Scalars['ID'];
   data: CategoryInput;
-  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 
 
 export type MutationDeleteCategoryArgs = {
   id: Scalars['ID'];
+};
+
+
+export type MutationUpdateHomePageArgs = {
+  data: HomePageInput;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
+};
+
+
+export type MutationDeleteHomePageArgs = {
   locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 
@@ -1048,6 +1358,25 @@ export type MutationUpdateProjectArgs = {
 
 
 export type MutationDeleteProjectArgs = {
+  id: Scalars['ID'];
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
+};
+
+
+export type MutationCreateTestimonialArgs = {
+  data: TestimonialInput;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
+};
+
+
+export type MutationUpdateTestimonialArgs = {
+  id: Scalars['ID'];
+  data: TestimonialInput;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
+};
+
+
+export type MutationDeleteTestimonialArgs = {
   id: Scalars['ID'];
   locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
@@ -1129,9 +1458,9 @@ export type MutationRemoveFileArgs = {
 };
 
 
-export type MutationCreateCategoryLocalizationArgs = {
+export type MutationCreateHomePageLocalizationArgs = {
   id?: InputMaybe<Scalars['ID']>;
-  data?: InputMaybe<CategoryInput>;
+  data?: InputMaybe<HomePageInput>;
   locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 
@@ -1139,6 +1468,13 @@ export type MutationCreateCategoryLocalizationArgs = {
 export type MutationCreateProjectLocalizationArgs = {
   id?: InputMaybe<Scalars['ID']>;
   data?: InputMaybe<ProjectInput>;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
+};
+
+
+export type MutationCreateTestimonialLocalizationArgs = {
+  id?: InputMaybe<Scalars['ID']>;
+  data?: InputMaybe<TestimonialInput>;
   locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 

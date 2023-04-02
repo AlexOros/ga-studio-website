@@ -19,6 +19,7 @@ export const FullPageSwiper = ({
   );
   return (
     <Swiper
+      loop
       lazy={{
         loadPrevNext: false,
       }}

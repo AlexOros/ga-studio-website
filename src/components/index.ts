@@ -7,3 +7,5 @@ export * from "./PageModal";
 export * from "./FullPageSwiper";
 export * from "./Header";
 export * from "./SplitImageAndContentSection";
+export * from "./ExpandableText";
+export * from "./Footer";

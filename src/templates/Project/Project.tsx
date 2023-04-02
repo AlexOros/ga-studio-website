@@ -25,7 +25,6 @@ import {
   UploadFileEntity,
 } from "@models";
 import { uniqBy, prop, pipe, reduce, __ } from "ramda";
-import { format } from "date-fns";
 
 export const Project = ({ data }: { data: ProjectEntity }) => {
   const [imageId, setImageId] = useState<number | null>(null);
@@ -59,7 +58,7 @@ export const Project = ({ data }: { data: ProjectEntity }) => {
 
   return (
     <>
-      <VStack as="article" overflow="hidden" spacing={[8, 12]}>
+      <VStack as="article" overflow="hidden" spacing={[8, 12]} mb={32}>
         {image?.data && (
           <HeroSection imageData={image?.data} title={title ?? ""} />
         )}
@@ -77,25 +76,21 @@ export const Project = ({ data }: { data: ProjectEntity }) => {
             <Divider height="50px" orientation="vertical" />
           </Show>
 
-          <Stack spacing="8" direction="row">
-            <Stat label="Location" value={data.attributes!.location} />
-
-            <Divider height="50px" orientation="vertical" />
-
-            <Stat
-              label="Last Modified"
-              value={format(
-                new Date(data.attributes!.updatedAt),
-                "dd / MM / yyyy"
-              )}
-            />
-          </Stack>
+          <Stat label="Location" value={data.attributes!.location} />
         </Stack>
 
         <Divider />
 
         <Container mx="auto" maxWidth="4xl">
-          <VStack spacing={4} alignItems="flex-start">
+          <VStack
+            spacing={4}
+            alignItems="flex-start"
+            sx={{
+              "h1, h2": {
+                mb: 2,
+              },
+            }}
+          >
             {content?.map((block) =>
               renderContentBlock(block, handleOpenModal)
             )}

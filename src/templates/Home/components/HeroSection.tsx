@@ -1,11 +1,17 @@
-import { Box, Fade, Text, IconButton, Icon } from "@chakra-ui/react";
+import React from "react";
+import { Box, Fade, IconButton, Icon } from "@chakra-ui/react";
 import { BlurImage, Heading } from "@components";
 import { RiMouseLine } from "react-icons/ri";
+import { getImageFormat } from "@utils";
+import { ComponentHomeHero } from "@models";
 
-import React from "react";
+export const HeroSection = ({ data }: { data: ComponentHomeHero }) => {
+  const { image, title, subTitle } = data;
+  const { large, original, placeholder } = getImageFormat(image.data);
 
-export const HeroSection = () => {
-  // TODO add translations
+  const titleFirstLetter = title.slice(0, 1);
+  const restOfTitle = title.slice(1, title.length);
+
   return (
     <Box
       as="section"
@@ -15,16 +21,14 @@ export const HeroSection = () => {
     >
       <Box position="absolute" left={0} bottom={"50%"} zIndex={1}>
         <Fade in={true} delay={0.5}>
-          <Box color="whiteAlpha.900" px={5} py={2} background="blackAlpha.700">
+          <Box color="white" px={5} py={2} background="blackAlpha.700">
             <Heading zIndex={-1} as="h1" size="title">
               <Box as="span" color="orange.400">
-                G
+                {titleFirstLetter}
               </Box>
-              herman Alin Studio
+              {restOfTitle}
             </Heading>
-            <Text fontSize={["md", "2xl", "4xl"]}>
-              Arhitectura si Inginerie
-            </Text>
+            {subTitle && <Heading size="h4">{subTitle}</Heading>}
           </Box>
         </Fade>
       </Box>
@@ -40,16 +44,18 @@ export const HeroSection = () => {
       </IconButton>
 
       <Box zIndex={0} height="100vh">
-        <BlurImage
-          style={{
-            objectFit: "cover",
-          }}
-          fill
-          // blurDataURL={hero64}
-          alt={"hero"}
-          src="/images/hero.png"
-          quality={100}
-        />
+        {original && (
+          <BlurImage
+            style={{
+              objectFit: "cover",
+            }}
+            fill
+            blurDataURL={placeholder}
+            alt={"hero"}
+            src={large?.url ?? original.url}
+            quality={100}
+          />
+        )}
       </Box>
     </Box>
   );

@@ -4,7 +4,7 @@ import { Roboto } from "@next/font/google";
 import { ChakraProvider } from "@chakra-ui/react";
 import { AppStateProvider } from "@context";
 import { theme } from "theme";
-import { Header } from "@components";
+import { Header, Footer } from "@components";
 import { useIsomorphicLayoutEffect } from "@shared/hooks";
 
 // TODO add one or more font
@@ -32,6 +32,7 @@ export default function AppWithContext(props: AppProps) {
       <ChakraProvider theme={theme}>
         <Header />
         <App {...props} />
+        <Footer />
       </ChakraProvider>
     </AppStateProvider>
   );

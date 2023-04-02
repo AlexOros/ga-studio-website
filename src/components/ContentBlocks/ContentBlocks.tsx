@@ -19,15 +19,30 @@ import BlockParagraph from "./components/BlockParagraph";
 import { Heading } from "components/Heading";
 import { ContentImage } from "components/ContentImage";
 
+type HeadingLevel = 1 | 2 | 6 | 4 | 3 | 5;
+
 type ContentBlocksProps = {
-  onImageClick: (id: number) => void;
+  onImageClick?: (id: number) => void;
+  renderHeading?: (headingLevel: HeadingLevel, text: string) => React.ReactNode;
   data?: {
     time: number;
     blocks: Block[];
   };
 };
 
-export const ContentBlocks = ({ data, onImageClick }: ContentBlocksProps) => {
+export const ContentBlocks = ({
+  data,
+  onImageClick = () => {},
+  renderHeading = (headingLevel, text) => (
+    <Heading
+      accent="bottom"
+      as={getHeadingSize(headingLevel)}
+      size={getHeadingSize(headingLevel)}
+    >
+      {text}
+    </Heading>
+  ),
+}: ContentBlocksProps) => {
   return (
     <>
       {data?.blocks.map((block) => {
@@ -35,15 +50,8 @@ export const ContentBlocks = ({ data, onImageClick }: ContentBlocksProps) => {
           const headingLevel = block.data.level;
 
           return (
-            <Box key={block.id} alignSelf="center">
-              <Heading
-                mb={2}
-                accent="bottom"
-                as={`h${headingLevel + 1 > 6 ? 6 : headingLevel + 1}` as any}
-                size={`h${headingLevel}`}
-              >
-                {block.data.text}
-              </Heading>
+            <Box key={block.id}>
+              {renderHeading(headingLevel, block.data.text)}
             </Box>
           );
         }
@@ -152,3 +160,6 @@ export const ContentBlocks = ({ data, onImageClick }: ContentBlocksProps) => {
     </>
   );
 };
+
+const getHeadingSize = (headingLevel: HeadingLevel) =>
+  `h${headingLevel + 1 > 6 ? 6 : headingLevel + 1}` as any;
