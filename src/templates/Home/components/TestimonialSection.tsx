@@ -25,7 +25,7 @@ export const TestimonialSection = ({
   const [smallerThen740] = useMediaQuery("(max-width: 740px)");
 
   return (
-    <Box py={10}>
+    <Box py={10} as="section">
       <Swiper
         modules={[Navigation, A11y, Keyboard]}
         keyboard={{

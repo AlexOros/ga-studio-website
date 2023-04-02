@@ -26,6 +26,7 @@ export const SplitScreenSection = ({
 
   return (
     <Stack
+      as="section"
       flex={1}
       h={["full", null, null, "100vh"]}
       direction={["column", null, null, "row"]}

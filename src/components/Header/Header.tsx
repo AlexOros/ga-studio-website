@@ -13,10 +13,16 @@ import {
   Divider,
   DrawerFooter,
   List,
+  Button,
+  useToast,
+  Stack,
 } from "@chakra-ui/react";
+import { CONTACT } from "@shared/constants";
+import { useCopyToClipboard } from "@shared/hooks";
 import { Heading } from "components/Heading";
 import Link from "next/link";
 import React from "react";
+import { MdEmail, MdPhone } from "react-icons/md";
 import { RiCloseFill, RiMenuFill } from "react-icons/ri";
 import { LinkListItem, LanguageSwitch } from "./components";
 
@@ -25,6 +31,8 @@ const HEADER_HEIGHT = 64;
 export const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef<HTMLButtonElement>(null);
+  const toast = useToast();
+  const [_, copyPhone] = useCopyToClipboard();
 
   return (
     <>
@@ -80,8 +88,37 @@ export const Header = () => {
             </DrawerBody>
 
             <Divider orientation="horizontal" />
-            {/* TODO - Add contact information */}
-            <DrawerFooter>Contact</DrawerFooter>
+
+            <DrawerFooter>
+              <Stack justifyContent="space-between" w="full">
+                <Button variant="link" as="a" href={`mailto:${CONTACT.email}`}>
+                  <HStack textTransform="none">
+                    <Icon as={MdEmail} fontSize="2xl" />
+                    <Text>{CONTACT.email}</Text>
+                  </HStack>
+                </Button>
+
+                <Button
+                  variant="link"
+                  onClick={() =>
+                    copyPhone(CONTACT.phone).then(() =>
+                      toast({
+                        position: "top",
+                        title: "Phone copied to clipboard",
+                        status: "success",
+                        variant: "subtle",
+                      })
+                    )
+                  }
+                >
+                  <HStack>
+                    <Icon as={MdPhone} fontSize="2xl" />
+
+                    <Text>{CONTACT.phone}</Text>
+                  </HStack>
+                </Button>
+              </Stack>
+            </DrawerFooter>
           </DrawerContent>
         </DarkMode>
       </Drawer>

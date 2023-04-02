@@ -1,10 +1,17 @@
 {
   "architect": "Arhitect",
+  "mailSubject": "Contact website",
   "titles": [
-    "Membru al Ordinului Arhitectilor din Romania",
-    "Membru al Uniunii Arhitectilor din Romania",
-    "Responsabil educație stagiu si formare profesională al OAR Filiala Alba",
-    "Membru al Consiliului Teritorial OAR Filiala Alba",
-    "Membru al Consiliului National al OAR"
-  ]
+    "Membru al Ordinului Arhitecților din România",
+    "Membru al Uniunii Arhitecților din România",
+    "Responsabil educație stagiu și formare profesională al OAR Filiala Albă",
+    "Membru al Consiliului Teritorial OAR Filiala Albă",
+    "Membru al Consiliului Național al OAR"
+  ],
+  "categories": {
+    "industrial": "Industrial",
+    "residential": "Rezidențial",
+    "urbanism": "Urbanism",
+    "all": "Toate"
+  }
 }

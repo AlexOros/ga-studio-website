@@ -6,5 +6,11 @@
     "Responsible for internship education and professional training of OAR Alba Branch",
     "Member of the Territorial Council OAR Alba Branch",
     "Member of the National Council of the OAR"
-  ]
+  ],
+  "categories": {
+    "industrial": "Industrial",
+    "residential": "Residential",
+    "urbanism": "Urbanism",
+    "all": "All"
+  }
 }

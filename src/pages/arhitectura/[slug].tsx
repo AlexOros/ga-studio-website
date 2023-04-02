@@ -1,6 +1,7 @@
 import { GetStaticPropsContext } from "next";
 import { getProjectBySlug, getProjects } from "@api";
 import { Project } from "@templates";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 const LOCALE = "ro";
 
 export async function getStaticPaths() {
@@ -27,26 +28,34 @@ export async function getStaticPaths() {
 export async function getStaticProps({
   params,
 }: GetStaticPropsContext<{ slug: string }>) {
-  const data = await getProjectBySlug({
-    slug: params!.slug,
-    params: {
-      populate: {
-        image: "*",
-        category: {
-          populate: "attribute",
-        },
-        content: {
-          populate: "*",
+  try {
+    const data = await getProjectBySlug({
+      slug: params!.slug,
+      ...(await serverSideTranslations(LOCALE, ["common"])),
+      params: {
+        populate: {
+          image: "*",
+          category: {
+            populate: "attribute",
+          },
+          content: {
+            populate: "*",
+          },
         },
       },
-    },
-  });
+    });
 
-  return {
-    props: {
-      data,
-    },
-  };
+    return {
+      props: {
+        data,
+      },
+    };
+  } catch (error: any) {
+    throw new Error(
+      error?.message ??
+        `Something went wrong (getStaticProps architecture ${LOCALE})`
+    );
+  }
 }
 
 export default Project;

@@ -8,11 +8,13 @@ import {
   SplitScreenSectionImage,
 } from "@components";
 import { ComponentHomeProjects, CategoryEntity } from "@models";
+import { useTranslation } from "next-i18next";
 import { getImageFormat } from "@utils";
 import React from "react";
 
 export const ProjectsSection = ({ data }: { data: ComponentHomeProjects }) => {
   const { title, categories = { data: [] } } = data;
+  const { t } = useTranslation(["common"]);
 
   const categoryData = categories!.data;
 
@@ -30,7 +32,7 @@ export const ProjectsSection = ({ data }: { data: ComponentHomeProjects }) => {
         }
         secondaryContent={
           <SplitScreenSectionImage>
-            <Categories categories={categoryData} />
+            <Categories categories={categoryData} t={t} />
           </SplitScreenSectionImage>
         }
       />
@@ -38,7 +40,13 @@ export const ProjectsSection = ({ data }: { data: ComponentHomeProjects }) => {
   );
 };
 // TODO finish cards.
-function Categories({ categories }: { categories: CategoryEntity[] }) {
+function Categories({
+  categories,
+  t,
+}: {
+  categories: CategoryEntity[];
+  t: any;
+}) {
   return (
     <Grid gridTemplateColumns={"1fr 1fr"}>
       {categories.map(({ attributes, id }) => {
@@ -81,7 +89,7 @@ function Categories({ categories }: { categories: CategoryEntity[] }) {
                 alignItems="center"
               >
                 <Heading px={4} py={1} color="white">
-                  {name}
+                  {t(`common:categories.${name}`)}
                 </Heading>
               </Stack>
             </MotionBox>
