@@ -31,7 +31,6 @@ export async function getStaticProps({
   try {
     const data = await getProjectBySlug({
       slug: params!.slug,
-      ...(await serverSideTranslations(LOCALE, ["common"])),
       params: {
         populate: {
           image: "*",
@@ -48,6 +47,7 @@ export async function getStaticProps({
     return {
       props: {
         data,
+        ...(await serverSideTranslations(LOCALE, ["common", "home"])),
       },
     };
   } catch (error: any) {

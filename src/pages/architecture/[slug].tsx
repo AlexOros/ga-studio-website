@@ -32,7 +32,6 @@ export async function getStaticProps({
   try {
     const data = await getProjectBySlug({
       slug: params!.slug,
-      ...(await serverSideTranslations(LOCALE, ["common"])),
       params: {
         locale: LOCALE,
         populate: {
@@ -47,6 +46,7 @@ export async function getStaticProps({
     return {
       props: {
         data,
+        ...(await serverSideTranslations(LOCALE, ["common"])),
       },
     };
   } catch (error: any) {

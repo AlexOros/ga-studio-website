@@ -1,7 +1,7 @@
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { GetStaticPropsContext } from "next";
 import { Home } from "@templates";
-import { getHomePage } from "api/projects/getHomePage";
+import { getHomePage } from "api/home/getHomePage";
 
 // TODO Get all categories here
 
@@ -11,8 +11,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
 
     return {
       props: {
-        homePage: data,
-        categories: [],
+        data,
         ...(await serverSideTranslations(locale!, ["common", "home"])),
       },
     };

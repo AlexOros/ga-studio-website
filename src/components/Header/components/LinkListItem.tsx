@@ -10,7 +10,7 @@ export type LinkListItemProps = {
 
 export const LinkListItem = ({ children, href }: LinkListItemProps) => {
   return (
-    <ListItem as={Link} href={href} fontSize={["2xl", "3xl"]} display="block">
+    <ListItem as={Link} href={href} fontSize={["xl", "2xl"]} display="block">
       <ListIcon as={RiArrowRightLine} />
       {children}
     </ListItem>

@@ -10,4 +10,8 @@ export const ROUTES = {
     en: (slug: string | null) => getRouteBySlug(slug, "architecture"),
     ro: (slug: string | null) => getRouteBySlug(slug, "arhitectura"),
   },
+  projects: {
+    en: "architecture",
+    ro: "arhitectura",
+  },
 } as const;

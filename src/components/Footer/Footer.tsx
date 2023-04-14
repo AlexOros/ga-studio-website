@@ -23,8 +23,6 @@ export function Footer() {
   const [now] = useState(new Date());
   const { t } = useTranslation(["common"]);
 
-  console.log(t("common:titles"));
-
   return (
     <DarkMode>
       <VStack
@@ -54,9 +52,9 @@ export function Footer() {
             </Box>
 
             <UnorderedList fontSize="md" fontWeight="semibold" p={0}>
-              {(t("common:titles", { returnObjects: true }) as string[]).map(
+              {(t("common:titles", { returnObjects: true }) as string[])?.map(
                 (title, index) => (
-                  <ListItem key={index}>{title + index}</ListItem>
+                  <ListItem key={title + index}>{title}</ListItem>
                 )
               )}
             </UnorderedList>

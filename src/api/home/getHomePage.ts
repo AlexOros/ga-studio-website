@@ -7,7 +7,7 @@ export const getHomePage = async (params: QueryParams = {}) => {
     data: { data },
   } = await api.get<{
     data: HomePageEntity;
-  }>(`/home-page`, {
+  }>("/home-page", {
     params: {
       ...params,
       populate: "deep",

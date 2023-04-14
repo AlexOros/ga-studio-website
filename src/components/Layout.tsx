@@ -1,8 +1,15 @@
-import { ChakraProvider } from "@chakra-ui/react";
+import { Box, ChakraProvider } from "@chakra-ui/react";
 import { AppStateProvider } from "@context";
 import { theme } from "theme";
 import { Header, Footer } from "@components";
 import { useIsomorphicLayoutEffect } from "@shared/hooks";
+import { Roboto } from "@next/font/google";
+
+// TODO add one or more font
+const robot = Roboto({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "700"],
+});
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   useIsomorphicLayoutEffect(() => {
@@ -13,9 +20,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <AppStateProvider>
       <ChakraProvider theme={theme}>
-        <Header />
-        {children}
-        <Footer />
+        <Box display="flex" flexDir="column" minHeight="100vh">
+          <Header />
+          <Box as="main" flex={1} className={robot.className}>
+            {children}
+          </Box>
+          <Footer />
+        </Box>
       </ChakraProvider>
     </AppStateProvider>
   );

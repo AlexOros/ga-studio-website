@@ -2,16 +2,6 @@ import Head from "next/head";
 import { HomePageEntity, UploadFileEntity } from "@models";
 import { ROUTES } from "@api";
 import { useSyncNextLocale } from "@shared/hooks";
-import {
-  Box,
-  Center,
-  HStack,
-  List,
-  ListItem,
-  Stack,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
 
 export type SectionProps = {
   imageData: UploadFileEntity;
@@ -27,12 +17,14 @@ import {
 import { TestimonialSection } from "./components/TestimonialSection";
 
 type HomeProps = {
-  homePage: HomePageEntity;
-  categories: unknown[];
+  data: HomePageEntity;
 };
 
-export function Home({ homePage }: HomeProps) {
+export function Home({ data }: HomeProps) {
   useSyncNextLocale(ROUTES.home);
+
+  const { hero, vision, process, service, projects, testimonials } =
+    data.attributes ?? {};
 
   return (
     <>
@@ -43,17 +35,19 @@ export function Home({ homePage }: HomeProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <HeroSection data={homePage.attributes!.hero} />
+      {hero && <HeroSection data={hero} />}
 
-      <VisionSection data={homePage.attributes!.vision} />
+      {vision && <VisionSection data={vision} />}
 
-      <ProcessSection data={homePage.attributes!.process} />
+      {process && <ProcessSection data={process} />}
 
-      <ServicesSection data={homePage.attributes!.service} />
+      {service && <ServicesSection data={service} />}
 
-      <ProjectsSection data={homePage.attributes!.projects} />
+      {projects && <ProjectsSection data={projects} />}
 
-      <TestimonialSection data={homePage.attributes!.testimonials} />
+      {testimonials && Boolean(testimonials.testimonials?.data?.length) && (
+        <TestimonialSection data={testimonials} />
+      )}
     </>
   );
 }

@@ -8,7 +8,7 @@ async function getProjects<T extends ProjectEntity[]>(
   return api.get<{
     data: T;
     meta: Pagination;
-  }>("projects", {
+  }>("/projects", {
     params,
   });
 }

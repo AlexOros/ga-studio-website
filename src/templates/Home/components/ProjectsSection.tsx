@@ -11,6 +11,7 @@ import { ComponentHomeProjects, CategoryEntity } from "@models";
 import { useTranslation } from "next-i18next";
 import { getImageFormat } from "@utils";
 import React from "react";
+import Link from "next/link";
 
 export const ProjectsSection = ({ data }: { data: ComponentHomeProjects }) => {
   const { title, categories = { data: [] } } = data;
@@ -60,7 +61,13 @@ function Categories({
         };
 
         return (
-          <Box key={id} overflow={["visible", "hidden"]} position="relative">
+          <Box
+            href="/arhitectura"
+            as={Link}
+            key={id}
+            overflow={["visible", "hidden"]}
+            position="relative"
+          >
             <MotionBox
               h={["25vh", null, null, "50vh"]}
               cursor="pointer"

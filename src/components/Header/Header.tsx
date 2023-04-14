@@ -16,6 +16,7 @@ import {
   Button,
   useToast,
   Stack,
+  Box,
 } from "@chakra-ui/react";
 import { CONTACT } from "@shared/constants";
 import { useCopyToClipboard } from "@shared/hooks";
@@ -76,21 +77,35 @@ export const Header = () => {
             </HStack>
             <Divider orientation="horizontal" />
             <DrawerBody p={6}>
-              {/* TODO - Add dynamic projects */}
-              <Heading as="h1" size="h2">
-                Proiecte
-              </Heading>
-              <List>
-                <LinkListItem href="/">Industrial</LinkListItem>
-                <LinkListItem href="/">Home</LinkListItem>
-                <LinkListItem href="/">Personal</LinkListItem>
-              </List>
+              <Stack spacing={6}>
+                <Box>
+                  <Heading as="h2" size="h3">
+                    Proiecte
+                  </Heading>
+                  <List>
+                    <LinkListItem href="/">Industrial</LinkListItem>
+                    <LinkListItem href="/">Home</LinkListItem>
+                    <LinkListItem href="/">Personal</LinkListItem>
+                  </List>
+                </Box>
+
+                <HStack direction="row">
+                  <Heading color="gray.400" as="h2" size="h3">
+                    News
+                  </Heading>
+                  <Text color="gray.400">(Coming soon)</Text>
+                </HStack>
+              </Stack>
             </DrawerBody>
 
             <Divider orientation="horizontal" />
 
             <DrawerFooter>
-              <Stack justifyContent="space-between" w="full">
+              <Stack
+                justifyContent="space-between"
+                w="full"
+                direction={["column", null, null, "row"]}
+              >
                 <Button variant="link" as="a" href={`mailto:${CONTACT.email}`}>
                   <HStack textTransform="none">
                     <Icon as={MdEmail} fontSize="2xl" />
