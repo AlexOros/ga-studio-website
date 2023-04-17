@@ -27,7 +27,7 @@ import { MdEmail, MdPhone } from "react-icons/md";
 import { RiCloseFill, RiMenuFill } from "react-icons/ri";
 import { LinkListItem, LanguageSwitch } from "./components";
 
-const HEADER_HEIGHT = 64;
+export const HEADER_HEIGHT = 64;
 
 export const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();

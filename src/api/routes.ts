@@ -7,11 +7,11 @@ export const ROUTES = {
   home: "/",
   notFound: "/not-found",
   project: {
-    en: (slug: string | null) => getRouteBySlug(slug, "architecture"),
-    ro: (slug: string | null) => getRouteBySlug(slug, "arhitectura"),
+    en: (slug: string | null) => getRouteBySlug(slug, "projects"),
+    ro: (slug: string | null) => getRouteBySlug(slug, "proiecte"),
   },
   projects: {
-    en: "architecture",
-    ro: "arhitectura",
+    en: "projects",
+    ro: "proiecte",
   },
 } as const;

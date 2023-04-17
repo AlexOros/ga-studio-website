@@ -3994,6 +3994,11 @@ tiny-invariant@^1.0.6:
   resolved "https://registry.yarnpkg.com/tiny-invariant/-/tiny-invariant-1.3.1.tgz#8560808c916ef02ecfd55e66090df23a4b7aa642"
   integrity sha512-AD5ih2NlSssTCwsMznbvwMZpJ1cbhkGd2uueNxzv2jDlEeZdU04JQfRnggJQ8DrcVBGjAsCKwFBbDlVNtEMlzw==
 
+titleizejs@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/titleizejs/-/titleizejs-1.2.0.tgz#429c0f359b0b7a13ee112c266d2c4df91527c04d"
+  integrity sha512-yv6ZTrolirOiGQ1juX6Bmjge7Z6wrWzqRSqxus4t8Z/0C+gokubS3CWHRv+I0L9oz+fL+JncfrDR1FtL/8s6MA==
+
 to-fast-properties@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/to-fast-properties/-/to-fast-properties-2.0.0.tgz#dc5e698cbd079265bc73e0377681a4e4e83f616e"

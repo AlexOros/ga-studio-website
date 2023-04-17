@@ -35,7 +35,7 @@ export const ContentBlocks = ({
   onImageClick = () => {},
   renderHeading = (headingLevel, text) => (
     <Heading
-      accent="bottom"
+      // accent="bottom"
       as={getHeadingSize(headingLevel)}
       size={getHeadingSize(headingLevel)}
     >

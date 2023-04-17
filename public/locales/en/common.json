@@ -1,5 +1,8 @@
 {
   "architect": "Architect",
+  "projects": "Projects",
+  "noProjectFound": "No project found",
+  "searchSelectedCategory": "Search selected category",
   "titles": [
     "Member of the Order of Architects, Romania",
     "Member of the Union of Architects, Romania",
@@ -7,10 +10,18 @@
     "Member of the Territorial Council OAR Alba Branch",
     "Member of the National Council of the OAR"
   ],
-  "categories": {
+  "categoryObj": {
     "industrial": "Industrial",
     "residential": "Residential",
     "urbanism": "Urbanism",
     "all": "All"
-  }
+  },
+  "statusObj": {
+    "concept": "Concept",
+    "under construction": "Under development",
+    "finished": "Finished"
+  },
+  "category": "Category",
+  "location": "Location",
+  "selectedCategory": "Selected category"
 }

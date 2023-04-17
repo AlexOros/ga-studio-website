@@ -24,10 +24,13 @@ import {
   ProjectEntity,
   UploadFileEntity,
 } from "@models";
+import titleize from "titleizejs";
 import { uniqBy, prop, pipe, reduce, __ } from "ramda";
+import { useTranslation } from "next-i18next";
 
 export const Project = ({ data }: { data: ProjectEntity }) => {
   const [imageId, setImageId] = useState<number | null>(null);
+  const { t } = useTranslation(["common"]);
 
   const handleOpenModal = (id: number) => setImageId(id);
   const handleCloseModal = () => setImageId(null);
@@ -43,13 +46,7 @@ export const Project = ({ data }: { data: ProjectEntity }) => {
 
   useSyncNextLocale(nextRoute);
 
-  const {
-    title,
-    image,
-    content,
-    // info: infoList,
-    // description = [],
-  } = data?.attributes || {};
+  const { title, image, content, category } = data?.attributes || {};
 
   const projectImages = pipe(
     reduce(getImagesFromContentBlocks, []),
@@ -64,19 +61,32 @@ export const Project = ({ data }: { data: ProjectEntity }) => {
         )}
 
         <Stack direction={["column", null, "row"]} spacing="8">
-          <Stack spacing="8" direction="row">
-            <Stat label="Category" value={data.attributes!.category} />
-
-            <Divider height="50px" orientation="vertical" />
-
-            <Stat label="Status" value={data.attributes!.status} />
-          </Stack>
+          {/* <Stack spacing="8" direction="row"> */}
+          <Stat
+            label={t("common:category")}
+            value={
+              t(`common:categoryObj.${category?.data?.attributes?.name}`) ?? ""
+            }
+          />
 
           <Show above="md">
             <Divider height="50px" orientation="vertical" />
           </Show>
 
-          <Stat label="Location" value={data.attributes!.location} />
+          <Stat
+            label="Status"
+            value={t(`common:statusObj.${data.attributes!.status}`) ?? ""}
+          />
+          {/* </Stack> */}
+
+          <Show above="md">
+            <Divider height="50px" orientation="vertical" />
+          </Show>
+
+          <Stat
+            label={t("common:location")}
+            value={titleize(data.attributes!.location ?? "")}
+          />
         </Stack>
 
         <Divider />

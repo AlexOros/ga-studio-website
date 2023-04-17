@@ -1,14 +1,13 @@
 import { GetStaticPropsContext } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { getProjectBySlug, getProjects } from "@api";
 import { Project } from "@templates";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-const LOCALE = "ro";
+
+const LOCALE = "en";
 
 export async function getStaticPaths() {
   try {
-    const {
-      data: { data },
-    } = await getProjects({
+    const { data } = await getProjects({
       locale: LOCALE,
       fields: ["locale", "slug"],
     });
@@ -32,11 +31,10 @@ export async function getStaticProps({
     const data = await getProjectBySlug({
       slug: params!.slug,
       params: {
+        locale: LOCALE,
         populate: {
+          category: "name",
           image: "*",
-          category: {
-            populate: "attribute",
-          },
           content: {
             populate: "*",
           },
@@ -47,7 +45,7 @@ export async function getStaticProps({
     return {
       props: {
         data,
-        ...(await serverSideTranslations(LOCALE, ["common", "home"])),
+        ...(await serverSideTranslations(LOCALE, ["common"])),
       },
     };
   } catch (error: any) {

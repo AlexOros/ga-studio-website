@@ -32,7 +32,6 @@ export const TestimonialSection = ({
           enabled: true,
         }}
         autoHeight
-        // centeredSlides
         navigation={{
           enabled: true,
         }}

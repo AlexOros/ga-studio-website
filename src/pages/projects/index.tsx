@@ -1,36 +1,32 @@
 import { getProjects } from "@api";
 import { Projects } from "@templates";
+import { getCategories } from "api/projects/getCategories";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-const LOCALE = "ro";
-
-/**
- * TODO
- * Add both index pages (With filter functionality)
- * Add category to Heading (side navigation)
- * Add translation si side navigation
- * Test Projects page make sure nothing has broken
- * Add Logo
- * Deploy :D
- */
+const LOCALE = "en";
 
 export async function getStaticProps() {
   try {
-    const data = await getProjects({
+    const { data: projects } = await getProjects({
+      locale: LOCALE,
+      populate: ["category", "image"],
+    });
+
+    const { data: categories } = await getCategories({
       locale: LOCALE,
     });
-    console.log("🔥  data:", data);
 
     return {
       props: {
-        // data: JSON.stringify(data),`
+        projects,
+        categories,
         ...(await serverSideTranslations(LOCALE, ["common"])),
       },
     };
   } catch (error: any) {
     throw new Error(
       error?.message ??
-        `Something went wrong (getStaticProps architecture ${LOCALE})`
+        `Something went wrong (getStaticProps projects ${LOCALE})`
     );
   }
 }

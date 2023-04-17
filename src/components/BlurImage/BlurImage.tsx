@@ -35,9 +35,7 @@ export function BlurImage({
         objectFit: "cover",
         ...(!isCached && {
           transition: "300ms all linear",
-          ...(!isLoading
-            ? { filter: "blur(0px)", scale: "1" }
-            : { filter: "blur(40px)", scale: "1.15" }),
+          ...(!isLoading ? { filter: "blur(0px)" } : { filter: "blur(140px)" }),
         }),
         ...props.style,
       }}

@@ -10,3 +10,4 @@ export * from "./SplitImageAndContentSection";
 export * from "./ExpandableText";
 export * from "./Footer";
 export * from "./Layout";
+export * from "./ImageCard";

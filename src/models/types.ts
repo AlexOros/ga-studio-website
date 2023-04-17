@@ -400,6 +400,7 @@ export type ComponentHomeVision = {
 export type CategoryFiltersInput = {
   id?: InputMaybe<IdFilterInput>;
   name?: InputMaybe<StringFilterInput>;
+  projects?: InputMaybe<ProjectFiltersInput>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
   and?: InputMaybe<Array<InputMaybe<CategoryFiltersInput>>>;
@@ -410,14 +411,23 @@ export type CategoryFiltersInput = {
 export type CategoryInput = {
   name?: InputMaybe<Scalars['String']>;
   image?: InputMaybe<Scalars['ID']>;
+  projects?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
 };
 
 export type Category = {
   __typename?: 'Category';
   name: Scalars['String'];
   image: UploadFileEntityResponse;
+  projects?: Maybe<ProjectRelationResponseCollection>;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+
+export type CategoryProjectsArgs = {
+  filters?: InputMaybe<ProjectFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 export type CategoryEntity = {
@@ -488,16 +498,9 @@ export type HomePageRelationResponseCollection = {
   data: Array<HomePageEntity>;
 };
 
-export enum Enum_Project_Category {
-  Office = 'office',
-  Industrial = 'industrial',
-  Commercial = 'commercial',
-  Other = 'other'
-}
-
 export enum Enum_Project_Status {
-  Idle = 'idle',
-  Active = 'active',
+  Concept = 'concept',
+  UnderConstruction = 'under_construction',
   Finished = 'finished'
 }
 
@@ -507,9 +510,9 @@ export type ProjectFiltersInput = {
   id?: InputMaybe<IdFilterInput>;
   title?: InputMaybe<StringFilterInput>;
   slug?: InputMaybe<StringFilterInput>;
-  category?: InputMaybe<StringFilterInput>;
   status?: InputMaybe<StringFilterInput>;
   location?: InputMaybe<StringFilterInput>;
+  category?: InputMaybe<CategoryFiltersInput>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
   localizations?: InputMaybe<ProjectFiltersInput>;
@@ -524,9 +527,9 @@ export type ProjectInput = {
   image?: InputMaybe<Scalars['ID']>;
   slug?: InputMaybe<Scalars['String']>;
   content?: InputMaybe<Array<Scalars['ProjectContentDynamicZoneInput']>>;
-  category?: InputMaybe<Enum_Project_Category>;
   status?: InputMaybe<Enum_Project_Status>;
   location?: InputMaybe<Scalars['String']>;
+  category?: InputMaybe<Scalars['ID']>;
 };
 
 export type Project = {
@@ -535,9 +538,9 @@ export type Project = {
   image: UploadFileEntityResponse;
   slug?: Maybe<Scalars['String']>;
   content?: Maybe<Array<Maybe<ProjectContentDynamicZone>>>;
-  category: Enum_Project_Category;
   status: Enum_Project_Status;
   location: Scalars['String'];
+  category?: Maybe<CategoryEntityResponse>;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   localizations?: Maybe<ProjectRelationResponseCollection>;

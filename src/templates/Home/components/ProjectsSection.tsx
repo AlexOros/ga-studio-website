@@ -6,12 +6,15 @@ import {
   BlurImage,
   SplitScreenSectionContent,
   SplitScreenSectionImage,
+  ImageCard,
 } from "@components";
 import { ComponentHomeProjects, CategoryEntity } from "@models";
 import { useTranslation } from "next-i18next";
 import { getImageFormat } from "@utils";
 import React from "react";
 import Link from "next/link";
+import { useRouter } from "@shared/hooks";
+import { ROUTES } from "@api";
 
 export const ProjectsSection = ({ data }: { data: ComponentHomeProjects }) => {
   const { title, categories = { data: [] } } = data;
@@ -40,14 +43,16 @@ export const ProjectsSection = ({ data }: { data: ComponentHomeProjects }) => {
     </>
   );
 };
-// TODO finish cards.
-function Categories({
+
+export function Categories({
   categories,
   t,
 }: {
   categories: CategoryEntity[];
   t: any;
 }) {
+  const { locale } = useRouter();
+
   return (
     <Grid gridTemplateColumns={"1fr 1fr"}>
       {categories.map(({ attributes, id }) => {
@@ -60,46 +65,16 @@ function Categories({
           url: "",
         };
 
-        return (
-          <Box
-            href="/arhitectura"
-            as={Link}
-            key={id}
-            overflow={["visible", "hidden"]}
-            position="relative"
-          >
-            <MotionBox
-              h={["25vh", null, null, "50vh"]}
-              cursor="pointer"
-              whileHover={{ scale: 1.05 }}
-              // @ts-ignore
-              transition={{
-                duration: 1.5,
-                ease: "easeInOut",
-              }}
-            >
-              <BlurImage
-                style={{
-                  filter: "brightness(60%)",
-                }}
-                fill
-                alt={original?.alternativeText || ""}
-                blurDataURL={placeholder}
-                src={url}
-                quality={80}
-              />
+        const href = `/${ROUTES.projects[locale]}?category=${name}`;
 
-              <Stack
-                position="absolute"
-                inset="0"
-                placeContent="center"
-                alignItems="center"
-              >
-                <Heading px={4} py={1} color="white">
-                  {t(`common:categories.${name}`)}
-                </Heading>
-              </Stack>
-            </MotionBox>
+        return (
+          <Box key={id} href={href} as={Link}>
+            <ImageCard
+              name={t(`common:categoryObj.${name}`)}
+              url={url}
+              blurDataURL={placeholder}
+              alt={original?.alternativeText || ""}
+            />
           </Box>
         );
       })}
