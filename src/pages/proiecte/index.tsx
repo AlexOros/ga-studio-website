@@ -1,18 +1,9 @@
 import { getProjects } from "@api";
 import { Projects } from "@templates";
-import { getCategories } from "api/projects/getCategories";
+import { getCategories } from "api/project/getCategories";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const LOCALE = "ro";
-
-/**
- * TODO
- * Add category to Heading (side navigation)
- * Add translation si side navigation
- * Test Projects page make sure nothing has broken
- * Add Logo
- * Deploy :D
- */
 
 export async function getStaticProps() {
   try {

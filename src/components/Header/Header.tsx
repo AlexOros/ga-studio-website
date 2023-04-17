@@ -89,7 +89,7 @@ export const Header = () => {
                   </List>
                 </Box>
 
-                <HStack direction="row">
+                <HStack>
                   <Heading color="gray.400" as="h2" size="h3">
                     News
                   </Heading>
