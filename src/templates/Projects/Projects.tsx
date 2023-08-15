@@ -76,7 +76,7 @@ export const Projects = ({ projects, categories }: ProjectsProps) => {
     locale === "ro" ? pathname : `/${locale}${pathname}`;
 
   return (
-    <Box pt={`${HEADER_HEIGHT}px`}>
+    <Box py={`${HEADER_HEIGHT}px`}>
       <Center pb={6} pt={12}>
         <Heading size="h1">{t("common:projects")}</Heading>
       </Center>

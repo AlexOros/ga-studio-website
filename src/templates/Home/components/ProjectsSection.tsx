@@ -1,9 +1,7 @@
-import { Box, Divider, Grid, Stack } from "@chakra-ui/react";
+import { Box, Divider, Grid } from "@chakra-ui/react";
 import {
   SplitScreenSection,
   Heading,
-  MotionBox,
-  BlurImage,
   SplitScreenSectionContent,
   SplitScreenSectionImage,
   ImageCard,
@@ -20,8 +18,6 @@ export const ProjectsSection = ({ data }: { data: ComponentHomeProjects }) => {
   const { title, categories = { data: [] } } = data;
   const { t } = useTranslation(["common"]);
 
-  const categoryData = categories!.data;
-
   return (
     <>
       <Divider />
@@ -36,7 +32,7 @@ export const ProjectsSection = ({ data }: { data: ComponentHomeProjects }) => {
         }
         secondaryContent={
           <SplitScreenSectionImage>
-            <Categories categories={categoryData} t={t} />
+            <Categories categories={categories!.data} t={t} />
           </SplitScreenSectionImage>
         }
       />

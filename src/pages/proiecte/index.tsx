@@ -1,6 +1,6 @@
 import { getProjects } from "@api";
 import { Projects } from "@templates";
-import { getCategories } from "api/project/getCategories";
+import { getCategories } from "api/project";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const LOCALE = "ro";

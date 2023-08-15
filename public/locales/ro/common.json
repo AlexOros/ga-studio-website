@@ -1,8 +1,11 @@
 {
+  "mainSubTitle": "Arhitectură si Inginerie",
   "architect": "Arhitect",
   "mailSubject": "Contact website",
   "projects": "Proiecte",
   "noProjectFound": "Niciun proiect găsit",
+  "news": "Știri",
+  "comingSoon": "În curând",
   "searchSelectedCategory": "Caută în categoria selectată",
   "titles": [
     "Membru al Ordinului Arhitecților din România",

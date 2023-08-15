@@ -1,7 +1,10 @@
 {
+  "mainSubTitle": "Architecture and Engineering",
   "architect": "Architect",
   "projects": "Projects",
   "noProjectFound": "No project found",
+  "news": "News",
+  "comingSoon": "Coming soon",
   "searchSelectedCategory": "Search selected category",
   "titles": [
     "Member of the Order of Architects, Romania",

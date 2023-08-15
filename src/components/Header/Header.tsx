@@ -1,3 +1,4 @@
+import { ROUTES, useCategories } from "@api";
 import {
   Text,
   Drawer,
@@ -17,10 +18,13 @@ import {
   useToast,
   Stack,
   Box,
+  Badge,
+  VStack,
 } from "@chakra-ui/react";
 import { CONTACT } from "@shared/constants";
-import { useCopyToClipboard } from "@shared/hooks";
+import { useCopyToClipboard, useRouter } from "@shared/hooks";
 import { Heading } from "components/Heading";
+import { useTranslation } from "next-i18next";
 import Link from "next/link";
 import React from "react";
 import { MdEmail, MdPhone } from "react-icons/md";
@@ -30,10 +34,13 @@ import { LinkListItem, LanguageSwitch } from "./components";
 export const HEADER_HEIGHT = 64;
 
 export const Header = () => {
+  const { locale, asPath } = useRouter();
+  const { t } = useTranslation(["common"]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef<HTMLButtonElement>(null);
   const toast = useToast();
   const [_, copyPhone] = useCopyToClipboard();
+  const { data: { data: categories } = {} } = useCategories();
 
   return (
     <>
@@ -44,14 +51,32 @@ export const Header = () => {
         zIndex="docked"
         justifyContent="space-between"
         width="full"
-        px={5}
       >
         <Link href="/">
-          <Text fontWeight="bold">Logo</Text>
+          <VStack
+            borderRadius="sm"
+            px={5}
+            h="full"
+            spacing={-2}
+            alignItems="start"
+            bgColor="white"
+            mixBlendMode="darken"
+          >
+            <Text fontSize="large" fontWeight="bold">
+              GA Studio
+            </Text>
+            <Text>{t("mainSubTitle")}</Text>
+          </VStack>
         </Link>
-        <IconButton ref={btnRef} onClick={onOpen} aria-label="open menu button">
-          <Icon fontSize="xl" as={RiMenuFill} />
-        </IconButton>
+        <Box pr={5}>
+          <IconButton
+            ref={btnRef}
+            onClick={onOpen}
+            aria-label="open menu button"
+          >
+            <Icon fontSize="xl" as={RiMenuFill} />
+          </IconButton>
+        </Box>
       </HStack>
 
       <Drawer
@@ -65,7 +90,7 @@ export const Header = () => {
         <DarkMode>
           <DrawerContent bgColor="gray.900" color="white">
             <HStack as={DrawerHeader} justifyContent="space-between">
-              <LanguageSwitch onClose={onClose} />
+              <LanguageSwitch />
 
               <IconButton
                 variant="ghost"
@@ -79,21 +104,37 @@ export const Header = () => {
             <DrawerBody p={6}>
               <Stack spacing={6}>
                 <Box>
-                  <Heading as="h2" size="h3">
-                    Proiecte
+                  <Heading pb={2} as="h2" size="h3">
+                    {t("common:projects")}
                   </Heading>
                   <List>
-                    <LinkListItem href="/">Industrial</LinkListItem>
-                    <LinkListItem href="/">Home</LinkListItem>
-                    <LinkListItem href="/">Personal</LinkListItem>
+                    {categories?.map((category) => {
+                      const { name } = category?.attributes || {};
+                      const categoryQueryParam =
+                        name === "all" ? "" : `?category=${name}`;
+                      const href = `/${ROUTES.projects[locale]}${categoryQueryParam}`;
+
+                      return (
+                        <LinkListItem
+                          href={href}
+                          key={category.id}
+                          onClick={onClose}
+                          isActive={asPath === href}
+                        >
+                          {t(`common:categoryObj.${name}`)}
+                        </LinkListItem>
+                      );
+                    })}
                   </List>
                 </Box>
 
                 <HStack>
                   <Heading color="gray.400" as="h2" size="h3">
-                    News
+                    {t("common:news")}
                   </Heading>
-                  <Text color="gray.400">(Coming soon)</Text>
+                  <Text color="gray.400">
+                    <Badge>{t("common:comingSoon")}</Badge>
+                  </Text>
                 </HStack>
               </Stack>
             </DrawerBody>

@@ -4,12 +4,16 @@ import { theme } from "theme";
 import { Header, Footer } from "@components";
 import { useIsomorphicLayoutEffect } from "@shared/hooks";
 import { Roboto } from "@next/font/google";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-// TODO add one or more font
 const robot = Roboto({
   subsets: ["latin"],
+  preload: true,
+  display: "swap",
   weight: ["300", "400", "500", "700"],
 });
+
+const queryClient = new QueryClient();
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   useIsomorphicLayoutEffect(() => {
@@ -18,16 +22,18 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <AppStateProvider>
-      <ChakraProvider theme={theme}>
-        <Box display="flex" flexDir="column" minHeight="100vh">
-          <Header />
-          <Box as="main" flex={1} className={robot.className}>
-            {children}
+    <QueryClientProvider client={queryClient}>
+      <AppStateProvider>
+        <ChakraProvider theme={theme}>
+          <Box display="flex" flexDir="column" minHeight="100vh">
+            <Header />
+            <Box as="main" flex={1} className={robot.className}>
+              {children}
+            </Box>
+            <Footer />
           </Box>
-          <Footer />
-        </Box>
-      </ChakraProvider>
-    </AppStateProvider>
+        </ChakraProvider>
+      </AppStateProvider>
+    </QueryClientProvider>
   );
 }
