@@ -29,6 +29,12 @@ import { uniqBy, prop, pipe, reduce, __ } from "ramda";
 import { useTranslation } from "next-i18next";
 
 export const Project = ({ data }: { data: ProjectEntity | undefined }) => {
+  if (!data) return null;
+
+  return <ProjectContent data={data} />;
+};
+
+const ProjectContent = ({ data }: { data: ProjectEntity }) => {
   const [imageId, setImageId] = useState<number | null>(null);
   const { t } = useTranslation(["common"]);
 
