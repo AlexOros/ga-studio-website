@@ -45,7 +45,7 @@ export async function getStaticProps({
     return {
       props: {
         data,
-        ...(await serverSideTranslations(LOCALE, ["common"])),
+        // ...(await serverSideTranslations(LOCALE, ["common"])),
       },
     };
   } catch (error: any) {

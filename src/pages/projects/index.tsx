@@ -20,7 +20,7 @@ export async function getStaticProps() {
       props: {
         projects,
         categories,
-        ...(await serverSideTranslations(LOCALE, ["common"])),
+        // ...(await serverSideTranslations(LOCALE, ["common"])),
       },
     };
   } catch (error: any) {
