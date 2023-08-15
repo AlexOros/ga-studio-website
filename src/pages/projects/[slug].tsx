@@ -19,7 +19,7 @@ export async function getStaticPaths() {
         },
         locale: attributes!.locale,
       })),
-      fallback: true,
+      fallback: false,
     };
   } catch (error) {}
 }
