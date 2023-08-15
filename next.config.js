@@ -4,7 +4,7 @@ const { i18n } = require("./next-i18next.config");
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["localhost"],
+    domains: ["localhost", "www.gastudio-server.click"],
   },
   i18n,
 };

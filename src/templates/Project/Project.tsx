@@ -28,7 +28,7 @@ import titleize from "titleizejs";
 import { uniqBy, prop, pipe, reduce, __ } from "ramda";
 import { useTranslation } from "next-i18next";
 
-export const Project = ({ data }: { data: ProjectEntity }) => {
+export const Project = ({ data }: { data: ProjectEntity | undefined }) => {
   const [imageId, setImageId] = useState<number | null>(null);
   const { t } = useTranslation(["common"]);
 
@@ -45,6 +45,8 @@ export const Project = ({ data }: { data: ProjectEntity }) => {
       : ROUTES.project.en(localeSlug!);
 
   useSyncNextLocale(nextRoute);
+
+  if (!data) return null;
 
   const { title, image, content, category } = data?.attributes || {};
 
@@ -148,6 +150,7 @@ function getImagesFromContentBlocks(
   acc: UploadFileEntity[],
   block: ProjectContentDynamicZone
 ) {
+  console.log("🔥  block:", block);
   if ("images" in block) {
     return [...acc, ...(block?.images?.data ?? [])];
   } else if ("text" in block && block.text) {
