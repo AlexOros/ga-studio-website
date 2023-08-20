@@ -1,1 +1,1 @@
-export * from "./SplitImageAndContentSection";
+export * from "./SplitScreenSection";

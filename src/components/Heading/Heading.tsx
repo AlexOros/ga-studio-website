@@ -1,20 +1,12 @@
-import { Box, BoxProps, useTheme } from "@chakra-ui/react";
+import { Box, BoxProps, ResponsiveValue } from "@chakra-ui/react";
 import React from "react";
 
 interface HeadingProps extends BoxProps {
   accent?: "bottom" | "through";
-  size?: "title" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+  size?:
+    | ResponsiveValue<"title" | "h1" | "h2" | "h3" | "h4" | "h5" | ("h6" & {})>
+    | undefined;
 }
-
-const bottomHeightMapBySize = {
-  title: 10,
-  h1: 8,
-  h2: 8,
-  h3: 7,
-  h4: 5,
-  h5: 4,
-  h6: 2,
-};
 
 const Heading: React.FC<HeadingProps> = ({
   children,
