@@ -52,8 +52,6 @@ const ProjectContent = ({ data }: { data: ProjectEntity }) => {
 
   useSyncNextLocale(nextRoute);
 
-  if (!data) return null;
-
   const { title, image, content, category } = data?.attributes || {};
 
   const projectImages = pipe(
@@ -156,7 +154,6 @@ function getImagesFromContentBlocks(
   acc: UploadFileEntity[],
   block: ProjectContentDynamicZone
 ) {
-  console.log("🔥  block:", block);
   if ("images" in block) {
     return [...acc, ...(block?.images?.data ?? [])];
   } else if ("text" in block && block.text) {
