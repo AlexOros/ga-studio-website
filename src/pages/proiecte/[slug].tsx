@@ -26,6 +26,9 @@ export async function getStaticPaths() {
 export async function getStaticProps({
   params,
 }: GetStaticPropsContext<{ slug: string }>) {
+  throw new Error(
+    `Something went wrong (getStaticProps architecture ${LOCALE})`
+  );
   try {
     const data = await getProjectBySlug({
       slug: params!.slug,
