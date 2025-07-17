@@ -37,7 +37,9 @@ export async function getStaticProps({
   // Temporary fix: Return an empty paths array and set fallback to 'blocking'
   // This will allow the build to succeed even if the backend is down.
   return {
-     props: {}
+    props: {
+      ...(await serverSideTranslations(LOCALE, ["common"])),   
+    }
   }; 
   try {
     const data = await getProjectBySlug({
