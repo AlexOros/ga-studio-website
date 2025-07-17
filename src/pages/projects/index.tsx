@@ -12,7 +12,8 @@ export async function getStaticProps() {
     props: {
       projects: [],
       categories: [],
-  };  
+    }
+  };
   try {
     const { data: projects } = await getProjects({
       locale: LOCALE,
