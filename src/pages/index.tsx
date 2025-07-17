@@ -7,12 +7,12 @@ import { getHomePage } from "api/home/getHomePage";
 
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
   try {
-    const data = await getHomePage({ locale });
+    // const data = await getHomePage({ locale });
 
     return {
       props: {
-        data,
-        ...(await serverSideTranslations(locale!, ["common", "home"])),
+        data: {},
+        ...(await serverSideTranslations(locale!, ['common', 'home'])),
       },
     };
   } catch (error: any) {
