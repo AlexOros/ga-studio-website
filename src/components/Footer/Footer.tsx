@@ -16,6 +16,7 @@ import { Heading } from "@components";
 import React, { useState } from "react";
 import { useTranslation } from "next-i18next";
 import { MdEmail, MdPhone, MdMap } from "react-icons/md";
+import { FaInstagram, FaFacebook } from "react-icons/fa";
 import { CONTACT } from "@shared/constants";
 import { useCopyToClipboard } from "@shared/hooks";
 
@@ -73,13 +74,41 @@ export function Footer() {
               </HStack>
             </Button>
 
-            <CopyButton value={CONTACT.phone} subject="Phone">
+            <Button
+              as="a"
+              href={CONTACT.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              width="fit-content"
+              variant="link"
+            >
+              <Stack direction="row" align="center">
+                <Icon as={FaInstagram} fontSize="2xl" />
+                <Text>Instagram</Text>
+              </Stack>
+            </Button>
+
+            <Button
+              as="a"
+              href={CONTACT.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              width="fit-content"
+              variant="link"
+            >
+              <Stack direction="row" align="center">
+                <Icon as={FaFacebook} fontSize="2xl" />
+                <Text>Facebook</Text>
+              </Stack>
+            </Button>
+
+            {/* <CopyButton value={CONTACT.phone} subject="Phone">
               <HStack>
                 <Icon as={MdPhone} fontSize="2xl" />
 
                 <Text>{CONTACT.phone}</Text>
               </HStack>
-            </CopyButton>
+            </CopyButton> */}
 
             <CopyButton value={CONTACT.address} subject="Address">
               <Stack direction="row">

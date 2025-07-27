@@ -6,5 +6,7 @@ export const useCategories = ({
 }: {
   params?: Record<string, any>;
 } = {}) => {
-  return useQuery(["categories", params], () => getCategories(params));
+  return ["urbanism", "residential", "industrial", "all"];
+  // return useQuery(["categories", params], () => getCategories(params));
+  // return useQuery(["categories", params], () => getCategories(params));
 };

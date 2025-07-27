@@ -64,7 +64,8 @@ export function Categories({
         const href = `/${ROUTES.projects[locale]}?category=${name}`;
 
         return (
-          <Box key={id} href={href} as={Link}>
+          // <Box key={id} href={href} as={Link}>
+          <Box key={id}>
             <ImageCard
               name={t(`common:categoryObj.${name}`)}
               url={url}

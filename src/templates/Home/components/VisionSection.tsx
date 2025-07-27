@@ -16,6 +16,7 @@ export const VisionSection = ({ data }: { data: ComponentHomeVision }) => {
 
   return (
     <SplitScreenSection
+      id="vision-section"
       mainContentPosition={"right"}
       mainContent={
         <SplitScreenSectionContent fontSize="lg" maxWidth="lg" spacing={6}>
