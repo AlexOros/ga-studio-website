@@ -21,7 +21,7 @@ export const ImageCard = ({
   return (
     <Box overflow={["visible", "hidden"]} position="relative">
       <MotionBox
-        h={["45vh", null, null, "50vh"]}
+        h={["25vh", null, null, "50vh"]}
         cursor="pointer"
         whileHover={{ scale: 1.05, filter: "brightness(150%)" }}
         // @ts-ignore
