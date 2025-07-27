@@ -8,9 +8,11 @@ const nextConfig = {
       "localhost",
       "www.gastudio-server.click",
       "gastudio-server.click",
+      "eminently-suitable-sheep.ngrok-free.app",
     ],
   },
   i18n,
+  output: "export",
 };
 
 module.exports = nextConfig;
