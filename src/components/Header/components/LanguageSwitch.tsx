@@ -56,7 +56,7 @@ export const LanguageSwitch = () => {
       </Button>
       <Button
         // disabled={loadingNextLocale}
-        title={t("common:comingSoon")}
+        title={t("common:comingSoon") as string}
         disabled={true}
         variant="ghost"
         color={locale === "en" ? "whiteAlpha.900" : "whiteAlpha.600"}
