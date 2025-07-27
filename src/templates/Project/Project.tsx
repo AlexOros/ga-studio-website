@@ -24,11 +24,19 @@ import {
   ProjectEntity,
   UploadFileEntity,
 } from "@models";
+import titleize from "titleizejs";
 import { uniqBy, prop, pipe, reduce, __ } from "ramda";
-import { format } from "date-fns";
+import { useTranslation } from "next-i18next";
 
-export const Project = ({ data }: { data: ProjectEntity }) => {
+export const Project = ({ data }: { data: ProjectEntity | undefined }) => {
+  if (!data) return null;
+
+  return <ProjectContent data={data} />;
+};
+
+const ProjectContent = ({ data }: { data: ProjectEntity }) => {
   const [imageId, setImageId] = useState<number | null>(null);
+  const { t } = useTranslation(["common"]);
 
   const handleOpenModal = (id: number) => setImageId(id);
   const handleCloseModal = () => setImageId(null);
@@ -44,13 +52,7 @@ export const Project = ({ data }: { data: ProjectEntity }) => {
 
   useSyncNextLocale(nextRoute);
 
-  const {
-    title,
-    image,
-    content,
-    // info: infoList,
-    // description = [],
-  } = data?.attributes || {};
+  const { title, image, content, category } = data?.attributes || {};
 
   const projectImages = pipe(
     reduce(getImagesFromContentBlocks, []),
@@ -59,43 +61,52 @@ export const Project = ({ data }: { data: ProjectEntity }) => {
 
   return (
     <>
-      <VStack as="article" overflow="hidden" spacing={[8, 12]}>
+      <VStack as="article" overflow="hidden" spacing={[8, 12]} mb={32}>
         {image?.data && (
           <HeroSection imageData={image?.data} title={title ?? ""} />
         )}
 
         <Stack direction={["column", null, "row"]} spacing="8">
-          <Stack spacing="8" direction="row">
-            <Stat label="Category" value={data.attributes!.category} />
-
-            <Divider height="50px" orientation="vertical" />
-
-            <Stat label="Status" value={data.attributes!.status} />
-          </Stack>
+          {/* <Stack spacing="8" direction="row"> */}
+          <Stat
+            label={t("common:category")}
+            value={
+              t(`common:categoryObj.${category?.data?.attributes?.name}`) ?? ""
+            }
+          />
 
           <Show above="md">
             <Divider height="50px" orientation="vertical" />
           </Show>
 
-          <Stack spacing="8" direction="row">
-            <Stat label="Location" value={data.attributes!.location} />
+          <Stat
+            label="Status"
+            value={t(`common:statusObj.${data.attributes!.status}`) ?? ""}
+          />
+          {/* </Stack> */}
 
+          <Show above="md">
             <Divider height="50px" orientation="vertical" />
+          </Show>
 
-            <Stat
-              label="Last Modified"
-              value={format(
-                new Date(data.attributes!.updatedAt),
-                "dd / MM / yyyy"
-              )}
-            />
-          </Stack>
+          <Stat
+            label={t("common:location")}
+            value={titleize(data.attributes!.location ?? "")}
+          />
         </Stack>
 
         <Divider />
 
         <Container mx="auto" maxWidth="4xl">
-          <VStack spacing={4} alignItems="flex-start">
+          <VStack
+            spacing={4}
+            alignItems="flex-start"
+            sx={{
+              "h1, h2": {
+                mb: 2,
+              },
+            }}
+          >
             {content?.map((block) =>
               renderContentBlock(block, handleOpenModal)
             )}

@@ -1,17 +1,26 @@
 import { Box, ListIcon, ListItem } from "@chakra-ui/react";
-import Link from "next/link";
+import Link, { LinkProps } from "next/link";
 import React from "react";
 import { RiArrowRightLine } from "react-icons/ri";
 
-export type LinkListItemProps = {
-  href: string;
-  children: React.ReactNode;
-};
-
-export const LinkListItem = ({ children, href }: LinkListItemProps) => {
+export type LinkListItemProps = LinkProps &
+  React.ComponentProps<typeof ListItem>;
+export const LinkListItem = ({
+  children,
+  isActive,
+  ...props
+}: LinkListItemProps) => {
   return (
-    <ListItem as={Link} href={href} fontSize={["2xl", "3xl"]} display="block">
-      <ListIcon as={RiArrowRightLine} />
+    <ListItem
+      _hover={{
+        color: "gray.100",
+      }}
+      as={Link}
+      fontSize={["xl", "2xl"]}
+      display="block"
+      {...props}
+    >
+      <ListIcon color={isActive ? "white" : "gray.600"} as={RiArrowRightLine} />
       {children}
     </ListItem>
   );

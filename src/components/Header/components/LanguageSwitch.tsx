@@ -4,11 +4,7 @@ import { useRouter } from "@shared/hooks";
 import React, { useState } from "react";
 import { BsGlobe } from "react-icons/bs";
 
-export type LanguageSwitch = {
-  onClose: () => void;
-};
-
-export const LanguageSwitch = ({ onClose }: LanguageSwitch) => {
+export const LanguageSwitch = () => {
   const { locale = "ro", push, asPath } = useRouter();
   const [loadingNextLocale, setLoadingNextLocale] = useState(false);
   const toast = useToast();
@@ -41,7 +37,6 @@ export const LanguageSwitch = ({ onClose }: LanguageSwitch) => {
 
     await push(nextLocalePath, undefined, { locale: nextLocale });
     setLoadingNextLocale(false);
-    onClose();
   };
 
   return (

@@ -31,7 +31,7 @@ export function HeroSection({ imageData, title }: HeroSectionProps) {
       )}
       <Box maxW={["80%"]} bottom={0} position="absolute">
         <Box px={[3, null, 6]} background="white">
-          <Heading fontWeight="medium" as="h1" accent="through" size={"title"}>
+          <Heading as="h1" accent="through" size={["h2", null, null, "h1"]}>
             {title}
           </Heading>
         </Box>

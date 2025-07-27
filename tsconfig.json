@@ -4,6 +4,7 @@
     "paths": {
       "@components": ["components/index"],
       "@shared/hooks": ["shared/hooks/index.ts"],
+      "@shared/constants": ["shared/constants/index.ts"],
       "@models": ["models/types.ts"],
       "@api": ["api/index.ts"],
       "@hooks": ["shared/hooks"],

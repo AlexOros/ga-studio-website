@@ -1,0 +1,31 @@
+{
+  "mainSubTitle": "Arhitectură si Inginerie",
+  "architect": "Arhitect",
+  "mailSubject": "Contact website",
+  "projects": "Proiecte",
+  "noProjectFound": "Niciun proiect găsit",
+  "news": "Știri",
+  "comingSoon": "În curând",
+  "searchSelectedCategory": "Caută în categoria selectată",
+  "titles": [
+    "Membru al Ordinului Arhitecților din România",
+    "Membru al Uniunii Arhitecților din România",
+    "Responsabil educație stagiu și formare profesională al OAR Filiala Albă",
+    "Membru al Consiliului Teritorial OAR Filiala Albă",
+    "Membru al Consiliului Național al OAR"
+  ],
+  "categoryObj": {
+    "industrial": "Industrial",
+    "residential": "Rezidențial",
+    "urbanism": "Urbanism",
+    "all": "Toate"
+  },
+  "statusObj": {
+    "concept": "Concept",
+    "under construction": "în dezvoltare",
+    "finished": "Finalizat"
+  },
+  "category": "Categorie",
+  "location": "Locație",
+  "selectedCategory": "Categoria selectată"
+}
