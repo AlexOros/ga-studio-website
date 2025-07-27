@@ -120,10 +120,12 @@ export const Header = () => {
                       const categoryQueryParam =
                         category === "all" ? "" : `?category=${category}`;
                       const href = `/${ROUTES.projects[locale]}${categoryQueryParam}`;
-
                       return (
                         <LinkListItem
-                          {...disabledStyles}
+                          opacity={0.5}
+                          cursor="not-allowed"
+                          pointerEvents="none"
+                          _hover={{ textDecoration: "none" }}
                           href={href}
                           key={category}
                           onClick={onClose}
@@ -216,12 +218,4 @@ export const Header = () => {
       </Drawer>
     </>
   );
-};
-
-const disabledStyles = {
-  opacity: 0.5,
-  cursor: "not-allowed",
-  pointerEvents: "none",
-  "aria-disabled": "true",
-  _hover: { textDecoration: "none" },
 };
