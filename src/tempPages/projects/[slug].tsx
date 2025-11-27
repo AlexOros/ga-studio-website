@@ -8,15 +8,14 @@ const LOCALE = "en";
 export async function getStaticPaths() {
   // Temporary fix: Return an empty paths array and set fallback to 'blocking'
   // This will allow the build to succeed even if the backend is down.
-  // Pages will be generated on demand if a user requests them.
   return {
     paths: [],
     fallback: 'blocking',
-  };   
+  };
   try {
     const { data } = await getProjects({
       locale: LOCALE,
-      fields: ["locale", "slug"],
+      fields: ['locale', 'slug'],
     });
 
     return {

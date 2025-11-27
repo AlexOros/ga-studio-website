@@ -1,8 +1,8 @@
-import { GetStaticPropsContext } from "next";
-import { getProjectBySlug, getProjects } from "@api";
-import { Project } from "@templates";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-const LOCALE = "ro";
+import { GetStaticPropsContext } from 'next';
+import { getProjectBySlug, getProjects } from '@api';
+import { Project } from '@templates';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+const LOCALE = 'ro';
 
 export async function getStaticPaths() {
   // Temporary fix: Return an empty paths array and set fallback to 'blocking'
@@ -12,11 +12,11 @@ export async function getStaticPaths() {
     paths: [],
     fallback: 'blocking', // or true if you handle loading states
   };
-  
+
   try {
     const { data } = await getProjects({
       locale: LOCALE,
-      fields: ["locale", "slug"],
+      fields: ['locale', 'slug'],
     });
 
     return {
@@ -28,7 +28,12 @@ export async function getStaticPaths() {
       })),
       fallback: false,
     };
-  } catch (error) {}
+  } catch (error) {
+    return {
+      paths: [],
+      fallback: 'blocking',
+    };
+  }
 }
 
 export async function getStaticProps({
@@ -38,20 +43,20 @@ export async function getStaticProps({
   // This will allow the build to succeed even if the backend is down.
   return {
     props: {
-      ...(await serverSideTranslations(LOCALE, ["common"])),   
-    }
-  }; 
+      ...(await serverSideTranslations(LOCALE, ['common'])),
+    },
+  };
   try {
     const data = await getProjectBySlug({
       slug: params!.slug,
       params: {
         populate: {
-          image: "*",
+          image: '*',
           category: {
-            populate: "attribute",
+            populate: 'attribute',
           },
           content: {
-            populate: "*",
+            populate: '*',
           },
         },
       },
@@ -60,13 +65,13 @@ export async function getStaticProps({
     return {
       props: {
         data,
-        ...(await serverSideTranslations(LOCALE, ["common", "home"])),
+        ...(await serverSideTranslations(LOCALE, ['common', 'home'])),
       },
     };
   } catch (error: any) {
     throw new Error(
       error?.message ??
-        `Something went wrong (getStaticProps architecture ${LOCALE})`
+        `Something went wrong (getStaticProps architecture ${LOCALE})`,
     );
   }
 }
