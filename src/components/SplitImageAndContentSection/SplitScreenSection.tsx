@@ -10,7 +10,7 @@ import {
   ResponsiveValue,
 } from "@chakra-ui/react";
 
-export type SplitScreenSectionProps = {
+export type SplitScreenSectionProps = StackProps & {
   mainContent: React.ReactNode;
   secondaryContent?: React.ReactNode;
   mainContentPosition?: ResponsiveValue<"left" | "right">;
@@ -20,6 +20,7 @@ export const SplitScreenSection = ({
   mainContent,
   secondaryContent,
   mainContentPosition = "left",
+  ...props
 }: SplitScreenSectionProps) => {
   const responsivePosition =
     useBreakpointValue(mainContentPosition as any) ?? mainContentPosition;
@@ -32,6 +33,7 @@ export const SplitScreenSection = ({
       direction={["column", null, null, "row"]}
       spacing={0}
       overflowY="hidden"
+      {...props}
     >
       {responsivePosition === "left" && (
         <>

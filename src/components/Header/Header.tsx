@@ -27,6 +27,7 @@ import { Heading } from "components/Heading";
 import { useTranslation } from "next-i18next";
 import Link from "next/link";
 import React from "react";
+import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { MdEmail, MdPhone } from "react-icons/md";
 import { RiCloseFill, RiMenuFill } from "react-icons/ri";
 import { LinkListItem, LanguageSwitch } from "./components";
@@ -40,7 +41,7 @@ export const Header = () => {
   const btnRef = React.useRef<HTMLButtonElement>(null);
   const toast = useToast();
   const [_, copyPhone] = useCopyToClipboard();
-  const { data: { data: categories } = {} } = useCategories();
+  const categories = useCategories();
 
   return (
     <>
@@ -104,24 +105,33 @@ export const Header = () => {
             <DrawerBody p={6}>
               <Stack spacing={6}>
                 <Box>
-                  <Heading pb={2} as="h2" size="h3">
-                    {t("common:projects")}
-                  </Heading>
+                  <HStack pb={2} align="center">
+                    <Heading as="h2" size="h3">
+                      {t("common:projects")}
+                    </Heading>
+                    <Text color="gray.400">
+                      <Badge>{t("common:comingSoon")}</Badge>
+                    </Text>
+                  </HStack>
+
                   <List>
                     {categories?.map((category) => {
-                      const { name } = category?.attributes || {};
+                      // const { name } = category?.attributes || {};
                       const categoryQueryParam =
-                        name === "all" ? "" : `?category=${name}`;
+                        category === "all" ? "" : `?category=${category}`;
                       const href = `/${ROUTES.projects[locale]}${categoryQueryParam}`;
-
                       return (
                         <LinkListItem
+                          opacity={0.5}
+                          cursor="not-allowed"
+                          pointerEvents="none"
+                          _hover={{ textDecoration: "none" }}
                           href={href}
-                          key={category.id}
+                          key={category}
                           onClick={onClose}
                           isActive={asPath === href}
                         >
-                          {t(`common:categoryObj.${name}`)}
+                          {t(`common:categoryObj.${category}`)}
                         </LinkListItem>
                       );
                     })}
@@ -129,7 +139,7 @@ export const Header = () => {
                 </Box>
 
                 <HStack>
-                  <Heading color="gray.400" as="h2" size="h3">
+                  <Heading as="h2" size="h3">
                     {t("common:news")}
                   </Heading>
                   <Text color="gray.400">
@@ -154,7 +164,35 @@ export const Header = () => {
                   </HStack>
                 </Button>
 
-                <Button
+                <HStack>
+                  <Button
+                    as="a"
+                    href={CONTACT.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    width="fit-content"
+                    variant="link"
+                  >
+                    <Stack direction="row" align="center">
+                      <Icon as={FaInstagram} fontSize="2xl" />
+                    </Stack>
+                  </Button>
+
+                  <Button
+                    as="a"
+                    href={CONTACT.facebook}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    width="fit-content"
+                    variant="link"
+                  >
+                    <Stack direction="row" align="center">
+                      <Icon as={FaFacebook} fontSize="2xl" />
+                    </Stack>
+                  </Button>
+                </HStack>
+
+                {/* <Button
                   variant="link"
                   onClick={() =>
                     copyPhone(CONTACT.phone).then(() =>
@@ -172,7 +210,7 @@ export const Header = () => {
 
                     <Text>{CONTACT.phone}</Text>
                   </HStack>
-                </Button>
+                </Button> */}
               </Stack>
             </DrawerFooter>
           </DrawerContent>

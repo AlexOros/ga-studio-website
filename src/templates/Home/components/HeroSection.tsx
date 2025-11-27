@@ -1,9 +1,14 @@
 import React from "react";
-import { Box, Fade, IconButton, Icon } from "@chakra-ui/react";
+import { Box, Fade, IconButton, Icon, keyframes } from "@chakra-ui/react";
 import { BlurImage, Heading } from "@components";
-import { RiMouseLine } from "react-icons/ri";
 import { getImageFormat } from "@utils";
 import { ComponentHomeHero } from "@models";
+import { FaArrowDown } from "react-icons/fa";
+
+const bounce = keyframes`
+  0%, 100% { transform: translateY(-2px); }
+  50% { transform: translateY(2px); }
+`;
 
 export const HeroSection = ({ data }: { data: ComponentHomeHero }) => {
   const { image, title, subTitle } = data;
@@ -11,6 +16,14 @@ export const HeroSection = ({ data }: { data: ComponentHomeHero }) => {
 
   const titleFirstLetter = title.slice(0, 1);
   const restOfTitle = title.slice(1, title.length);
+
+  // Handler to scroll to the next section
+  const handleScrollDown = () => {
+    const nextSection = document.getElementById("vision-section");
+    if (nextSection) {
+      nextSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <Box as="section" position="relative">
@@ -37,8 +50,13 @@ export const HeroSection = ({ data }: { data: ComponentHomeHero }) => {
           mb={16}
           alignSelf="end"
           aria-label="scroll button"
+          onClick={handleScrollDown}
         >
-          <Icon as={RiMouseLine} fontSize="3xl" />
+          <Icon
+            as={FaArrowDown}
+            fontSize="2xl"
+            animation={`${bounce} 2s infinite`}
+          />
         </IconButton>
       </Box>
 
