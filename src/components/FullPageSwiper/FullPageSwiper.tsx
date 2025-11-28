@@ -1,13 +1,21 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, A11y, Keyboard } from "swiper";
-import { getImageFormat } from "@utils";
 import { BlurImage } from "@components";
-import { UploadFileEntity } from "@models";
+
+type ImageData = {
+  id?: number;
+  attributes?: {
+    url: string;
+    alternativeText?: string;
+    width?: number;
+    height?: number;
+  };
+};
 
 export type FullPageSwiperProps = {
   initialImageId: number;
-  images: UploadFileEntity[];
+  images: ImageData[];
 };
 
 export const FullPageSwiper = ({
@@ -38,13 +46,12 @@ export const FullPageSwiper = ({
       onInit={(swiper) => swiper.slideTo(initialImageIndex)}
     >
       {images.map((image) => {
-        const imageFormat = getImageFormat(image);
-        const { hero, original, placeholder } = imageFormat;
-        const src = hero?.url || original?.url || "";
+        const url = image?.attributes?.url || "";
+        const alt = image?.attributes?.alternativeText || "";
 
         return (
           <SwiperSlide
-            key={original?.id}
+            key={image?.id}
             style={{
               height: "calc(100vh - 10px)",
               display: "grid",
@@ -56,9 +63,9 @@ export const FullPageSwiper = ({
                 objectFit: "contain",
               }}
               fill
-              blurDataURL={placeholder}
-              alt={original?.alternativeText || ""}
-              src={src}
+              blurDataURL=""
+              alt={alt}
+              src={url}
               quality={100}
             />
           </SwiperSlide>

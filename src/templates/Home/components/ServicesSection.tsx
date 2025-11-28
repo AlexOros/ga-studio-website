@@ -1,18 +1,18 @@
-import { VStack, Text, Divider } from "@chakra-ui/react";
+import { HomePage } from '@/lib/content';
+import { VStack, Text, Divider } from '@chakra-ui/react';
 import {
   BlurImage,
   Heading,
   SplitScreenSection,
   SplitScreenSectionContent,
   SplitScreenSectionImage,
-} from "@components";
-import { ComponentHomeService } from "@models";
-import { getImageFormat } from "@utils";
-import React from "react";
+} from '@components';
+import { getImageFormat } from '@utils';
+import React from 'react';
 
-export const ServicesSection = ({ data }: { data: ComponentHomeService }) => {
-  const { image, title, services } = data;
-  const { large, original, placeholder } = getImageFormat(image.data);
+export const ServicesSection = ({ data }: { data: HomePage['services'] }) => {
+  const { image, title, items } = data;
+  // const { large, original, placeholder } = getImageFormat(image.data);
 
   return (
     <SplitScreenSection
@@ -24,10 +24,10 @@ export const ServicesSection = ({ data }: { data: ComponentHomeService }) => {
           </Heading>
 
           <VStack textAlign="center" p={0} w="full">
-            {services.map((service, index) => (
-              <React.Fragment key={service?.id}>
-                <Text>{service?.text}</Text>
-                {services.length - 1 !== index && (
+            {items.map((item, index) => (
+              <React.Fragment key={item}>
+                <Text>{item}</Text>
+                {items.length - 1 !== index && (
                   <Divider orientation="vertical" height="50px" />
                 )}
               </React.Fragment>
@@ -37,12 +37,7 @@ export const ServicesSection = ({ data }: { data: ComponentHomeService }) => {
       }
       secondaryContent={
         <SplitScreenSectionImage>
-          <BlurImage
-            fill
-            blurDataURL={placeholder!}
-            src={large?.url ?? original!.url}
-            alt=""
-          />
+          <BlurImage fill src={image} alt="" />
         </SplitScreenSectionImage>
       }
     />

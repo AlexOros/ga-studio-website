@@ -1,27 +1,30 @@
 import React from "react";
 import { AspectRatio, Box, Container } from "@chakra-ui/react";
-import { UploadFileEntity } from "@models";
-import { getImageFormat, getImageFormatDimensions } from "@utils";
 import { MotionBox } from "components/MotionBox";
 import { BlurImage } from "components/BlurImage";
 
+type ImageData = {
+  id?: number;
+  attributes?: {
+    url: string;
+    alternativeText?: string;
+    width?: number;
+    height?: number;
+  };
+};
+
 export type ContentImage = {
-  image: UploadFileEntity;
+  image: ImageData;
   onClick: (id: number) => void;
 };
 
 export const ContentImage = ({ image, onClick }: ContentImage) => {
-  const imageFormat = getImageFormat(image);
-  const { hero, large, original, placeholder } = imageFormat;
+  const url = image?.attributes?.url;
+  const alt = image?.attributes?.alternativeText || "";
+  const width = image?.attributes?.width || 1200;
+  const height = image?.attributes?.height || 800;
 
-  if (!original) return null;
-
-  const src = large?.url || hero?.url || original.url;
-  const { width, height } = getImageFormatDimensions(imageFormat, [
-    "large",
-    "hero",
-    "original",
-  ]);
+  if (!url) return null;
 
   return (
     <Container onClick={() => onClick(image.id as any)} maxW="4xl" p={0}>
@@ -44,9 +47,9 @@ export const ContentImage = ({ image, onClick }: ContentImage) => {
             <BlurImage
               width={width}
               height={height}
-              alt={original?.alternativeText || ""}
-              blurDataURL={placeholder}
-              src={src}
+              alt={alt}
+              blurDataURL=""
+              src={url}
               quality={80}
             />
           </AspectRatio>

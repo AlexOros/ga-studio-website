@@ -45,9 +45,9 @@ export const LanguageSwitch = () => {
       <Button
         disabled={loadingNextLocale}
         variant="ghost"
-        color={locale === "ro" ? "whiteAlpha.900" : "whiteAlpha.600"}
+        color={locale === 'ro' ? 'whiteAlpha.900' : 'whiteAlpha.600'}
         as={Button}
-        onClick={() => handleChangeLocale("ro")}
+        onClick={() => handleChangeLocale('ro')}
       >
         <HStack>
           <Text>RO</Text>
@@ -55,13 +55,12 @@ export const LanguageSwitch = () => {
         </HStack>
       </Button>
       <Button
-        // disabled={loadingNextLocale}
-        title={t("common:comingSoon") as string}
-        disabled={true}
+        disabled={loadingNextLocale}
+        title={t('common:comingSoon') as string}
         variant="ghost"
-        color={locale === "en" ? "whiteAlpha.900" : "whiteAlpha.600"}
+        color={locale === 'en' ? 'whiteAlpha.900' : 'whiteAlpha.600'}
         as={Button}
-        onClick={() => handleChangeLocale("en")}
+        onClick={() => handleChangeLocale('en')}
       >
         <HStack>
           <Text>EN</Text>

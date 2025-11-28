@@ -5,18 +5,23 @@ import {
   SplitScreenSectionContent,
   SplitScreenSectionImage,
   BlurImage,
-} from "@components";
-import { ComponentHomeProcess } from "@models";
-import { getImageFormat } from "@utils";
-import React from "react";
+} from '@components';
+import { getImageFormat } from '@utils';
+import React from 'react';
+
+type ComponentHomeProcess = {
+  image: any;
+  title: string;
+  content?: string;
+};
 
 export const ProcessSection = ({ data }: { data: ComponentHomeProcess }) => {
   const { image, title, content } = data;
-  const { large, original, placeholder } = getImageFormat(image.data);
+  // const { large, original, placeholder } = getImageFormat(image.data);
 
   return (
     <SplitScreenSection
-      mainContentPosition={["right", null, null, "left"]}
+      mainContentPosition={['right', null, null, 'left']}
       mainContent={
         <SplitScreenSectionContent
           fontSize="lg"
@@ -28,7 +33,7 @@ export const ProcessSection = ({ data }: { data: ComponentHomeProcess }) => {
             {title}
           </Heading>
 
-          {content && (
+          {/* {content && (
             <ContentBlocks
               data={JSON.parse(content)}
               renderHeading={(_, text) => (
@@ -37,17 +42,12 @@ export const ProcessSection = ({ data }: { data: ComponentHomeProcess }) => {
                 </Heading>
               )}
             />
-          )}
+          )} */}
         </SplitScreenSectionContent>
       }
       secondaryContent={
         <SplitScreenSectionImage>
-          <BlurImage
-            fill
-            blurDataURL={placeholder!}
-            src={large?.url ?? original!.url}
-            alt=""
-          />
+          <BlurImage fill src={image} alt="" />
         </SplitScreenSectionImage>
       }
     />

@@ -1,28 +1,40 @@
-import { Box, Divider, Grid } from "@chakra-ui/react";
+import { Box, Divider, Grid } from '@chakra-ui/react';
 import {
   SplitScreenSection,
   Heading,
   SplitScreenSectionContent,
   SplitScreenSectionImage,
   ImageCard,
-} from "@components";
-import { ComponentHomeProjects, CategoryEntity } from "@models";
-import { useTranslation } from "next-i18next";
-import { getImageFormat } from "@utils";
-import React from "react";
-import Link from "next/link";
-import { useRouter } from "@shared/hooks";
-import { ROUTES } from "@api";
+} from '@components';
+import { useTranslation } from 'next-i18next';
+import { getImageFormat } from '@utils';
+import React from 'react';
+import Link from 'next/link';
+import { useRouter } from '@shared/hooks';
+import { ROUTES } from '@shared/routes';
+
+type ComponentHomeProjects = {
+  title: string;
+  categories?: { data: CategoryEntity[] };
+};
+
+type CategoryEntity = {
+  id: number;
+  attributes?: {
+    name: string;
+    image?: any;
+  };
+};
 
 export const ProjectsSection = ({ data }: { data: ComponentHomeProjects }) => {
   const { title, categories = { data: [] } } = data;
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation(['common']);
 
   return (
     <>
       <Divider />
       <SplitScreenSection
-        mainContentPosition={"left"}
+        mainContentPosition={'left'}
         mainContent={
           <SplitScreenSectionContent>
             <Heading py={8} size="h1" alignSelf="center" accent="bottom">
@@ -50,7 +62,7 @@ export function Categories({
   const { locale } = useRouter();
 
   return (
-    <Grid gridTemplateColumns={"1fr 1fr"}>
+    <Grid gridTemplateColumns={'1fr 1fr'}>
       {categories.map(({ attributes, id }) => {
         const { name, image } = attributes ?? {};
         const { large, original, placeholder } = getImageFormat(image!.data);
@@ -58,7 +70,7 @@ export function Categories({
         const { url } = large ?? {
           width: 0,
           height: 0,
-          url: "",
+          url: '',
         };
 
         const href = `/${ROUTES.projects[locale]}?category=${name}`;
@@ -70,7 +82,7 @@ export function Categories({
               name={t(`common:categoryObj.${name}`)}
               url={url}
               blurDataURL={placeholder}
-              alt={original?.alternativeText || ""}
+              alt={original?.alternativeText || ''}
             />
           </Box>
         );

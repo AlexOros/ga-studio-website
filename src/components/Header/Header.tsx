@@ -1,4 +1,4 @@
-import { ROUTES, useCategories } from "@api";
+import { ROUTES } from '@shared/routes';
 import {
   Text,
   Drawer,
@@ -20,28 +20,28 @@ import {
   Box,
   Badge,
   VStack,
-} from "@chakra-ui/react";
-import { CONTACT } from "@shared/constants";
-import { useCopyToClipboard, useRouter } from "@shared/hooks";
-import { Heading } from "components/Heading";
-import { useTranslation } from "next-i18next";
-import Link from "next/link";
-import React from "react";
-import { FaFacebook, FaInstagram } from "react-icons/fa";
-import { MdEmail, MdPhone } from "react-icons/md";
-import { RiCloseFill, RiMenuFill } from "react-icons/ri";
-import { LinkListItem, LanguageSwitch } from "./components";
+} from '@chakra-ui/react';
+import { CONTACT } from '@shared/constants';
+import { useCopyToClipboard, useRouter } from '@shared/hooks';
+import { Heading } from 'components/Heading';
+import { useTranslation } from 'next-i18next';
+import Link from 'next/link';
+import React from 'react';
+import { FaFacebook, FaInstagram } from 'react-icons/fa';
+import { MdEmail } from 'react-icons/md';
+import { RiCloseFill, RiMenuFill } from 'react-icons/ri';
+import { LinkListItem, LanguageSwitch } from './components';
 
 export const HEADER_HEIGHT = 64;
+const CATEGORIES = ['all', 'residential', 'industrial', 'urbanism'];
 
 export const Header = () => {
   const { locale, asPath } = useRouter();
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation(['common']);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef<HTMLButtonElement>(null);
   const toast = useToast();
   const [_, copyPhone] = useCopyToClipboard();
-  const categories = useCategories();
 
   return (
     <>
@@ -66,7 +66,7 @@ export const Header = () => {
             <Text fontSize="large" fontWeight="bold">
               GA Studio
             </Text>
-            <Text>{t("mainSubTitle")}</Text>
+            <Text>{t('mainSubTitle')}</Text>
           </VStack>
         </Link>
         <Box pr={5}>
@@ -107,25 +107,24 @@ export const Header = () => {
                 <Box>
                   <HStack pb={2} align="center">
                     <Heading as="h2" size="h3">
-                      {t("common:projects")}
+                      {t('common:projects')}
                     </Heading>
                     <Text color="gray.400">
-                      <Badge>{t("common:comingSoon")}</Badge>
+                      <Badge>{t('common:comingSoon')}</Badge>
                     </Text>
                   </HStack>
 
                   <List>
-                    {categories?.map((category) => {
-                      // const { name } = category?.attributes || {};
+                    {CATEGORIES?.map(category => {
                       const categoryQueryParam =
-                        category === "all" ? "" : `?category=${category}`;
+                        category === 'all' ? '' : `?category=${category}`;
                       const href = `/${ROUTES.projects[locale]}${categoryQueryParam}`;
                       return (
                         <LinkListItem
                           opacity={0.5}
                           cursor="not-allowed"
                           pointerEvents="none"
-                          _hover={{ textDecoration: "none" }}
+                          _hover={{ textDecoration: 'none' }}
                           href={href}
                           key={category}
                           onClick={onClose}
@@ -140,10 +139,10 @@ export const Header = () => {
 
                 <HStack>
                   <Heading as="h2" size="h3">
-                    {t("common:news")}
+                    {t('common:news')}
                   </Heading>
                   <Text color="gray.400">
-                    <Badge>{t("common:comingSoon")}</Badge>
+                    <Badge>{t('common:comingSoon')}</Badge>
                   </Text>
                 </HStack>
               </Stack>
@@ -155,7 +154,7 @@ export const Header = () => {
               <Stack
                 justifyContent="space-between"
                 w="full"
-                direction={["column", null, null, "row"]}
+                direction={['column', null, null, 'row']}
               >
                 <Button variant="link" as="a" href={`mailto:${CONTACT.email}`}>
                   <HStack textTransform="none">
@@ -191,26 +190,6 @@ export const Header = () => {
                     </Stack>
                   </Button>
                 </HStack>
-
-                {/* <Button
-                  variant="link"
-                  onClick={() =>
-                    copyPhone(CONTACT.phone).then(() =>
-                      toast({
-                        position: "top",
-                        title: "Phone copied to clipboard",
-                        status: "success",
-                        variant: "subtle",
-                      })
-                    )
-                  }
-                >
-                  <HStack>
-                    <Icon as={MdPhone} fontSize="2xl" />
-
-                    <Text>{CONTACT.phone}</Text>
-                  </HStack>
-                </Button> */}
               </Stack>
             </DrawerFooter>
           </DrawerContent>

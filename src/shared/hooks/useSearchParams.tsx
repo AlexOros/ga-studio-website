@@ -1,4 +1,3 @@
-import qs, { IStringifyOptions } from "qs";
 import { SetStateAction, useCallback, useMemo } from "react";
 import { useRouter } from "./useRouter";
 
@@ -7,7 +6,12 @@ export function useSearchParams<S extends Record<string, any>>() {
   const search = asPath.split("?")[1] ?? "";
 
   const searchParams = useMemo(() => {
-    return qs.parse(search.replace("?", "")) as S;
+    const params = new URLSearchParams(search);
+    const result: Record<string, any> = {};
+    params.forEach((value, key) => {
+      result[key] = value;
+    });
+    return result as S;
   }, [search]);
 
   const setSearchParams = useCallback(
@@ -31,8 +35,13 @@ export function useSearchParams<S extends Record<string, any>>() {
 }
 
 export function stringifySearchParams(
-  paramsObj: Record<string, any>,
-  options: IStringifyOptions = {}
+  paramsObj: Record<string, any>
 ) {
-  return qs.stringify(paramsObj, { skipNulls: true, ...options });
+  const params = new URLSearchParams();
+  Object.entries(paramsObj).forEach(([key, value]) => {
+    if (value !== null && value !== undefined) {
+      params.set(key, String(value));
+    }
+  });
+  return params.toString();
 }

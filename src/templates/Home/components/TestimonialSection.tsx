@@ -9,9 +9,13 @@ import {
   useMediaQuery,
 } from "@chakra-ui/react";
 import { Heading } from "@components";
-import { ComponentHomeTestimony, Testimonial } from "@models";
 import { getImageFormat } from "@utils";
 import React from "react";
+
+type ComponentHomeService = any;
+type ComponentHomeVision = any;
+type ComponentHomeTestimony = any;
+type Testimonial = any;
 import { A11y, Keyboard, Navigation } from "swiper";
 import { Swiper, SwiperSlide, useSwiper, useSwiperSlide } from "swiper/react";
 import { AiFillStar } from "react-icons/ai";
@@ -38,7 +42,7 @@ export const TestimonialSection = ({
         {...(smallerThen740 && { navigation: false })}
         loop={true}
       >
-        {testimonials?.data?.map(({ attributes, id }) => {
+        {testimonials?.data?.map(({ attributes, id }: any) => {
           return (
             <SwiperSlide key={id}>
               <Box py={4} px={[2, null, null, 4]}>

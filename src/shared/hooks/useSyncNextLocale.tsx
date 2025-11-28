@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useAppActions } from "@context";
-import { ROUTES } from "api/routes";
+import { ROUTES } from "@shared/routes";
 
 const useSyncNextLocale = (nextLocale: string | null | undefined) => {
   const { setNextLocalPath } = useAppActions();

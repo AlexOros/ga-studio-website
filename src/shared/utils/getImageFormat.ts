@@ -1,4 +1,17 @@
-import { Maybe, UploadFileEntity } from "@models";
+type Maybe<T> = T | null;
+
+type UploadFileEntity = {
+  id?: number;
+  attributes?: {
+    url: string;
+    alternativeText?: string;
+    width?: number;
+    height?: number;
+    formats?: any;
+    placeholder?: string;
+    __typename?: string;
+  };
+};
 
 export type Format = {
   name: string;

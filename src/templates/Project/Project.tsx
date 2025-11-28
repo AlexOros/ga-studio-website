@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Container,
   Divider,
@@ -8,168 +8,136 @@ import {
   Text,
   StackProps,
   Show,
+  Box,
 } from "@chakra-ui/react";
-import { ROUTES } from "@api";
-import {
-  ContentImageContainer,
-  ContentBlocks,
-  PageModal,
-  FullPageSwiper,
-} from "@components";
+import { ROUTES } from "@shared/routes";
 import { useRouter, useSyncNextLocale } from "@shared/hooks";
 import { HeroSection } from "./components";
-import {
-  Maybe,
-  ProjectContentDynamicZone,
-  ProjectEntity,
-  UploadFileEntity,
-} from "@models";
+import { Project as ProjectType } from "@/lib/content";
 import titleize from "titleizejs";
-import { uniqBy, prop, pipe, reduce, __ } from "ramda";
 import { useTranslation } from "next-i18next";
 
-export const Project = ({ data }: { data: ProjectEntity | undefined }) => {
+export const Project = ({ data }: { data: ProjectType | undefined }) => {
   if (!data) return null;
 
   return <ProjectContent data={data} />;
 };
 
-const ProjectContent = ({ data }: { data: ProjectEntity }) => {
-  const [imageId, setImageId] = useState<number | null>(null);
+const ProjectContent = ({ data }: { data: ProjectType }) => {
   const { t } = useTranslation(["common"]);
-
-  const handleOpenModal = (id: number) => setImageId(id);
-  const handleCloseModal = () => setImageId(null);
-
   const { locale } = useRouter();
-  const localeSlug =
-    data?.attributes?.localizations?.data?.[0]?.attributes?.slug ?? null;
 
+  // For now, use the same route for both locales (will be properly set up with i18n routing)
   const nextRoute =
     locale === "en"
-      ? ROUTES.project.ro(localeSlug!)
-      : ROUTES.project.en(localeSlug!);
+      ? ROUTES.project.ro(data.slug)
+      : ROUTES.project.en(data.slug);
 
   useSyncNextLocale(nextRoute);
 
-  const { title, image, content, category } = data?.attributes || {};
-
-  const projectImages = pipe(
-    reduce(getImagesFromContentBlocks, []),
-    uniqBy(prop("id"))
-  )(content as any);
-
   return (
-    <>
-      <VStack as="article" overflow="hidden" spacing={[8, 12]} mb={32}>
-        {image?.data && (
-          <HeroSection imageData={image?.data} title={title ?? ""} />
-        )}
+    <VStack as="article" overflow="hidden" spacing={[8, 12]} mb={32}>
+      {data.heroImage && (
+        <HeroSection
+          imageUrl={data.heroImage}
+          title={data.title}
+        />
+      )}
 
-        <Stack direction={["column", null, "row"]} spacing="8">
-          {/* <Stack spacing="8" direction="row"> */}
-          <Stat
-            label={t("common:category")}
-            value={
-              t(`common:categoryObj.${category?.data?.attributes?.name}`) ?? ""
-            }
-          />
+      <Stack direction={["column", null, "row"]} spacing="8">
+        <Stat
+          label={t("common:category")}
+          value={t(`common:categoryObj.${data.category}`) ?? data.category}
+        />
 
-          <Show above="md">
-            <Divider height="50px" orientation="vertical" />
-          </Show>
+        <Show above="md">
+          <Divider height="50px" orientation="vertical" />
+        </Show>
 
-          <Stat
-            label="Status"
-            value={t(`common:statusObj.${data.attributes!.status}`) ?? ""}
-          />
-          {/* </Stack> */}
+        <Stat
+          label="Status"
+          value={t(`common:statusObj.${data.status}`) ?? data.status}
+        />
 
-          <Show above="md">
-            <Divider height="50px" orientation="vertical" />
-          </Show>
+        <Show above="md">
+          <Divider height="50px" orientation="vertical" />
+        </Show>
 
-          <Stat
-            label={t("common:location")}
-            value={titleize(data.attributes!.location ?? "")}
-          />
-        </Stack>
+        <Stat
+          label={t("common:location")}
+          value={titleize(data.location ?? "")}
+        />
+      </Stack>
 
-        <Divider />
+      <Divider />
 
-        <Container mx="auto" maxWidth="4xl">
-          <VStack
-            spacing={4}
-            alignItems="flex-start"
-            sx={{
-              "h1, h2": {
-                mb: 2,
+      <Container mx="auto" maxWidth="4xl">
+        <Box
+          sx={{
+            "h1, h2, h3": {
+              mb: 4,
+              mt: 6,
+              fontWeight: "bold",
+            },
+            "h1": {
+              fontSize: ["2xl", "3xl"],
+            },
+            "h2": {
+              fontSize: ["xl", "2xl"],
+            },
+            "h3": {
+              fontSize: ["lg", "xl"],
+            },
+            "p": {
+              mb: 4,
+              lineHeight: "tall",
+            },
+            "ul, ol": {
+              mb: 4,
+              ml: 6,
+            },
+            "li": {
+              mb: 2,
+            },
+            "img": {
+              maxW: "100%",
+              height: "auto",
+              my: 6,
+              borderRadius: "md",
+            },
+            "code": {
+              px: 2,
+              py: 1,
+              bg: "gray.100",
+              borderRadius: "md",
+              fontSize: "sm",
+              fontFamily: "mono",
+            },
+            "pre": {
+              p: 4,
+              bg: "gray.50",
+              borderRadius: "md",
+              overflowX: "auto",
+              mb: 4,
+              "code": {
+                bg: "transparent",
+                p: 0,
               },
-            }}
-          >
-            {content?.map((block) =>
-              renderContentBlock(block, handleOpenModal)
-            )}
-          </VStack>
-        </Container>
-      </VStack>
-
-      <PageModal
-        id="projectModal"
-        isOpen={typeof imageId === "number"}
-        onClose={handleCloseModal}
-      >
-        <FullPageSwiper initialImageId={imageId!} images={projectImages} />
-      </PageModal>
-    </>
+            },
+            "blockquote": {
+              pl: 4,
+              borderLeft: "4px solid",
+              borderColor: "gray.300",
+              fontStyle: "italic",
+              my: 4,
+            },
+          }}
+          dangerouslySetInnerHTML={{ __html: data.html }}
+        />
+      </Container>
+    </VStack>
   );
 };
-
-function renderContentBlock(
-  block: Maybe<ProjectContentDynamicZone>,
-  onClick: (id: number) => void
-) {
-  if (!block) return;
-
-  if ("text" in block) {
-    return (
-      <ContentBlocks
-        onImageClick={onClick}
-        key={block.id}
-        data={block.text && JSON.parse(block.text)}
-      />
-    );
-  } else if ("images" in block) {
-    return (
-      <ContentImageContainer
-        onClick={onClick}
-        key={block.id}
-        images={block.images?.data ?? []}
-      />
-    );
-  }
-}
-
-function getImagesFromContentBlocks(
-  acc: UploadFileEntity[],
-  block: ProjectContentDynamicZone
-) {
-  if ("images" in block) {
-    return [...acc, ...(block?.images?.data ?? [])];
-  } else if ("text" in block && block.text) {
-    const blocks = JSON.parse(block.text).blocks;
-    return [
-      ...acc,
-      ...blocks
-        .filter((b: any) => b.type === "image")
-        .map((image: any) => ({
-          id: image.data.file.id,
-          attributes: image.data.file,
-        })),
-    ];
-  }
-  return acc;
-}
 
 function Stat({
   label,

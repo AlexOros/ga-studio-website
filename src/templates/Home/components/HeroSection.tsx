@@ -1,27 +1,24 @@
 import React from "react";
 import { Box, Fade, IconButton, Icon, keyframes } from "@chakra-ui/react";
 import { BlurImage, Heading } from "@components";
-import { getImageFormat } from "@utils";
-import { ComponentHomeHero } from "@models";
 import { FaArrowDown } from "react-icons/fa";
+import { HomePage } from '@/lib/content/types';
 
 const bounce = keyframes`
   0%, 100% { transform: translateY(-2px); }
   50% { transform: translateY(2px); }
 `;
 
-export const HeroSection = ({ data }: { data: ComponentHomeHero }) => {
-  const { image, title, subTitle } = data;
-  const { large, original, placeholder } = getImageFormat(image.data);
+export const HeroSection = ({ data }: { data: HomePage['hero'] }) => {
+  const { image, title, subtitle } = data;
 
   const titleFirstLetter = title.slice(0, 1);
   const restOfTitle = title.slice(1, title.length);
 
-  // Handler to scroll to the next section
   const handleScrollDown = () => {
-    const nextSection = document.getElementById("vision-section");
+    const nextSection = document.getElementById('vision-section');
     if (nextSection) {
-      nextSection.scrollIntoView({ behavior: "smooth" });
+      nextSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -35,12 +32,12 @@ export const HeroSection = ({ data }: { data: ComponentHomeHero }) => {
         h="100vh"
         w="full"
       >
-        {original && (
+        {image && (
           <BlurImage
             fill
-            blurDataURL={placeholder}
-            alt={"hero"}
-            src={large?.url ?? original.url}
+            blurDataURL=""
+            alt={title}
+            src={image}
             quality={100}
           />
         )}
@@ -60,7 +57,7 @@ export const HeroSection = ({ data }: { data: ComponentHomeHero }) => {
         </IconButton>
       </Box>
 
-      <Box zIndex={1} position="absolute" left={0} bottom={"50%"}>
+      <Box zIndex={1} position="absolute" left={0} bottom={'50%'}>
         <Fade in={true} delay={0.5}>
           <Box color="white" px={5} py={2} background="blackAlpha.700">
             <Heading as="h1" size="title">
@@ -69,7 +66,7 @@ export const HeroSection = ({ data }: { data: ComponentHomeHero }) => {
               </Box>
               {restOfTitle}
             </Heading>
-            {subTitle && <Heading size="h4">{subTitle}</Heading>}
+            {subtitle && <Heading size="h4">{subtitle}</Heading>}
           </Box>
         </Fade>
       </Box>

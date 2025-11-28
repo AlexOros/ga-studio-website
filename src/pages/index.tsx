@@ -1,25 +1,23 @@
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { GetStaticPropsContext } from "next";
+import { GetStaticProps, GetStaticPropsContext } from 'next';
 import { Home } from "@templates";
-import { getHomePage } from "api/home/getHomePage";
+import { getHomePage, HomePage } from '@/lib/content';
 
-// TODO Get all categories here
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  try {
-    // const data = await getHomePage({ locale });
-
-    return {
-      props: {
-        data: {},
-        ...(await serverSideTranslations(locale!, ['common', 'home'])),
-      },
-    };
-  } catch (error: any) {
-    throw new Error(
-      error?.message ?? "Something went wrong (getStaticProps getHomePage)"
-    );
-  }
+interface HomePageProps {
+  data: HomePage;
 }
+
+export const getStaticProps: GetStaticProps<HomePageProps> = async ({
+  locale,
+}: GetStaticPropsContext) => {
+  const data = await getHomePage(locale || 'en');
+
+  return {
+    props: {
+      data,
+      ...(await serverSideTranslations(locale || 'en', ['common', 'home'])),
+    },
+  };
+};
 
 export default Home;

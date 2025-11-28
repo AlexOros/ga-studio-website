@@ -1,13 +1,22 @@
 import React, { useState } from "react";
-import { UploadFileEntity } from "@models";
 import { ImageSwiper } from "./components/imageSwiper";
 import { ContentImage } from "components/ContentImage/ContentImage";
+
+type ImageData = {
+  id?: number;
+  attributes?: {
+    url: string;
+    alternativeText?: string;
+    width?: number;
+    height?: number;
+  };
+};
 
 export const ContentImageContainer = ({
   images,
   onClick,
 }: {
-  images: UploadFileEntity[];
+  images: ImageData[];
   onClick: (id: number) => void;
 }) => {
   if (images.length === 1) {

@@ -1,5 +1,3 @@
-import { UploadFileEntity } from "@models";
-
 export type Heading = {
   type: "header";
   data: {
@@ -52,7 +50,12 @@ export type Image = {
   data: {
     caption: string;
     stretched: boolean;
-    file: UploadFileEntity["attributes"];
+    file: {
+      url: string;
+      alternativeText?: string;
+      width?: number;
+      height?: number;
+    };
   };
 };
 

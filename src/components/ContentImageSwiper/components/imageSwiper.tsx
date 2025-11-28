@@ -3,15 +3,23 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, A11y } from "swiper";
 import { Container, AspectRatio, Box } from "@chakra-ui/react";
 import { BlurImage, MotionBox } from "@components";
-import { getImageFormat, getImageFormatDimensions } from "@utils";
-import { UploadFileEntity } from "@models";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
+type ImageData = {
+  id?: number;
+  attributes?: {
+    url: string;
+    alternativeText?: string;
+    width?: number;
+    height?: number;
+  };
+};
+
 export type ImageSwiperProps = {
-  images: UploadFileEntity[];
+  images: ImageData[];
   onClick: (id: number) => void;
 };
 
@@ -46,20 +54,14 @@ export const ImageSwiper = ({ images, onClick }: ImageSwiperProps) => {
         }}
       >
         {images.map((image) => {
-          const imageFormat = getImageFormat(image);
-          const { large, original, placeholder, medium } = imageFormat;
-
-          const src = large?.url || medium?.url || original?.url || "";
-
-          const { width, height } = getImageFormatDimensions(imageFormat, [
-            "large",
-            "hero",
-            "original",
-          ]);
+          const url = image?.attributes?.url || "";
+          const alt = image?.attributes?.alternativeText || "";
+          const width = image?.attributes?.width || 1200;
+          const height = image?.attributes?.height || 800;
 
           return (
             <SwiperSlide
-              key={original?.id}
+              key={image?.id}
               onClick={() => onClick(image.id as any)}
             >
               <Box overflow={["visible", "hidden"]}>
@@ -76,9 +78,9 @@ export const ImageSwiper = ({ images, onClick }: ImageSwiperProps) => {
                     <BlurImage
                       width={width}
                       height={height}
-                      alt={original?.alternativeText || ""}
-                      blurDataURL={placeholder}
-                      src={src}
+                      alt={alt}
+                      blurDataURL=""
+                      src={url}
                       quality={80}
                     />
                   </AspectRatio>

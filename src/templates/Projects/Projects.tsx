@@ -14,15 +14,14 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { HEADER_HEIGHT, Heading, ImageCard } from "@components";
-import { CategoryEntity, ProjectEntity } from "@models";
+import { Project, Category } from "@/lib/content";
 import {
   stringifySearchParams,
   useRouter,
   useSearchParams,
   useSyncNextLocale,
 } from "@shared/hooks";
-import { getImageFormat } from "@utils";
-import { ROUTES } from "api/routes";
+import { ROUTES } from "@shared/routes";
 import { useTranslation } from "next-i18next";
 import React, { useState } from "react";
 import { TbZoomQuestion } from "react-icons/tb";
@@ -30,8 +29,8 @@ import { RiCloseFill } from "react-icons/ri";
 import { useSearch } from "./useSearch";
 
 export type ProjectsProps = {
-  projects: ProjectEntity[];
-  categories: CategoryEntity[];
+  projects: Project[];
+  categories: Category[];
 };
 
 export const Projects = ({ projects, categories }: ProjectsProps) => {
@@ -56,12 +55,12 @@ export const Projects = ({ projects, categories }: ProjectsProps) => {
   useSyncNextLocale(getNextLocaleWithSearchParam());
 
   const filteredProjectsByCategory = projects
-    .filter(({ attributes }) => {
+    .filter((project) => {
       if (category === "all") return true;
-      return attributes?.category?.data?.attributes?.name === category;
+      return project.category === category;
     })
-    .filter(({ attributes }) =>
-      attributes?.title.toLowerCase().includes(searchQuery.toLowerCase())
+    .filter((project) =>
+      project.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
   const handleCategoryChange = (newCategory: string) => {
@@ -96,14 +95,14 @@ export const Projects = ({ projects, categories }: ProjectsProps) => {
             {t("common:selectedCategory")}:
           </Heading>
 
-          {categories.map(({ id, attributes }) => (
+          {categories.map((cat) => (
             <Button
               textTransform="none"
-              onClick={() => handleCategoryChange(attributes!.name)}
-              variant={category === attributes!.name ? "solid" : "ghost"}
-              key={id}
+              onClick={() => handleCategoryChange(cat.slug)}
+              variant={category === cat.slug ? "solid" : "ghost"}
+              key={cat.slug}
             >
-              {t(`common:categoryObj.${attributes?.name}`) ?? ""}
+              {t(`common:categoryObj.${cat.slug}`) ?? cat.name}
             </Button>
           ))}
         </Stack>
@@ -132,23 +131,14 @@ export const Projects = ({ projects, categories }: ProjectsProps) => {
         </InputGroup>
       </VStack>
       <Grid gridTemplateColumns={["1fr", null, null, "1fr 1fr"]} gap={2}>
-        {filteredProjectsByCategory.map(({ id, attributes }) => {
-          const { title, image, slug } = attributes ?? {};
-          const { large, original, placeholder } = getImageFormat(image!.data);
-
-          const { url } = large ?? {
-            width: 0,
-            height: 0,
-            url: "",
-          };
-
+        {filteredProjectsByCategory.map((project) => {
           return (
-            <Box key={id} href={`${pathnameWithLocale}/${slug}`} as={Link}>
+            <Box key={project.slug} href={`${pathnameWithLocale}/${project.slug}`} as={Link}>
               <ImageCard
-                name={title!}
-                url={url}
-                blurDataURL={placeholder}
-                alt={original?.alternativeText || ""}
+                name={project.title}
+                url={project.heroImage}
+                blurDataURL={undefined}
+                alt={project.title}
               />
             </Box>
           );

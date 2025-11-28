@@ -1,4 +1,4 @@
-import { ROUTES } from "api/routes";
+import { ROUTES } from "@shared/routes";
 import React, { useMemo, useState } from "react";
 
 type Actions = {

@@ -5,14 +5,12 @@
       "@components": ["components/index"],
       "@shared/hooks": ["shared/hooks/index.ts"],
       "@shared/constants": ["shared/constants/index.ts"],
-      "@models": ["models/types.ts"],
-      "@api": ["api/index.ts"],
+      "@shared/routes": ["shared/routes.ts"],
       "@hooks": ["shared/hooks"],
       "@utils": ["shared/utils"],
       "@templates": ["templates/index.ts"],
-      "@context": ["context/index.ts"]
-      // "@theme": ["theme/index"],
-      // "@constant": ["constant/index"]
+      "@context": ["context/index.ts"],
+      "@/lib/*": ["lib/*"]
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
