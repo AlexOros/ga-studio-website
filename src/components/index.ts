@@ -1,4 +1,3 @@
-export * from "./ContentBlocks";
 export * from "./ContentImageSwiper";
 export * from "./MotionBox";
 export * from "./BlurImage";

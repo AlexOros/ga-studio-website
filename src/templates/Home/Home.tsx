@@ -8,9 +8,7 @@ import {
   ProcessSection,
   ServicesSection,
   VisionSection,
-  ProjectsSection,
 } from './components';
-import { TestimonialSection } from './components/TestimonialSection';
 
 type HomeProps = {
   data: HomePage;

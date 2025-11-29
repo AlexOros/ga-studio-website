@@ -23,7 +23,7 @@ export async function getAllProjects(locale: string): Promise<Project[]> {
     const projectPath = path.join(projectsDir, projectDir, `index.${locale}.md`);
 
     if (fs.existsSync(projectPath)) {
-      const { frontmatter, content, html } = await loadMarkdownFile(projectPath);
+      const { frontmatter, content } = await loadMarkdownFile(projectPath);
       const images = extractImagesFromMarkdown(content);
 
       // Resolve relative image paths to absolute paths
@@ -53,7 +53,6 @@ export async function getAllProjects(locale: string): Promise<Project[]> {
         featured: frontmatter.featured || false,
         order: frontmatter.order || 0,
         content,
-        html,
         images: resolvedImages,
       });
     }
@@ -83,7 +82,7 @@ export async function getProjectBySlug(
     return null;
   }
 
-  const { frontmatter, content, html } = await loadMarkdownFile(projectPath);
+  const { frontmatter, content } = await loadMarkdownFile(projectPath);
   const images = extractImagesFromMarkdown(content);
 
   // Resolve relative image paths
@@ -113,7 +112,6 @@ export async function getProjectBySlug(
     featured: frontmatter.featured || false,
     order: frontmatter.order || 0,
     content,
-    html,
     images: resolvedImages,
   };
 }

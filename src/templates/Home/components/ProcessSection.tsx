@@ -1,12 +1,12 @@
 import {
   SplitScreenSection,
   Heading,
-  ContentBlocks,
   SplitScreenSectionContent,
   SplitScreenSectionImage,
   BlurImage,
 } from '@components';
-import { getImageFormat } from '@utils';
+import { Text } from '@chakra-ui/react';
+import ReactMarkdown from 'react-markdown';
 import React from 'react';
 
 type ComponentHomeProcess = {
@@ -17,7 +17,6 @@ type ComponentHomeProcess = {
 
 export const ProcessSection = ({ data }: { data: ComponentHomeProcess }) => {
   const { image, title, content } = data;
-  // const { large, original, placeholder } = getImageFormat(image.data);
 
   return (
     <SplitScreenSection
@@ -33,16 +32,19 @@ export const ProcessSection = ({ data }: { data: ComponentHomeProcess }) => {
             {title}
           </Heading>
 
-          {/* {content && (
-            <ContentBlocks
-              data={JSON.parse(content)}
-              renderHeading={(_, text) => (
-                <Heading as={"h2"} size={"h5"}>
-                  {text}
-                </Heading>
-              )}
-            />
-          )} */}
+          {content && (
+            <ReactMarkdown
+              components={{
+                p: ({ children }) => (
+                  <Text fontSize="lg" mb={4} lineHeight="tall">
+                    {children}
+                  </Text>
+                ),
+              }}
+            >
+              {content}
+            </ReactMarkdown>
+          )}
         </SplitScreenSectionContent>
       }
       secondaryContent={

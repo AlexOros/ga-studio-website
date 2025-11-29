@@ -9,8 +9,7 @@ export interface Project {
   date: string;
   featured: boolean;
   order: number;
-  content: string;  // Markdown
-  html: string;     // Rendered HTML
+  content: string;
   images: string[]; // Extracted from markdown
 }
 
@@ -45,5 +44,4 @@ export interface HomePage {
     image: string;
   };
   content?: string;
-  html?: string;
 }

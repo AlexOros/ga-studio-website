@@ -7,12 +7,10 @@ import {
   SplitScreenSectionContent,
   SplitScreenSectionImage,
 } from '@components';
-import { getImageFormat } from '@utils';
 import React from 'react';
 
 export const ServicesSection = ({ data }: { data: HomePage['services'] }) => {
   const { image, title, items } = data;
-  // const { large, original, placeholder } = getImageFormat(image.data);
 
   return (
     <SplitScreenSection

@@ -1,14 +1,10 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { remark } from 'remark';
-import html from 'remark-html';
-import gfm from 'remark-gfm';
 
 export interface MarkdownFile {
   frontmatter: Record<string, any>;
   content: string;
-  html: string;
 }
 
 /**
@@ -21,22 +17,15 @@ export function getContentDirectory(...segments: string[]): string {
 /**
  * Load and parse a markdown file
  */
-export async function loadMarkdownFile(filePath: string): Promise<MarkdownFile> {
+export async function loadMarkdownFile(
+  filePath: string,
+): Promise<MarkdownFile> {
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const { data, content } = matter(fileContents);
-
-  // Convert markdown to HTML
-  const processedContent = await remark()
-    .use(gfm)
-    .use(html, { sanitize: false })
-    .process(content);
-
-  const htmlContent = processedContent.toString();
 
   return {
     frontmatter: data,
     content,
-    html: htmlContent,
   };
 }
 

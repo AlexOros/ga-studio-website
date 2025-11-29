@@ -1,18 +1,17 @@
 import { HomePage } from '@/lib/content';
 import {
   BlurImage,
-  ContentBlocks,
   Heading,
   SplitScreenSection,
   SplitScreenSectionContent,
   SplitScreenSectionImage,
 } from '@components';
-import { getImageFormat } from '@utils';
+import { Text } from '@chakra-ui/react';
+import ReactMarkdown from 'react-markdown';
 import React from 'react';
 
 export const VisionSection = ({ data }: { data: HomePage['vision'] }) => {
   const { image, title, content } = data;
-  // const { large, original, placeholder } = getImageFormat(image.data);
 
   return (
     <SplitScreenSection
@@ -24,16 +23,19 @@ export const VisionSection = ({ data }: { data: HomePage['vision'] }) => {
             {title}
           </Heading>
 
-          {/* {content && (
-            <ContentBlocks
-              data={content}
-              renderHeading={(_, text) => (
-                <Heading as={'h2'} size={'h5'}>
-                  {text}
-                </Heading>
-              )}
-            />
-          )} */}
+          {content && (
+            <ReactMarkdown
+              components={{
+                p: ({ children }) => (
+                  <Text fontSize="lg" mb={4} lineHeight="tall">
+                    {children}
+                  </Text>
+                ),
+              }}
+            >
+              {content}
+            </ReactMarkdown>
+          )}
         </SplitScreenSectionContent>
       }
       secondaryContent={

@@ -9,7 +9,11 @@ import {
   StackProps,
   Show,
   Box,
+  Heading,
+  Code,
 } from "@chakra-ui/react";
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { ROUTES } from "@shared/routes";
 import { useRouter, useSyncNextLocale } from "@shared/hooks";
 import { HeroSection } from "./components";
@@ -72,68 +76,94 @@ const ProjectContent = ({ data }: { data: ProjectType }) => {
       <Divider />
 
       <Container mx="auto" maxWidth="4xl">
-        <Box
-          sx={{
-            "h1, h2, h3": {
-              mb: 4,
-              mt: 6,
-              fontWeight: "bold",
+        <ReactMarkdown
+          remarkPlugins={[remarkGfm]}
+          components={{
+            h1: ({ children }) => (
+              <Heading as="h1" fontSize={["2xl", "3xl"]} mb={4} mt={6} fontWeight="bold">
+                {children}
+              </Heading>
+            ),
+            h2: ({ children }) => (
+              <Heading as="h2" fontSize={["xl", "2xl"]} mb={4} mt={6} fontWeight="bold">
+                {children}
+              </Heading>
+            ),
+            h3: ({ children }) => (
+              <Heading as="h3" fontSize={["lg", "xl"]} mb={4} mt={6} fontWeight="bold">
+                {children}
+              </Heading>
+            ),
+            p: ({ children }) => (
+              <Text mb={4} lineHeight="tall">
+                {children}
+              </Text>
+            ),
+            ul: ({ children }) => (
+              <Box as="ul" mb={4} ml={6}>
+                {children}
+              </Box>
+            ),
+            ol: ({ children }) => (
+              <Box as="ol" mb={4} ml={6}>
+                {children}
+              </Box>
+            ),
+            li: ({ children }) => (
+              <Box as="li" mb={2}>
+                {children}
+              </Box>
+            ),
+            img: ({ src, alt }) => (
+              <Box
+                as="img"
+                src={src}
+                alt={alt}
+                maxW="100%"
+                height="auto"
+                my={6}
+                borderRadius="md"
+              />
+            ),
+            code: ({ inline, children }: any) => {
+              if (inline) {
+                return (
+                  <Code px={2} py={1} bg="gray.100" borderRadius="md" fontSize="sm" fontFamily="mono">
+                    {children}
+                  </Code>
+                );
+              }
+              return (
+                <Box
+                  as="pre"
+                  p={4}
+                  bg="gray.50"
+                  borderRadius="md"
+                  overflowX="auto"
+                  mb={4}
+                >
+                  <Code bg="transparent" p={0}>
+                    {children}
+                  </Code>
+                </Box>
+              );
             },
-            "h1": {
-              fontSize: ["2xl", "3xl"],
-            },
-            "h2": {
-              fontSize: ["xl", "2xl"],
-            },
-            "h3": {
-              fontSize: ["lg", "xl"],
-            },
-            "p": {
-              mb: 4,
-              lineHeight: "tall",
-            },
-            "ul, ol": {
-              mb: 4,
-              ml: 6,
-            },
-            "li": {
-              mb: 2,
-            },
-            "img": {
-              maxW: "100%",
-              height: "auto",
-              my: 6,
-              borderRadius: "md",
-            },
-            "code": {
-              px: 2,
-              py: 1,
-              bg: "gray.100",
-              borderRadius: "md",
-              fontSize: "sm",
-              fontFamily: "mono",
-            },
-            "pre": {
-              p: 4,
-              bg: "gray.50",
-              borderRadius: "md",
-              overflowX: "auto",
-              mb: 4,
-              "code": {
-                bg: "transparent",
-                p: 0,
-              },
-            },
-            "blockquote": {
-              pl: 4,
-              borderLeft: "4px solid",
-              borderColor: "gray.300",
-              fontStyle: "italic",
-              my: 4,
-            },
+            blockquote: ({ children }) => (
+              <Box
+                as="blockquote"
+                pl={4}
+                borderLeft="4px solid"
+                borderColor="gray.300"
+                fontStyle="italic"
+                my={4}
+              >
+                {children}
+              </Box>
+            ),
           }}
-          dangerouslySetInnerHTML={{ __html: data.html }}
-        />
+        >
+          {data.content}
+        </ReactMarkdown>
       </Container>
     </VStack>
   );

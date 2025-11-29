@@ -6,8 +6,8 @@ import { getContentDirectory, loadMarkdownFile } from './loader';
  */
 export async function getHomePage(locale: string): Promise<HomePage> {
   const homePagePath = getContentDirectory('pages', `home.${locale}.md`);
-  const { frontmatter, content, html } = await loadMarkdownFile(homePagePath);
- 
+  const { frontmatter, content } = await loadMarkdownFile(homePagePath);
+
   return {
     locale: frontmatter.locale,
     hero: frontmatter.hero || {
@@ -31,6 +31,5 @@ export async function getHomePage(locale: string): Promise<HomePage> {
       image: '',
     },
     content,
-    html,
   } satisfies HomePage;
 }

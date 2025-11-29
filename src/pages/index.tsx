@@ -10,12 +10,12 @@ interface HomePageProps {
 export const getStaticProps: GetStaticProps<HomePageProps> = async ({
   locale,
 }: GetStaticPropsContext) => {
-  const data = await getHomePage(locale || 'en');
+  const data = await getHomePage(locale || 'ro');
 
   return {
     props: {
       data,
-      ...(await serverSideTranslations(locale || 'en', ['common', 'home'])),
+      ...(await serverSideTranslations(locale || 'ro', ['common', 'home'])),
     },
   };
 };
