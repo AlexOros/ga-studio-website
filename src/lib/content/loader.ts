@@ -68,3 +68,16 @@ export function extractImagesFromMarkdown(content: string): string[] {
 
   return images;
 }
+
+/**
+ * Replace relative image paths in markdown content with absolute paths
+ */
+export function resolveMarkdownImagePaths(
+  content: string,
+  basePath: string
+): string {
+  return content.replace(/!\[(.*?)\]\((\.\/.*?)\)/g, (_match, alt, src) => {
+    const resolvedPath = `${basePath}/${src.slice(2)}`;
+    return `![${alt}](${resolvedPath})`;
+  });
+}

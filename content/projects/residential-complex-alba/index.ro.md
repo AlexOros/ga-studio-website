@@ -5,7 +5,7 @@ locale: "ro"
 category: "residential"
 status: "finished"
 location: "Alba Iulia, România"
-hero_image: "./images/hero.jpg"
+hero_image: "./images/hero.svg"
 date: "2023-06-15"
 featured: true
 order: 1
@@ -31,9 +31,9 @@ Principiile cheie ale designului au inclus:
 
 Complexul prezintă mai multe soluții arhitecturale inovatoare. Fiecare clădire este orientată pentru a optimiza expunerea solară, reducând costurile de încălzire și oferind în același timp rezidenților o lumină naturală abundentă. Fațadele combină materiale de înaltă calitate, inclusiv beton texturat, panouri din aluminiu și geamuri de format mare.
 
-![Vedere exterioară complex](./images/gallery-01.jpg)
-![Perspectivă curte interioară](./images/gallery-02.jpg)
-![Detaliu clădire](./images/gallery-03.jpg)
+![Vedere exterioară complex](./images/gallery-01.svg)
+![Perspectivă curte interioară](./images/gallery-02.svg)
+![Detaliu clădire](./images/gallery-03.svg)
 
 Unitățile de la parter dispun de grădini private, în timp ce apartamentele de la etajele superioare includ terase generoase. Zonele comune încorporează peisagistică cu specii native care necesită întreținere minimă și susțin biodiversitatea locală.
 
@@ -51,7 +51,7 @@ Responsabilitatea ecologică a ghidat fiecare decizie în acest proiect:
 
 Complexul include zone comune atent concepute care încurajează interacțiunea socială. O curte centrală servește ca spațiu de întâlnire, având zone de odihnă, structuri de joacă pentru copii și alei pietonale. Parcarea subterană păstrează nivelul solului pentru spații verzi și recreere.
 
-![Curte interioară](./images/gallery-04.jpg)
+![Curte interioară](./images/gallery-04.svg)
 
 ## Detalii Proiect
 

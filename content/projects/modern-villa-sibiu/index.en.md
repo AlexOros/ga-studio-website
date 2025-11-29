@@ -5,7 +5,7 @@ locale: "en"
 category: "residential"
 status: "finished"
 location: "Sibiu, Romania"
-hero_image: "./images/hero.jpg"
+hero_image: "./images/hero.svg"
 date: "2023-09-10"
 featured: false
 order: 4
@@ -31,9 +31,9 @@ Design priorities included:
 
 The villa's form responds to site conditions and programmatic needs. A linear plan follows the hillside contour, with living spaces oriented to capture southern light and valley views. Large sliding glass panels dissolve boundaries between interior and exterior, extending living areas onto terraces that serve as outdoor rooms.
 
-![Villa exterior](./images/gallery-01.jpg)
-![Terrace view](./images/gallery-02.jpg)
-![Interior living space](./images/gallery-03.jpg)
+![Villa exterior](./images/gallery-01.svg)
+![Terrace view](./images/gallery-02.svg)
+![Interior living space](./images/gallery-03.svg)
 
 The material palette emphasizes natural textures—locally sourced stone, natural wood cladding, and smooth plaster surfaces create a restrained aesthetic that complements the landscape. A green roof on the lower level blends the structure into the hillside when viewed from above.
 
@@ -43,7 +43,7 @@ Interior layouts emphasize spatial continuity and natural light. The entry level
 
 The lower level includes three bedrooms, each with direct access to private terrace areas. The master suite opens onto a secluded garden carved into the hillside. A home office occupies a quiet corner with views through the tree canopy.
 
-![Interior detail](./images/gallery-04.jpg)
+![Interior detail](./images/gallery-04.svg)
 
 ## Sustainable Features
 

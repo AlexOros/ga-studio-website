@@ -5,7 +5,7 @@ locale: "ro"
 category: "residential"
 status: "finished"
 location: "Sibiu, România"
-hero_image: "./images/hero.jpg"
+hero_image: "./images/hero.svg"
 date: "2023-09-10"
 featured: false
 order: 4
@@ -31,9 +31,9 @@ Prioritățile de design au inclus:
 
 Forma vilei răspunde condițiilor site-ului și nevoilor programatice. Un plan liniar urmează conturul dealului, cu spații de locuit orientate pentru a capta lumina sudică și vederile asupra văii. Panouri mari de sticlă glisante dizolvă granițele dintre interior și exterior, extinzând zonele de locuit pe terase care servesc ca camere în aer liber.
 
-![Exterior vilă](./images/gallery-01.jpg)
-![Vedere terasă](./images/gallery-02.jpg)
-![Spațiu interior living](./images/gallery-03.jpg)
+![Exterior vilă](./images/gallery-01.svg)
+![Vedere terasă](./images/gallery-02.svg)
+![Spațiu interior living](./images/gallery-03.svg)
 
 Paleta de materiale pune accent pe texturi naturale—piatră de proveniență locală, îmbrăcăminte din lemn natural și suprafețe din tencuială netedă creează o estetică reținută care complementează peisajul. Un acoperiș verde pe nivelul inferior integrează structura în deal atunci când este privită de sus.
 
@@ -43,7 +43,7 @@ Layout-urile interioare pun accent pe continuitatea spațială și lumina natura
 
 Nivelul inferior include trei dormitoare, fiecare cu acces direct la zone de terasă private. Suite-ul principal se deschide spre o grădină retrasă sculptată în deal. Un birou la domiciliu ocupă un colț liniștit cu vederi prin coronamentul copacilor.
 
-![Detaliu interior](./images/gallery-04.jpg)
+![Detaliu interior](./images/gallery-04.svg)
 
 ## Caracteristici Durabile
 

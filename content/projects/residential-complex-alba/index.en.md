@@ -5,7 +5,7 @@ locale: "en"
 category: "residential"
 status: "finished"
 location: "Alba Iulia, Romania"
-hero_image: "./images/hero.jpg"
+hero_image: "./images/hero.svg"
 date: "2023-06-15"
 featured: true
 order: 1
@@ -31,9 +31,9 @@ Key design principles included:
 
 The complex showcases several innovative architectural solutions. Each building is oriented to optimize solar exposure, reducing heating costs while providing residents with abundant natural light. The facades combine high-quality materials including textured concrete, aluminum panels, and large-format glazing.
 
-![Complex exterior view](./images/gallery-01.jpg)
-![Courtyard perspective](./images/gallery-02.jpg)
-![Building detail](./images/gallery-03.jpg)
+![Complex exterior view](./images/gallery-01.svg)
+![Courtyard perspective](./images/gallery-02.svg)
+![Building detail](./images/gallery-03.svg)
 
 Ground floor units feature private gardens, while upper-floor apartments include generous terraces. The communal areas incorporate native landscaping that requires minimal maintenance and supports local biodiversity.
 
@@ -51,7 +51,7 @@ Environmental responsibility guided every decision in this project:
 
 The complex includes carefully designed communal areas that encourage social interaction. A central courtyard serves as a gathering space, featuring seating areas, play structures for children, and walking paths. Underground parking preserves the ground level for green space and recreation.
 
-![Interior courtyard](./images/gallery-04.jpg)
+![Interior courtyard](./images/gallery-04.svg)
 
 ## Project Details
 

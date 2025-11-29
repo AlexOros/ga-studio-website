@@ -12,21 +12,21 @@ import {
   Link,
   Stack,
   VStack,
-} from "@chakra-ui/react";
-import { HEADER_HEIGHT, Heading, ImageCard } from "@components";
-import { Project, Category } from "@/lib/content";
+} from '@chakra-ui/react';
+import { HEADER_HEIGHT, Heading, ImageCard } from '@components';
+import { Project, Category } from '@/lib/content';
 import {
   stringifySearchParams,
   useRouter,
   useSearchParams,
   useSyncNextLocale,
-} from "@shared/hooks";
-import { ROUTES } from "@shared/routes";
-import { useTranslation } from "next-i18next";
-import React, { useState } from "react";
-import { TbZoomQuestion } from "react-icons/tb";
-import { RiCloseFill } from "react-icons/ri";
-import { useSearch } from "./useSearch";
+} from '@shared/hooks';
+import { ROUTES } from '@shared/routes';
+import { useTranslation } from 'next-i18next';
+import React, { useState } from 'react';
+import { TbZoomQuestion } from 'react-icons/tb';
+import { RiCloseFill } from 'react-icons/ri';
+import { useSearch } from './useSearch';
 
 export type ProjectsProps = {
   projects: Project[];
@@ -40,66 +40,74 @@ export const Projects = ({ projects, categories }: ProjectsProps) => {
   const { searchParams, setSearchParams } = useSearchParams<{
     category: string | null;
   }>();
-  const { category = "all" } = searchParams;
+  const { category = 'all' } = searchParams;
 
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation(['common']);
 
   const getNextLocaleWithSearchParam = () => {
     const suffix =
-      category !== "all" ? `?${stringifySearchParams({ category })}` : "";
-    return locale === "ro"
+      category !== 'all' ? `?${stringifySearchParams({ category })}` : '';
+    return locale === 'ro'
       ? `${ROUTES.projects.en}${suffix}`
       : `${ROUTES.projects.ro}${suffix}`;
   };
 
   useSyncNextLocale(getNextLocaleWithSearchParam());
 
-  const filteredProjectsByCategory = projects
-    .filter((project) => {
-      if (category === "all") return true;
+  const filteredProjects = projects
+    .filter(project => {
+      if (category === 'all') return true;
       return project.category === category;
     })
-    .filter((project) =>
-      project.title.toLowerCase().includes(searchQuery.toLowerCase())
+    .filter(project =>
+      project.title.toLowerCase().includes(searchQuery.toLowerCase()),
     );
-
+  console.log(category);
   const handleCategoryChange = (newCategory: string) => {
-    setSearchParams((searchParams) => ({
+    setSearchParams(searchParams => ({
       ...searchParams,
-      category: newCategory === "all" ? null : newCategory,
+      category: newCategory === 'all' ? null : newCategory,
     }));
-    setSearchQuery("");
+    setSearchQuery('');
   };
 
   const pathnameWithLocale =
-    locale === "ro" ? pathname : `/${locale}${pathname}`;
+    locale === 'ro' ? pathname : `/${locale}${pathname}`;
 
   return (
     <Box py={`${HEADER_HEIGHT}px`}>
       <Center pb={6} pt={12}>
-        <Heading size="h1">{t("common:projects")}</Heading>
+        <Heading size="h1">{t('common:projects')}</Heading>
       </Center>
 
       <VStack
         alignItems="start"
         px={4}
         py={8}
-        width={["auto", null, null, "min-content"]}
+        width={['auto', null, null, 'min-content']}
       >
         <Stack
-          direction={["column", null, null, "row"]}
+          direction={['column', null, null, 'row']}
           alignItems="center"
-          alignSelf={["center", null, null, "start"]}
+          alignSelf={['center', null, null, 'start']}
         >
           <Heading whiteSpace="nowrap" size="h5">
-            {t("common:selectedCategory")}:
+            {t('common:selectedCategory')}:
           </Heading>
 
-          {categories.map((cat) => (
+          <Button
+            textTransform="none"
+            onClick={() => handleCategoryChange('all')}
+            variant={category === 'all' ? 'solid' : 'ghost'}
+          >
+            {t(`common:categoryObj.all`)}
+          </Button>
+
+          {categories.map(cat => (
             <Button
               textTransform="none"
               onClick={() => handleCategoryChange(cat.slug)}
-              variant={category === cat.slug ? "solid" : "ghost"}
+              variant={category === cat.slug ? 'solid' : 'ghost'}
               key={cat.slug}
             >
               {t(`common:categoryObj.${cat.slug}`) ?? cat.name}
@@ -110,18 +118,18 @@ export const Projects = ({ projects, categories }: ProjectsProps) => {
           <Input
             pr="4.5rem"
             value={searchQuery}
-            onChange={(ev) => setSearchQuery(ev.target.value)}
+            onChange={ev => setSearchQuery(ev.target.value)}
             borderRadius={1}
             focusBorderColor="gray.800"
             variant="outline"
-            placeholder={t("common:searchSelectedCategory") ?? "Search"}
+            placeholder={t('common:searchSelectedCategory') ?? 'Search'}
           />
           {searchQuery && (
             <InputRightElement width="4.5rem">
               <IconButton
                 size="sm"
                 variant="ghost"
-                onClick={() => setSearchQuery("")}
+                onClick={() => setSearchQuery('')}
                 aria-label="clear search input"
               >
                 <Icon fontSize="2xl" as={RiCloseFill} />
@@ -130,10 +138,14 @@ export const Projects = ({ projects, categories }: ProjectsProps) => {
           )}
         </InputGroup>
       </VStack>
-      <Grid gridTemplateColumns={["1fr", null, null, "1fr 1fr"]} gap={2}>
-        {filteredProjectsByCategory.map((project) => {
+      <Grid gridTemplateColumns={['1fr', null, null, '1fr 1fr']} gap={2}>
+        {filteredProjects.map(project => {
           return (
-            <Box key={project.slug} href={`${pathnameWithLocale}/${project.slug}`} as={Link}>
+            <Box
+              key={project.slug}
+              href={`${pathnameWithLocale}/${project.slug}`}
+              as={Link}
+            >
               <ImageCard
                 name={project.title}
                 url={project.heroImage}
@@ -144,11 +156,11 @@ export const Projects = ({ projects, categories }: ProjectsProps) => {
           );
         })}
       </Grid>
-      {filteredProjectsByCategory.length === 0 && (
+      {filteredProjects.length === 0 && (
         <Center py={12}>
           <VStack spacing={6}>
             <Icon as={TbZoomQuestion} fontSize="6xl" />
-            <Heading>{t("common:noProjectFound")}</Heading>
+            <Heading>{t('common:noProjectFound')}</Heading>
           </VStack>
         </Center>
       )}

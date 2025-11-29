@@ -5,7 +5,7 @@ locale: "ro"
 category: "urbanism"
 status: "concept"
 location: "Sibiu, România"
-hero_image: "./images/hero.jpg"
+hero_image: "./images/hero.svg"
 date: "2024-11-15"
 featured: true
 order: 3
@@ -31,9 +31,9 @@ Principii de planificare fundamentale:
 
 Site-ul de 15 hectare este organizat în districte distincte, fiecare cu propriul caracter, contribuind în același timp la coeziunea generală. Zona nordică se concentrează pe reutilizarea adaptativă a depozitelor istorice pentru industrii creative și facilități culturale. Districtul central introduce clădiri rezidențiale noi organizate în jurul curților comune. Frontul de apă sudic pune accent pe spațiul public și amenajări recreaționale.
 
-![Prezentare plan director](./images/gallery-01.jpg)
-![Concept promenadă riverană](./images/gallery-02.jpg)
-![Perspectivă spațiu public](./images/gallery-03.jpg)
+![Prezentare plan director](./images/gallery-01.svg)
+![Concept promenadă riverană](./images/gallery-02.svg)
+![Perspectivă spațiu public](./images/gallery-03.svg)
 
 O rețea de străzi pietonale și coridoare verzi conectează diverse zone, creând rute plăcute de mers pe jos și facilitând utilizarea bicicletelor. Accesul vehicular este limitat la benzi de serviciu și facilități de parcare subterană, eliberând planul solului pentru activitatea umană.
 
@@ -51,7 +51,7 @@ Planul integrează multiple strategii de sustenabilitate:
 
 Mai multe clădiri industriale existente oferă oportunități pentru reutilizare adaptativă. Planul propune convertirea fostei fabrici textile într-un centru cultural cu galerii, ateliere și spații de performanță. Depozitele istorice din cărămidă ar găzdui restaurante, magazine și afaceri mici, păstrând caracterul industrial al zonei introducând în același timp noi utilizări.
 
-![Concept reutilizare adaptativă](./images/gallery-04.jpg)
+![Concept reutilizare adaptativă](./images/gallery-04.svg)
 
 ## Strategie Domeniu Public
 

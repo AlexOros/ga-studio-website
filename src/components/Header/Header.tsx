@@ -119,12 +119,9 @@ export const Header = () => {
                       const categoryQueryParam =
                         category === 'all' ? '' : `?category=${category}`;
                       const href = `/${ROUTES.projects[locale]}${categoryQueryParam}`;
+
                       return (
                         <LinkListItem
-                          opacity={0.5}
-                          cursor="not-allowed"
-                          pointerEvents="none"
-                          _hover={{ textDecoration: 'none' }}
                           href={href}
                           key={category}
                           onClick={onClose}

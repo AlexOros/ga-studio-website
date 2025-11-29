@@ -5,7 +5,7 @@ locale: "en"
 category: "urbanism"
 status: "concept"
 location: "Sibiu, Romania"
-hero_image: "./images/hero.jpg"
+hero_image: "./images/hero.svg"
 date: "2024-11-15"
 featured: true
 order: 3
@@ -31,9 +31,9 @@ Core planning principles:
 
 The 15-hectare site is organized into distinct districts, each with its own character while contributing to overall cohesion. The northern zone focuses on adaptive reuse of historic warehouses for creative industries and cultural facilities. The central district introduces new residential buildings organized around shared courtyards. The southern waterfront emphasizes public space and recreational amenities.
 
-![Master plan overview](./images/gallery-01.jpg)
-![Riverside promenade concept](./images/gallery-02.jpg)
-![Public space perspective](./images/gallery-03.jpg)
+![Master plan overview](./images/gallery-01.svg)
+![Riverside promenade concept](./images/gallery-02.svg)
+![Public space perspective](./images/gallery-03.svg)
 
 A network of pedestrian streets and green corridors connects the various zones, creating pleasant walking routes and facilitating bicycle use. Vehicle access is limited to service lanes and underground parking facilities, freeing the ground plane for human activity.
 
@@ -51,7 +51,7 @@ The plan integrates multiple sustainability strategies:
 
 Several existing industrial buildings offer opportunities for adaptive reuse. The plan proposes converting the former textile factory into a cultural center with galleries, workshops, and performance spaces. Historic brick warehouses would house restaurants, shops, and small businesses, preserving the area's industrial character while introducing new uses.
 
-![Adaptive reuse concept](./images/gallery-04.jpg)
+![Adaptive reuse concept](./images/gallery-04.svg)
 
 ## Public Realm Strategy
 

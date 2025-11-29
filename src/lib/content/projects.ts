@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { Project } from './types';
-import { getContentDirectory, loadMarkdownFile, extractImagesFromMarkdown } from './loader';
+import { getContentDirectory, loadMarkdownFile, extractImagesFromMarkdown, resolveMarkdownImagePaths } from './loader';
 
 /**
  * Get all projects for a specific locale
@@ -24,6 +24,13 @@ export async function getAllProjects(locale: string): Promise<Project[]> {
 
     if (fs.existsSync(projectPath)) {
       const { frontmatter, content } = await loadMarkdownFile(projectPath);
+
+      // Resolve image paths in markdown content
+      const resolvedContent = resolveMarkdownImagePaths(
+        content,
+        `/content/projects/${projectDir}`
+      );
+
       const images = extractImagesFromMarkdown(content);
 
       // Resolve relative image paths to absolute paths
@@ -52,7 +59,7 @@ export async function getAllProjects(locale: string): Promise<Project[]> {
         date: frontmatter.date,
         featured: frontmatter.featured || false,
         order: frontmatter.order || 0,
-        content,
+        content: resolvedContent,
         images: resolvedImages,
       });
     }
@@ -83,6 +90,13 @@ export async function getProjectBySlug(
   }
 
   const { frontmatter, content } = await loadMarkdownFile(projectPath);
+
+  // Resolve image paths in markdown content
+  const resolvedContent = resolveMarkdownImagePaths(
+    content,
+    `/content/projects/${slug}`
+  );
+
   const images = extractImagesFromMarkdown(content);
 
   // Resolve relative image paths
@@ -111,7 +125,7 @@ export async function getProjectBySlug(
     date: frontmatter.date,
     featured: frontmatter.featured || false,
     order: frontmatter.order || 0,
-    content,
+    content: resolvedContent,
     images: resolvedImages,
   };
 }

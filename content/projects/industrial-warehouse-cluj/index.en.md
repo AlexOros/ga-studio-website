@@ -5,7 +5,7 @@ locale: "en"
 category: "industrial"
 status: "under_construction"
 location: "Cluj-Napoca, Romania"
-hero_image: "./images/hero.jpg"
+hero_image: "./images/hero.svg"
 date: "2024-03-20"
 featured: false
 order: 2
@@ -31,9 +31,9 @@ Primary project goals:
 
 The warehouse features a clear-span structure that maximizes usable floor space without interior columns. This open layout allows clients to configure the space according to their specific operational needs. The building envelope uses high-performance insulated panels that maintain stable interior temperatures year-round.
 
-![Construction progress exterior](./images/gallery-01.jpg)
-![Steel structure installation](./images/gallery-02.jpg)
-![Interior warehouse space](./images/gallery-03.jpg)
+![Construction progress exterior](./images/gallery-01.svg)
+![Steel structure installation](./images/gallery-02.svg)
+![Interior warehouse space](./images/gallery-03.svg)
 
 The facility includes a two-story office wing attached to the main warehouse, providing 2,000 square meters of administrative space with natural lighting and modern amenities. Large loading docks with adjustable height platforms accommodate various vehicle types.
 
@@ -51,7 +51,7 @@ Environmental considerations are central to this project:
 
 Currently in the structural phase, the steel framework has been completed and exterior wall installation is underway. The project is scheduled for completion in late 2024. Once operational, the facility will create approximately 150 jobs in the region.
 
-![Aerial construction view](./images/gallery-04.jpg)
+![Aerial construction view](./images/gallery-04.svg)
 
 ## Technical Specifications
 

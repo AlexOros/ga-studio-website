@@ -5,7 +5,7 @@ locale: "ro"
 category: "industrial"
 status: "under_construction"
 location: "Cluj-Napoca, România"
-hero_image: "./images/hero.jpg"
+hero_image: "./images/hero.svg"
 date: "2024-03-20"
 featured: false
 order: 2
@@ -31,9 +31,9 @@ Obiectivele principale ale proiectului:
 
 Depozitul dispune de o structură cu deschidere liberă care maximizează spațiul util fără stâlpi interiori. Acest layout deschis permite clienților să configureze spațiul conform nevoilor operaționale specifice. Anvelopa clădirii folosește panouri izolante de înaltă performanță care mențin temperaturi interioare stabile pe tot parcursul anului.
 
-![Progres construcție exterior](./images/gallery-01.jpg)
-![Instalare structură metalică](./images/gallery-02.jpg)
-![Spațiu interior depozit](./images/gallery-03.jpg)
+![Progres construcție exterior](./images/gallery-01.svg)
+![Instalare structură metalică](./images/gallery-02.svg)
+![Spațiu interior depozit](./images/gallery-02.svg)
 
 Facilitatea include o aripă de birouri cu două etaje atașată depozitului principal, oferind 2.000 de metri pătrați de spațiu administrativ cu iluminare naturală și dotări moderne. Docuri de încărcare mari cu platforme reglabile în înălțime pot acomoda diverse tipuri de vehicule.
 
@@ -51,7 +51,7 @@ Considerațiile ecologice sunt centrale pentru acest proiect:
 
 În prezent în faza structurală, cadrul metalic a fost finalizat și instalarea pereților exteriori este în desfășurare. Proiectul este programat pentru finalizare la sfârșitul anului 2024. Odată operațională, facilitatea va crea aproximativ 150 de locuri de muncă în regiune.
 
-![Vedere aeriană construcție](./images/gallery-04.jpg)
+![Vedere aeriană construcție](./images/gallery-02.svg)
 
 ## Specificații Tehnice
 
