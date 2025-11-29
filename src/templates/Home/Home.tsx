@@ -17,8 +17,6 @@ type HomeProps = {
 export function Home({ data }: HomeProps) {
   useSyncNextLocale(ROUTES.home);
 
-  console.log(data);
-
   const { hero, vision, process, services } = data;
 
   return (

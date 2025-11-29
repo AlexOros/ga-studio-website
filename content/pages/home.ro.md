@@ -3,15 +3,15 @@ locale: "ro"
 hero:
   title: "Arhitectură & Inginerie"
   subtitle: "Creăm spații care inspiră și dăinuie"
-  image: "/images/home/hero.svg"
+  image: "/content/pages/images/hero.webp"
 vision:
   title: "Viziunea Noastră"
   content: "Credem că arhitectura modelează modul în care oamenii își experimentează mediul. Munca noastră combină design gândit, expertiză tehnică și responsabilitate ecologică pentru a crea clădiri și spații care îmbunătățesc calitatea vieții, minimizând în același timp impactul ecologic."
-  image: "/images/home/vision.svg"
+  image: "/content/pages/images/vision.svg"
 process:
   title: "Procesul Nostru"
   content: "De la conceptul inițial până la finalizarea construcției, menținem o colaborare strânsă cu clienții și părțile interesate. Abordarea noastră integrată combină designul arhitectural, ingineria structurală și practicile de construcție durabilă pentru a livra proiecte care îndeplinesc cerințele funcționale, depășind așteptările."
-  image: "/images/home/process.svg"
+  image: "/content/pages/images/process.svg"
 services:
   title: "Servicii"
   items:
@@ -21,7 +21,7 @@ services:
     - "Design Interior"
     - "Consultanță Construcții Durabile"
     - "Management de Proiect"
-  image: "/images/home/services.svg"
+  image: "/content/pages/images/services.svg"
 ---
 
 ## Despre GA Studio

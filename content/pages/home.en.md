@@ -3,7 +3,7 @@ locale: "en"
 hero:
   title: "Architecture & Engineering"
   subtitle: "Creating spaces that inspire and endure"
-  image: "/images/home/hero.svg"
+  image: "/content/pages/images/hero.webp"
 vision:
   title: "Our Vision"
   content: "We believe architecture shapes how people experience their environment. Our work combines thoughtful design, technical expertise, and environmental responsibility to create buildings and spaces that enhance quality of life while minimizing ecological impact."
