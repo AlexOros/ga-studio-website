@@ -1,6 +1,6 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, A11y, Keyboard } from "swiper";
+import { Navigation, Pagination, A11y, Keyboard } from "swiper/modules";
 import { BlurImage } from "@components";
 
 type ImageData = {
@@ -23,14 +23,11 @@ export const FullPageSwiper = ({
   images,
 }: FullPageSwiperProps) => {
   const initialImageIndex = images.findIndex(
-    (image: any) => image.id === initialImageId ?? 0
+    (image: any) => image.id === (initialImageId ?? 0)
   );
   return (
     <Swiper
       loop
-      lazy={{
-        loadPrevNext: false,
-      }}
       modules={[Navigation, Pagination, Keyboard, A11y]}
       keyboard={{
         enabled: true,

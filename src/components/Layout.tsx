@@ -3,7 +3,7 @@ import { AppStateProvider } from "@context";
 import { theme } from "theme";
 import { Header, Footer } from "@components";
 import { useIsomorphicLayoutEffect } from "@shared/hooks";
-import { Roboto } from "@next/font/google";
+import { Roboto } from "next/font/google";
 
 const robot = Roboto({
   subsets: ["latin"],

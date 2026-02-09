@@ -85,7 +85,7 @@ export const Header = () => {
         isOpen={isOpen}
         placement="right"
         onClose={onClose}
-        finalFocusRef={btnRef}
+        finalFocusRef={btnRef as any}
       >
         <DrawerOverlay backdropFilter="blur(8px)" />
         <DarkMode>

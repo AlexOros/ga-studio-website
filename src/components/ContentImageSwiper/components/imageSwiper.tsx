@@ -1,6 +1,6 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, A11y } from "swiper";
+import { Navigation, Pagination, A11y } from "swiper/modules";
 import { Container, AspectRatio, Box } from "@chakra-ui/react";
 import { BlurImage, MotionBox } from "@components";
 
@@ -34,7 +34,6 @@ export const ImageSwiper = ({ images, onClick }: ImageSwiperProps) => {
       w={["99vw", "99.2vw", "99.3vw", "99.4vw"]}
     >
       <Swiper
-        lazy
         modules={[Navigation, Pagination, A11y]}
         navigation
         pagination={{

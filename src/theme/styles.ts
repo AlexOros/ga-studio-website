@@ -1,7 +1,8 @@
 import { Styles } from "@chakra-ui/theme-tools";
 
-const styles: Styles = {
-  global: ({ theme }) => {
+// Type annotation removed due to Chakra UI v2 + TypeScript 5 incompatibility
+const styles = {
+  global: ({ theme }: any) => {
     return {
       "ul, ol": {
         width: "100%",

@@ -58,6 +58,7 @@ export const HeroSection = ({ data }: { data: HomePage['hero'] }) => {
       </Box>
 
       <Box zIndex={1} position="absolute" left={0} bottom={'50%'}>
+        {/* @ts-ignore - Chakra UI v2 type incompatibility with React 19 */}
         <Fade in={true} delay={0.5}>
           <Box color="white" px={5} py={2} background="blackAlpha.700">
             <Heading as="h1" size="title">
