@@ -2911,6 +2911,11 @@ framesync@5.3.0:
   dependencies:
     tslib "^2.1.0"
 
+fsevents@~2.3.2:
+  version "2.3.3"
+  resolved "https://registry.npmjs.org/fsevents/-/fsevents-2.3.3.tgz"
+  integrity sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==
+
 function-bind@^1.1.2:
   version "1.1.2"
   resolved "https://registry.npmjs.org/function-bind/-/function-bind-1.1.2.tgz"
@@ -5366,10 +5371,10 @@ tinyglobby@^0.2.15:
     fdir "^6.5.0"
     picomatch "^4.0.3"
 
-titleizejs@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.npmjs.org/titleizejs/-/titleizejs-1.2.0.tgz"
-  integrity sha512-yv6ZTrolirOiGQ1juX6Bmjge7Z6wrWzqRSqxus4t8Z/0C+gokubS3CWHRv+I0L9oz+fL+JncfrDR1FtL/8s6MA==
+titleizejs@^1.3.2:
+  version "1.3.2"
+  resolved "https://registry.npmjs.org/titleizejs/-/titleizejs-1.3.2.tgz"
+  integrity sha512-fzKWzeAt2aKk0RrZdEVfN1zhyMhdl7vZKYblINNmdA/yRVWu/FnfatPGKlkNVgZ9USCkfHDzGBDCrZPYFU/UcA==
 
 to-readable-stream@^1.0.0:
   version "1.0.0"
