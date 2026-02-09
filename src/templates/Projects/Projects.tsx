@@ -23,7 +23,7 @@ import {
 } from '@shared/hooks';
 import { ROUTES } from '@shared/routes';
 import { useTranslation } from 'next-i18next';
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { TbZoomQuestion } from 'react-icons/tb';
 import { RiCloseFill } from 'react-icons/ri';
 import { useSearch } from './useSearch';
@@ -36,11 +36,17 @@ export type ProjectsProps = {
 export const Projects = ({ projects, categories }: ProjectsProps) => {
   const { pathname, locale } = useRouter();
   const [searchQuery, setSearchQuery] = useSearch();
+  const [mounted, setMounted] = useState(false);
 
   const { searchParams, setSearchParams } = useSearchParams<{
     category: string | null;
   }>();
   const { category = 'all' } = searchParams;
+
+  // Prevent hydration mismatch by deferring filtering until after mount
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const { t } = useTranslation(['common']);
 
@@ -54,15 +60,18 @@ export const Projects = ({ projects, categories }: ProjectsProps) => {
 
   useSyncNextLocale(getNextLocaleWithSearchParam());
 
-  const filteredProjects = projects
-    .filter(project => {
-      if (category === 'all') return true;
-      return project.category === category;
-    })
-    .filter(project =>
-      project.title.toLowerCase().includes(searchQuery.toLowerCase()),
-    );
-  console.log(category);
+  // Only filter after mount to prevent hydration mismatch
+  const filteredProjects = mounted
+    ? projects
+        .filter(project => {
+          if (category === 'all') return true;
+          return project.category === category;
+        })
+        .filter(project =>
+          project.title.toLowerCase().includes(searchQuery.toLowerCase()),
+        )
+    : projects;
+
   const handleCategoryChange = (newCategory: string) => {
     setSearchParams(searchParams => ({
       ...searchParams,
@@ -139,7 +148,7 @@ export const Projects = ({ projects, categories }: ProjectsProps) => {
         </InputGroup>
       </VStack>
       <Grid gridTemplateColumns={['1fr', null, null, '1fr 1fr']} gap={2}>
-        {filteredProjects.map(project => {
+        {/* {filteredProjects.map(project => {
           return (
             <Box
               key={project.slug}
@@ -154,9 +163,17 @@ export const Projects = ({ projects, categories }: ProjectsProps) => {
               />
             </Box>
           );
-        })}
+        })} */}
       </Grid>
-      {filteredProjects.length === 0 && (
+      {/* {filteredProjects.length === 0 && (
+        <Center py={12}>
+          <VStack spacing={6}>
+            <Icon as={TbZoomQuestion} fontSize="6xl" />
+            <Heading>{t('common:noProjectFound')}</Heading>
+          </VStack>
+        </Center>
+      )} */}
+      {true && (
         <Center py={12}>
           <VStack spacing={6}>
             <Icon as={TbZoomQuestion} fontSize="6xl" />
