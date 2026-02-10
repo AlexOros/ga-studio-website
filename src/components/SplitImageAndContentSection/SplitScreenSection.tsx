@@ -31,7 +31,7 @@ export const SplitScreenSection = ({
       flex={1}
       h={["full", null, null, "100vh"]}
       direction={["column", null, null, "row"]}
-      spacing={0}
+      gap={0}
       overflowY="hidden"
       {...props}
     >
@@ -64,7 +64,7 @@ export const SplitScreenSectionContent = ({
   return (
     <Center w="full" display={center ? "flex" : "box"}>
       <Container maxWidth={maxWidth}>
-        <Stack spacing={[6, 8, null, 16]} py={16} {...props}>
+        <Stack gap={[6, 8, null, 16]} py={16} {...props}>
           {children}
         </Stack>
       </Container>

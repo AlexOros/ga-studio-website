@@ -21,7 +21,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <AppStateProvider>
       <ChakraProvider value={system}>
-        <Box display="flex" flexDir="column" minHeight="100vh">
+        <Box display="flex" flexDirection="column" minHeight="100vh">
           <Header />
           <Box as="main" flex={1} className={robot.className}>
             {children}

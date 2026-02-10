@@ -40,7 +40,7 @@ const ProjectContent = ({ data }: { data: ProjectType }) => {
   useSyncNextLocale(nextRoute);
 
   return (
-    <VStack as="article" overflow="hidden" spacing={[8, 12]} mb={32}>
+    <VStack as="article" overflow="hidden" gap={[8, 12]} mb={32}>
       {data.heroImage && (
         <HeroSection
           imageUrl={data.heroImage}
@@ -48,7 +48,7 @@ const ProjectContent = ({ data }: { data: ProjectType }) => {
         />
       )}
 
-      <Stack direction={["column", null, "row"]} spacing="8">
+      <Stack direction={["column", null, "row"]} gap="8">
         <Stat
           label={t("common:category")}
           value={t(`common:categoryObj.${data.category}`) ?? data.category}
@@ -177,7 +177,7 @@ function Stat({
   if (!value) return null;
 
   return (
-    <VStack spacing={1} {...props}>
+    <VStack gap={1} {...props}>
       <Text fontWeight="bold" fontSize={["sm", "md"]}>
         {label}
       </Text>

@@ -18,7 +18,7 @@ export const VisionSection = ({ data }: { data: HomePage['vision'] }) => {
       id="vision-section"
       mainContentPosition={'right'}
       mainContent={
-        <SplitScreenSectionContent fontSize="lg" maxWidth="lg" spacing={6}>
+        <SplitScreenSectionContent fontSize="lg" maxWidth="lg" gap={6}>
           <Heading mb={4} accent="bottom" size="h1" alignSelf="center">
             {title}
           </Heading>

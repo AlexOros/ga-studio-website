@@ -32,7 +32,7 @@ export function Footer() {
         py={12}
         color="white"
         fontWeight="medium"
-        spacing={[12, null, 8, 4]}
+        gap={[12, null, 8, 4]}
       >
         <Heading size="h3" accent="bottom">
           Contact

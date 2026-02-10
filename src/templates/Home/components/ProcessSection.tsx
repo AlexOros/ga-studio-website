@@ -25,7 +25,7 @@ export const ProcessSection = ({ data }: { data: ComponentHomeProcess }) => {
         <SplitScreenSectionContent
           fontSize="lg"
           maxWidth="2xl"
-          spacing={[2]}
+          gap={[2]}
           sx={{ h2: { mt: 4 } }}
         >
           <Heading mb={10} accent="bottom" size="h1" alignSelf="center">

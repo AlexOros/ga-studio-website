@@ -58,9 +58,9 @@ export const Header = () => {
             borderRadius="sm"
             px={5}
             h="full"
-            spacing={-2}
+            gap={-2}
             alignItems="start"
-            bgColor="white"
+            bg="white"
             mixBlendMode="darken"
           >
             <Text fontSize="large" fontWeight="bold">
@@ -89,7 +89,7 @@ export const Header = () => {
       >
         <DrawerOverlay backdropFilter="blur(8px)" />
         <DarkMode>
-          <DrawerContent bgColor="gray.900" color="white">
+          <DrawerContent bg="gray.900" color="white">
             <HStack as={DrawerHeader} justifyContent="space-between">
               <LanguageSwitch />
 
@@ -103,7 +103,7 @@ export const Header = () => {
             </HStack>
             <Divider orientation="horizontal" />
             <DrawerBody p={6}>
-              <Stack spacing={6}>
+              <Stack gap={6}>
                 <Box>
                   <HStack pb={2} align="center">
                     <Heading as="h2" size="h3">

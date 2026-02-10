@@ -167,7 +167,7 @@ export const Projects = ({ projects, categories }: ProjectsProps) => {
       </Grid>
       {/* {filteredProjects.length === 0 && (
         <Center py={12}>
-          <VStack spacing={6}>
+          <VStack gap={6}>
             <Icon as={TbZoomQuestion} fontSize="6xl" />
             <Heading>{t('common:noProjectFound')}</Heading>
           </VStack>
@@ -175,7 +175,7 @@ export const Projects = ({ projects, categories }: ProjectsProps) => {
       )} */}
       {true && (
         <Center py={12}>
-          <VStack spacing={6}>
+          <VStack gap={6}>
             <Icon as={TbZoomQuestion} fontSize="6xl" />
             <Heading>{t('common:noProjectFound')}</Heading>
           </VStack>
