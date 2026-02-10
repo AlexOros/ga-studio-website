@@ -7,11 +7,11 @@ hero:
 vision:
   title: "Our Vision"
   content: "We believe architecture shapes how people experience their environment. Our work combines thoughtful design, technical expertise, and environmental responsibility to create buildings and spaces that enhance quality of life while minimizing ecological impact."
-  image: "/images/home/vision.svg"
+  image: "/content/pages/images/vision.svg"
 process:
   title: "Our Process"
   content: "From initial concept through construction completion, we maintain close collaboration with clients and stakeholders. Our integrated approach combines architectural design, structural engineering, and sustainable building practices to deliver projects that meet functional requirements while exceeding expectations."
-  image: "/images/home/process.svg"
+  image: "/content/pages/images/process.svg"
 services:
   title: "Services"
   items:
@@ -21,7 +21,7 @@ services:
     - "Interior Design"
     - "Sustainable Building Consulting"
     - "Project Management"
-  image: "/images/home/services.svg"
+  image: "/content/pages/images/services.svg"
 ---
 
 ## About GA Studio
