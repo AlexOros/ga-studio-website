@@ -1,0 +1,53 @@
+export const colors = {
+  gray: {
+    50: { value: "#F2F2F2" },
+    100: { value: "#DBDBDB" },
+    200: { value: "#C4C4C4" },
+    300: { value: "#ADADAD" },
+    400: { value: "#969696" },
+    500: { value: "#808080" },
+    600: { value: "#666666" },
+    700: { value: "#4D4D4D" },
+    800: { value: "#333333" },
+    900: { value: "#1A1A1A" },
+  },
+
+  primary: {
+    50: { value: "#F2F2F2" },
+    100: { value: "#DBDBDB" },
+    200: { value: "#C4C4C4" },
+    300: { value: "#ADADAD" },
+    400: { value: "#969696" },
+    500: { value: "#808080" },
+    600: { value: "#666666" },
+    700: { value: "#4D4D4D" },
+    800: { value: "#333333" },
+    900: { value: "#1A1A1A" },
+  },
+
+  orange: {
+    50: { value: "#FCEDE9" },
+    100: { value: "#F6CCC0" },
+    200: { value: "#F1AC98" },
+    300: { value: "#EB8C70" },
+    400: { value: "#E56B48" },
+    500: { value: "#E04B1F" },
+    600: { value: "#B33C19" },
+    700: { value: "#862D13" },
+    800: { value: "#591E0D" },
+    900: { value: "#2D0F06" },
+  },
+
+  purple: {
+    50: { value: "#EFEAFB" },
+    100: { value: "#D2C4F3" },
+    200: { value: "#B59DEB" },
+    300: { value: "#9877E4" },
+    400: { value: "#7B51DC" },
+    500: { value: "#5E2BD4" },
+    600: { value: "#4B22AA" },
+    700: { value: "#381A7F" },
+    800: { value: "#261155" },
+    900: { value: "#13092B" },
+  },
+};
