@@ -1,6 +1,6 @@
 import { Box, ChakraProvider } from "@chakra-ui/react";
 import { AppStateProvider } from "@context";
-import { theme } from "theme";
+import { system } from "theme/theme";
 import { Header, Footer } from "@components";
 import { useIsomorphicLayoutEffect } from "@shared/hooks";
 import { Roboto } from "next/font/google";
@@ -14,13 +14,13 @@ const robot = Roboto({
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   useIsomorphicLayoutEffect(() => {
-    // Making sure chackra will always use light mode
-    window.localStorage.setItem("chakra-ui-color-mode", "light");
+    // Making sure Chakra will always use light mode
+    document.documentElement.setAttribute("data-color-mode", "light");
   }, []);
 
   return (
     <AppStateProvider>
-      <ChakraProvider theme={theme}>
+      <ChakraProvider value={system}>
         <Box display="flex" flexDir="column" minHeight="100vh">
           <Header />
           <Box as="main" flex={1} className={robot.className}>
